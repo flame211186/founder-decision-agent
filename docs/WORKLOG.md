@@ -570,4 +570,6 @@ Phase 0：进行中。
 - Node 22.14 上的 check、45 项测试和 build 通过，只有已公开的上游 SQLite 实验警告；
 - 实际 tarball 包含 106 个文件和新增组合请求 Schema，约 127 kB；
 - tarball 在全新消费者目录严格安装成功，包内 CLI、SDK Schema getter、公开 Schema
-  子路径和 SQLite 无效画像拒绝路径均通过。
+  子路径和 SQLite 无效画像拒绝路径均通过；
+- 提交 `b8a0b49` 已推送，远端 CI run `30355428433` 与 CodeQL run
+  `30355428396` 均成功。
