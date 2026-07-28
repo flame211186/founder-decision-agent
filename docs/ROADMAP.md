@@ -230,7 +230,8 @@
 工作流、干净 tarball 安装、live smoke、质量诊断及私有同意/评审记录验证器已实现；
 公共评估、画像和组合输入均有版本化运行时 Schema 校验，MCP 已通过内存协议集成
 测试；Ubuntu Node 22.14/24 已纳入 CI，macOS arm64 Node 22.14/24 已本地验证，
-Docker 构建与非 root SQLite smoke 已纳入 CI；Windows 明确为 beta 未经 CI 验证且
+Docker 构建与非 root SQLite smoke 已在 CI 实际通过；稳定版失败关闭发布门也已在
+Node 22.14/24 矩阵和 CodeQL 复验；Windows 明确为 beta 未经 CI 验证且
 文件权限加固仅为 best-effort；实时 OpenAI
 smoke、GitHub beta Release、npm beta 和新用户反馈尚未完成。
 

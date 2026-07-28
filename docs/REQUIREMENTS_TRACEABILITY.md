@@ -38,7 +38,7 @@
 | REQ-023 | 使用显式 TypeScript 工作流 | verified | `DECISIONS.md DEC-009`、`src/workflow.ts` | quick/deep/repair/角色顺序单测和严格 TS 检查 |
 | REQ-024 | 提供 CLI、SDK、MCP 和 HTTP 使用面 | verified | `src/cli.ts`、`src/index.ts`、`src/mcp.ts`、`src/server.ts` | SDK/HTTP 测试、MCP 内存传输协议集成测试、干净 tarball 安装和三个 bin 入口 smoke 通过；Node 22.14/24 CI 矩阵覆盖 |
 | REQ-025 | 首批支持 B2B SaaS、AI-native、中文和英文 | implemented | `src/industry-packs.ts`、`src/prompts.ts` | industry/context 单测与中英文 fixture；领域人工评测待完成 |
-| REQ-026 | 先公开 beta，稳定 v1 需真实案例和专家盲评 | implemented | `DECISIONS.md DEC-014`、`docs/EVALS.md`、publish workflow | `founder-stable-audit` 统一机检全部证据，最终人工决定另以准确审计哈希记录；publish workflow 对 beta/stable 标记、受保护版本/源码/审计/决定哈希失败关闭，不能只靠改 SemVer 发布 `latest`；实际真实案例、beta 与 v1 发布证据待完成 |
+| REQ-026 | 先公开 beta，稳定 v1 需真实案例和专家盲评 | implemented | `DECISIONS.md DEC-014`、`docs/EVALS.md`、publish workflow | `founder-stable-audit` 统一机检全部证据，最终人工决定另以准确审计哈希记录；publish workflow 对 beta/stable 标记、受保护版本/源码/审计/决定哈希失败关闭，不能只靠改 SemVer 发布 `latest`；GitHub CI `30368618478` 已在 Node 22.14/24 与 Docker 通过，CodeQL `30368620648` 通过；实际真实案例、beta 与 v1 发布证据待完成 |
 
 ## 需求变更规则
 

@@ -842,8 +842,18 @@ Phase 0：进行中。
   `EPERM` 失败；未修改用户全局目录，改用 `/private/tmp` 独立缓存后成功，生成 122 个
   文件、167.5 kB 的候选 tarball。
 
+### 远端复验
+
+- 修复提交 `c5a4435105b4d2363535d19b58588a2ed04189d8` 已推送到公开仓库
+  `main`；
+- GitHub CI run `30368618478` 成功：
+  - Node 22.14 quality job `90306299547` 通过 TypeScript、89 项测试、coverage、
+    fixture、文档、build 和 pack；
+  - Node 24 quality job `90306299465` 通过相同检查；
+  - Docker job `90306299493` 通过镜像构建、CLI 和非 root SQLite smoke；
+- CodeQL run `30368620648` 成功。
+
 ### 尚未证明
 
-- 本修复尚未取得新的远端 Node 22.14/24 CI 与 CodeQL 成功证据；
 - BYOK 实时 smoke、npm beta、GitHub beta Release、3–5 个真实案例和最终人工稳定版
   决定仍未完成。
