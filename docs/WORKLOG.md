@@ -524,3 +524,11 @@ Phase 0：进行中。
 - 无 Key 的 live smoke 按预期只返回结构化 `MISSING_API_KEY`，未伪造成功；
 - `npm audit --audit-level=high` 联网复验为 0 vulnerabilities；
 - live smoke 现在优先读取执行目录中的忽略 `.env`，便于已安装包调用；`--help` 在读取任何 Key 前完成。
+
+### 远端复验
+
+- 发布加固提交 `063babf` 已推送至公开仓库；
+- 因 `github.com:443` 临时超时，使用已授权 GitHub API 上传 23 个 Git blob，并在更新 `main` 前逐一核对 blob SHA、tree SHA 与最终 commit SHA 均与本地完全一致；
+- 远端 CI run `30353777901` 成功，覆盖 Ubuntu Node 22.14 与 24 矩阵；
+- 远端 CodeQL run `30353777927` 成功；
+- GitHub beta Release 与 npm beta 仍未创建，继续等待用户 BYOK 实时 smoke 通过。
