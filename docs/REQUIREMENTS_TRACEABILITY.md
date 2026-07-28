@@ -30,7 +30,7 @@
 | REQ-015 | 中途关键事项由用户决策 | verified | `DECISIONS.md`、`ROADMAP.md` | DEC-001 至 DEC-014 用户确认历史；DEC-015 为记录清楚的可逆发布实现决定 |
 | REQ-016 | 不急于求成，不以堆代码代替质量 | implemented | `PROJECT_CHARTER.md §5`、`AGENTS.md §2`、`docs/EVALS.md` | 覆盖率门和稳定版硬门已执行/记录；人工门仍开放 |
 | REQ-017 | 降低幻觉、上下文压缩和目标丢失 | implemented | `AGENTS.md`、`EVALUATION_METHODOLOGY.md §6–11`、`src/validation.ts` | 状态恢复、外部事实/引用/提示词边界测试；深研真实搜索调用计数与超限失败关闭测试；语义引用人工评测待完成 |
-| REQ-018 | 评估应具有较高判断正确性 | captured | `EVALUATION_METHODOLOGY.md §10` | 专家盲评、反事实、稳定性和事实性指标 |
+| REQ-018 | 评估应具有较高判断正确性 | captured | `EVALUATION_METHODOLOGY.md §10`、`EXPERT_REVIEW_PROTOCOL.md` | 专家评审表 Schema 与确定性记录验证器已实现；实际专家盲评、反事实、稳定性和事实性指标仍待执行 |
 | REQ-019 | 用户可以纠正 Agent 对其想法和个人模式的理解 | implemented | `PRODUCT_SPEC.md §1.3`、`answers`、版本化 profile | 画像公共 Schema 与 CLI/SDK/MCP/HTTP/SQLite 运行时校验已实现，SDK/HTTP/MCP/SQLite 拒绝路径有直接测试；纠正与重评真实端到端测试待完成 |
 | REQ-020 | 不同价值类型不能被一个 VC 总分覆盖 | verified | `PROJECT_CHARTER.md §2.2`、报告 Schema | 五份 fixture 和 case 002 独立 value assessments |
 | REQ-021 | 模型调用次数采用可调默认值 | verified | `DECISIONS.md DEC-010`、`src/budget.ts` | `tests/safety-and-budget.test.ts`、`tests/workflow.test.ts`；实际 `web_search_call` 计数且超限失败关闭 |

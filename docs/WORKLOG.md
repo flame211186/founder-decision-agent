@@ -578,3 +578,41 @@ Phase 0：进行中。
 - 修改后的 CI 与 publish workflow 通过 actionlint；
 - 提交 `b8a0b49` 已推送，远端 CI run `30355428433` 与 CodeQL run
   `30355428396` 均成功。
+
+## 2026-07-28（专家评审记录验证工具）
+
+### 已完成
+
+- 新增 `scripts/validate-review-records.mjs` 与 `npm run validate:reviews -- <path...>`；
+- 验证器接受显式文件或目录，不默认扫描或复制真实私密记录；
+- 检查专家评审 JSON Schema、R1–R7 唯一完整性、盲评锁定/揭示/裁决时间顺序、
+  致命约束范围、重复评审/失败 ID、同一评审者重复案例、裁决人数及裁决失败引用/冲突；
+- 汇总分别报告案例、评审者、各维度分数分布、P0–P3、裁决状态和决策改变遗漏，
+  不用一个平均分互相抵消；
+- 输出固定 `stableGateStatus: not_assessed`，避免结构验证冒充专家质量、有效同意或
+  稳定版通过；
+- 评审 schema 的旧项目 URN 已更正为 Founder Decision Agent；
+- 验证脚本和 schema 均纳入 npm tarball，避免发布包暴露不可执行命令；
+- npm 安装用户可直接运行 `founder-review-validate`，评审 Schema 也有稳定包导出路径；
+- 新增七项协议测试，覆盖公开命令/Schema 导出、npm 符号链接入口、有效记录、
+  盲评/致命约束矛盾、重复评审、裁决矛盾和关键遗漏细节；
+- 干净安装探针发现并修复 npm `.bin` 符号链接下入口判断静默退出的问题。
+
+### 尚未证明
+
+- 没有真实评审记录，工具存在不等于专家盲评已执行；
+- 未证明评审者独立性、专业性、真实案例同意或去标识化；
+- 未冻结稳定版阈值，仍不得发布稳定 `v1`。
+
+### 验证
+
+- `npm run check` 通过；
+- `npm run eval:offline` 通过：11 个测试文件、52/52 测试、5/5 fixture；
+- coverage：statements 85.45%、branches 75.77%、functions 87.64%、lines 87.10%；
+- `npm run validate:docs` 通过，33 个 Markdown 文件链接有效；
+- `npm run build` 通过；
+- 隔离缓存生成精确 npm tarball：110 个文件，包含评审验证器与
+  `review-form.v1.schema.json`；
+- tarball 在全新临时目录安装成功：96 个依赖、0 个已知漏洞；
+- 安装包内 `.bin/founder-review-validate --help`、评审 Schema 子路径导入与 SDK
+  公开导入均通过。

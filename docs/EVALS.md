@@ -51,6 +51,20 @@ overrun, zero quick-mode searches/external facts, no false human-review claim, a
 safety identifier in the outcome. The full artifact is written to a permission-restricted temporary
 path and remains human-review status `not_reviewed`.
 
+Private expert-review records can be checked without copying them into the repository:
+
+```bash
+npm run validate:reviews -- /private/path/to/review-records
+
+# after installing the npm package
+founder-review-validate /private/path/to/review-records
+```
+
+This validates the review form and deterministic cross-field invariants and emits aggregate counts
+plus local issue locations, never review bodies. Its summary deliberately reports
+`stableGateStatus: not_assessed`; consent, reviewer independence, expertise and adjudication remain
+human evidence.
+
 ## What is not automatically proven
 
 - Whether a citation semantically entails the exact claim.

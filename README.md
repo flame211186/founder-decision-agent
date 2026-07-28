@@ -141,6 +141,15 @@ founder-decision-server
 
 Non-loopback HTTP binding refuses to start without a bearer token. See [API documentation](docs/API.md) for routes and the synchronous deep-mode limitation.
 
+Expert-review records can be validated without placing private records in the repository:
+
+```bash
+founder-review-validate /private/path/to/review-records
+```
+
+The command checks record structure and deterministic consistency only. It intentionally does not
+claim that expert independence, consent or the stable-release quality gate has been proven.
+
 ## What a report guarantees—and does not
 
 The implementation enforces versioned JSON Schema for evaluation, founder-profile and portfolio

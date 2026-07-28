@@ -23,6 +23,8 @@ All notable changes follow semantic versioning once stable.
 - In-memory MCP protocol integration tests covering evaluation, persistence, consent and portfolio
   tools.
 - Working `eval:offline` quality-gate command wired into CI and release checks.
+- Privacy-preserving `founder-review-validate` command with structural, blinding, rubric,
+  adjudication and duplicate checks; it never self-declares the stable gate passed.
 - Offline fixtures covering all five verdicts.
 - Permission-restricted live OpenAI smoke harness and integrity-aware npm release workflow.
 

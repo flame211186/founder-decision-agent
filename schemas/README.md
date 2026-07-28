@@ -29,3 +29,7 @@ Schema 能验证字段、类型、枚举和基础约束，但以下语义需要�
 - `portfolio-request.v1.schema.json`
 - `portfolio-report.v1.schema.json`
 - `run-manifest.v1.schema.json`
+
+专家盲评记录契约位于 `evals/review/review-form.v1.schema.json`，安装包可通过
+`@sangfei/founder-decision-agent/schemas/expert-review.v1.schema.json` 导入。它只证明
+记录结构有效，不证明评审者独立性、专业性或结论正确性。

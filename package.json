@@ -29,7 +29,8 @@
   "bin": {
     "founder-decision": "./dist/cli.js",
     "founder-decision-mcp": "./dist/mcp.js",
-    "founder-decision-server": "./dist/server.js"
+    "founder-decision-server": "./dist/server.js",
+    "founder-review-validate": "./scripts/validate-review-records.mjs"
   },
   "exports": {
     ".": {
@@ -44,12 +45,15 @@
       "types": "./dist/adapters/sqlite.d.ts",
       "import": "./dist/adapters/sqlite.js"
     },
+    "./schemas/expert-review.v1.schema.json": "./evals/review/review-form.v1.schema.json",
     "./schemas/*": "./schemas/*"
   },
   "files": [
     "dist",
     "schemas",
     "scripts/live-smoke.mjs",
+    "scripts/validate-review-records.mjs",
+    "evals/review/review-form.v1.schema.json",
     "docs",
     "README.md",
     "LICENSE",
@@ -65,11 +69,12 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "check": "tsc -p tsconfig.json --noEmit && npm run check:scripts",
-    "check:scripts": "node --check scripts/live-smoke.mjs && node --check scripts/validate-all-reports.mjs && node --check scripts/validate-doc-links.mjs && node --check scripts/validate-report-semantics.mjs",
+    "check:scripts": "node --check scripts/live-smoke.mjs && node --check scripts/validate-all-reports.mjs && node --check scripts/validate-doc-links.mjs && node --check scripts/validate-report-semantics.mjs && node --check scripts/validate-review-records.mjs",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "eval:offline": "npm run test:coverage && npm run validate:fixtures",
     "eval:live": "node scripts/live-smoke.mjs",
+    "validate:reviews": "node scripts/validate-review-records.mjs",
     "validate:fixtures": "node scripts/validate-all-reports.mjs",
     "validate:docs": "node scripts/validate-doc-links.mjs",
     "prepack": "npm run build && npm run test && npm run validate:fixtures && npm run validate:docs",

@@ -245,3 +245,16 @@ pursue ↔ validate ↔ reframe ↔ park ↔ stop
 - 是否允许作为公开样例。
 
 结构化评审表定义在 `evals/review/review-form.v1.schema.json`。执行记录后续保存在非公开数据目录；只有合成或明确授权的记录进入仓库。
+
+记录可使用以下命令做结构和一致性检查：
+
+```bash
+npm run validate:reviews -- /private/path/to/review-records
+
+# 安装 npm 包后
+founder-review-validate /private/path/to/review-records
+```
+
+验证器不读取公开仓库以外的记录，除非维护者显式传入路径；输出聚合统计和问题，不输出
+评审正文。它不会判断评审者是否真正独立、案例是否已经获得有效同意，也不会自动宣布
+稳定版质量门通过。
