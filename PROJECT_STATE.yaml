@@ -52,15 +52,16 @@ current_deliverables:
   explicit_typescript_core: implemented
   public_json_schemas: implemented_and_offline_verified
   openai_byok_adapter: implemented_and_mock_verified_not_live_verified
-  sqlite_storage: implemented_and_verified
+  sqlite_storage: built_in_node_sqlite_implemented_and_verified_on_node_22_14_and_24
   cli_sdk_mcp_http: implemented_and_package_entrypoints_verified
   portfolio_analysis: implemented_and_offline_verified
   industry_packs: b2b_saas_and_ai_native_implemented_expert_review_pending
   jurisdiction_guidance: us_and_mainland_china_primary_entrypoints_implemented
   fixture_reports: five_covering_all_verdicts_structurally_verified_not_expert_validated
-  offline_tests: thirty_seven_passing
+  offline_tests: thirty_nine_passing
   coverage_gate: passing
-  release_engineering: public_github_source_published_release_and_npm_pending
+  live_smoke_harness: implemented_and_offline_checked_live_key_pending
+  release_engineering: public_github_source_published_integrity_aware_release_flow_verified_locally_release_and_npm_pending
   expert_review: designed_not_executed
   real_anonymized_cases: not_collected
 
@@ -94,7 +95,7 @@ external_blockers:
 
 completed_beta_checks:
   - strict_typescript_build
-  - thirty_seven_offline_tests_and_coverage_gate
+  - thirty_nine_offline_tests_and_coverage_gate
   - five_fixture_schema_and_semantic_validation
   - local_markdown_link_validation
   - npm_tarball_generation
@@ -107,6 +108,10 @@ completed_beta_checks:
   - github_main_ci_and_codeql_passed
   - github_dependency_graph_enabled_and_dependency_reviews_passed
   - npm_account_and_sangfei_scope_owner_permission_confirmed
+  - live_smoke_harness_missing_key_failure_checked
+  - npm_bootstrap_publish_command_dry_run_checked
+  - node_22_14_and_node_24_runtime_checks_passed
+  - published_candidate_has_no_runtime_native_install_scripts
 
 prohibited_shortcuts:
   - do_not_treat_offline_tests_as_live_model_quality

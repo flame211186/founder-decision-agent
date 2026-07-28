@@ -441,3 +441,86 @@ Phase 0：进行中。
 - 远端 `main` 的 CI 与 CodeQL 首次运行通过；
 - 新仓库的 Dependency Review 最初因未启用 Dependency Graph 失败；启用依赖图与漏洞提醒后，7 个自动依赖更新 PR 的依赖审查重跑全部通过；
 - npm 官方网页登录成功，`npm whoami` 为 `flame211186`，`npm org ls sangfei` 确认为 `sangfei` 组织 owner；未因 GitHub 用户名不同而擅自更换既定 npm scope。
+
+## 2026-07-28（发布前审计与发布链加固）
+
+### 审计发现
+
+- 原 publish workflow 会在 GitHub Release 发布时立即执行 OIDC npm publish，但全新 npm 包在首次发布前又无法配置 trusted publisher；若先本地 bootstrap，同版本自动发布会失败；
+- 深研 manifest 使用去重查询数近似搜索调用数，重复查询时会低估实际 `web_search_call` 数量；
+- 初版 live smoke 仅写在发布清单中，没有可重复、权限受限且能检查隐私/预算不变量的命令；
+- `package.json` 若暴露 live smoke 命令但不把脚本包含进 tarball，会导致发布包中的命令不可用。
+
+### 已完成
+
+- OpenAI adapter 现在按响应中的真实 `web_search_call` 项计数，同时继续只对展示用查询文本去重；
+- 深研零搜索配置会在调用提供商前拒绝；适配器报告超过预算的搜索调用时工作流失败关闭；
+- 新增 `scripts/live-smoke.mjs` 与 `npm run eval:live -- --mode quick|deep`：
+  - 使用固定合成想法；
+  - `persist: false`；
+  - 检查完整 manifest、canonical report、预算、quick 零搜索/零外部事实、无虚假人工评审；
+  - 检查 API Key 与原始 safety identifier 不进入结果；
+  - 完整 outcome 只写入权限受限的临时目录和 mode `0600` 文件；
+- live smoke 脚本纳入 npm tarball，因此源码仓库和已安装包共用同一验证入口；
+- npm publish workflow 改为：
+  - 串行发布与 30 分钟超时；
+  - 发布环境禁用 package-manager cache；
+  - 重跑完整质量门；
+  - 从 release tag 打出单一精确 tarball；
+  - 仅在 registry 已有版本与本地 tarball integrity 完全一致时跳过一次 bootstrap；
+  - 后续版本通过 trusted OIDC 与 provenance 发布；
+  - 校验 registry integrity、dist-tag，并从 registry 干净安装 CLI；
+- `packageManager` 与 CI/release workflow 固定为已验证的 npm `11.16.0`，避免 bootstrap 与 OIDC 重打包使用不同 tar 算法；
+- 发布文档明确首次 bootstrap、2FA、trusted publisher 和首版 provenance 限制。
+
+### 验证
+
+- `npm run check` 通过，包含所有 `.mjs` 语法检查；
+- `npm run test:coverage`：39/39 通过；
+- coverage：statements 85.90%、branches 75.94%、functions 91.72%、lines 86.99%；
+- 5/5 fixture 与 33 个 Markdown 链接通过；
+- live smoke 无 Key 时安全返回 `MISSING_API_KEY`，没有创建伪成功产物；
+- 隔离 npm cache 下的最终 tarball dry-run 成功：105 个文件、约 123 kB、解包约 434 kB，且包含 live smoke 脚本；
+- 使用该 tarball的 `npm publish --dry-run --access public --tag beta --provenance=false` 通过命令与包元数据检查；
+- publish workflow YAML 可解析，正式 GitHub release 运行仍必须等待实时 smoke 与 npm bootstrap。
+
+### 尚未证明
+
+- `OPENAI_API_KEY` 仍未提供到工作区，live smoke 工具尚未产生真实 OpenAI 结果；
+- npm registry 尚无 `0.1.0-beta.0`，trusted publisher 只能在首次 bootstrap 后配置；
+- GitHub beta Release 尚未创建；
+- 真实案例、独立专家盲评、引用语义抽查和稳定版质量门仍未完成。
+
+### SQLite 安装风险修正
+
+- 在最终 tarball 的干净消费者项目安装时，npm 11 提示 `better-sqlite3` 安装脚本尚未由消费者批准；
+- 实际运行当时仍成功，但 npm 官方已经说明当前警告未来会转为默认阻止，因此不能把偶然成功当作长期安装保证；
+- `SqliteStorage` 已切换为 Node 内置 `node:sqlite`，移除 `better-sqlite3` 和对应类型依赖；
+- 旧驱动创建的标准 SQLite 数据库能够由新适配器直接打开；
+- 使用官方 SHA-256 校验后的 Node `v22.14.0` macOS arm64 二进制执行 `check`、39 个测试和 build 均通过；
+- Node 22.14 只在实际构造 SQLite 适配器时输出上游 `ExperimentalWarning`；普通 CLI 版本查询和 SDK import 不触发，限制已公开；当前 Node 24.18 运行无该警告；
+- CI 改为 Node `22.14.0` 与 `24` 双版本矩阵；
+- 项目开发依赖中只有经固定版本批准的 `esbuild` 与 macOS `fsevents` 安装脚本，发布包消费者不安装这些 devDependencies。
+- `npm ci --strict-allow-scripts` 通过，证明未来默认阻止未审批脚本时开发安装仍可重建；
+- 移除原生运行依赖后再次执行干净消费者安装：
+  - 无待审批安装脚本；
+  - 包内 CLI 版本、SDK import、真实 SQLite 创建/读取、live smoke `--help` 与无 Key 失败路径全部通过；
+  - 最终 tarball 的 npm public `beta` publish dry-run 通过。
+- 下载的 actionlint `1.7.12` 与官方 SHA-256 校验和一致，全部 GitHub Actions workflow 语义检查通过；
+- 最终依赖树 `npm audit --audit-level=high` 为 0 vulnerabilities；
+- 收紧避免 NIST URL 误报后的密钥模式扫描无匹配，`git diff --check` 通过。
+
+### 平台支持边界
+
+- Ubuntu Node 22.14/24 由 CI 验证，macOS arm64 Node 22.14/24 已完成本地验证；
+- Windows 在当前 beta 中尚未纳入 CI，不将推测兼容性表述为已证明支持；
+- Windows 文件权限加固明确为 best-effort，处理敏感想法时应检查目录 ACL 或使用 `--no-persist`。
+
+### 最终候选包复验
+
+- 使用隔离 npm cache 生成真实 tarball，而非只依赖 dry-run：105 个文件、约 124 kB，解包约 436 kB；
+- 从该 tarball 在全新目录严格安装成功，无未批准的运行期安装脚本；
+- 包内 CLI 版本、SDK import、SQLite 创建/读取与 live smoke 帮助入口均通过；
+- 无 Key 的 live smoke 按预期只返回结构化 `MISSING_API_KEY`，未伪造成功；
+- `npm audit --audit-level=high` 联网复验为 0 vulnerabilities；
+- live smoke 现在优先读取执行目录中的忽略 `.env`，便于已安装包调用；`--help` 在读取任何 Key 前完成。

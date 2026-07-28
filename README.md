@@ -21,7 +21,8 @@ It is not a startup-success predictor, investment adviser, lawyer, tax adviser, 
 
 ## Install
 
-Requirements: Node.js `>=22.14`.
+Requirements: Node.js `>=22.14`; Node 24 is recommended. On Node 22, constructing the built-in
+SQLite adapter emits an upstream experimental-feature warning.
 
 ```bash
 npm install -g @sangfei/founder-decision-agent@beta
@@ -56,6 +57,8 @@ founder-decision evaluate "..." \
   --max-minutes 10
 ```
 
+Quick mode always forces searches to `0`; deep mode requires a search cap of at least `1`.
+
 Actual API charges depend on the selected model, tokens and search tool use. Check the current [OpenAI API pricing](https://openai.com/api/pricing/) before running deep evaluations.
 
 ## CLI
@@ -82,7 +85,14 @@ founder-decision history delete REPORT_ID --yes
 founder-decision profile delete PROFILE_ID --yes
 ```
 
-SQLite history defaults to `~/.founder-decision/data.sqlite`. Use `--no-persist` for an evaluation that must not be stored.
+SQLite history defaults to `~/.founder-decision/data.sqlite` and uses Node's built-in SQLite
+driver, so installation does not require a native addon build. Use `--no-persist` for an evaluation
+that must not be stored.
+
+Platform verification for this beta covers Ubuntu on Node 22.14 and 24 in CI, plus macOS arm64 on
+Node 22.14 and 24 locally. Windows is not yet CI-verified; local file-permission hardening is
+best-effort there, so Windows users handling sensitive ideas should review directory ACLs or use
+`--no-persist`.
 
 ## TypeScript SDK
 
@@ -173,6 +183,9 @@ npm run test:coverage
 npm run validate:fixtures
 npm run build
 npm run pack:dry
+
+# Maintainer-only live OpenAI smoke; reads the environment or ignored .env
+npm run eval:live -- --mode quick
 ```
 
 Key references:

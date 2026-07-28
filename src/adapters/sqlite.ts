@@ -1,6 +1,7 @@
 import { chmodSync, mkdirSync } from "node:fs";
+import { createRequire } from "node:module";
 import { dirname, resolve } from "node:path";
-import Database from "better-sqlite3";
+import type { DatabaseSync as NodeDatabaseSync } from "node:sqlite";
 import { AgentError } from "../errors.js";
 import type {
   EvaluationOutcome,
@@ -10,16 +11,17 @@ import type {
 } from "../types.js";
 
 const SCHEMA_VERSION = 1;
+const require = createRequire(import.meta.url);
 
 export class SqliteStorage implements StorageAdapter {
-  private readonly database: Database.Database;
+  private readonly database: NodeDatabaseSync;
 
   constructor(path: string) {
     const absolute = resolve(path);
     mkdirSync(dirname(absolute), { recursive: true, mode: 0o700 });
-    this.database = new Database(absolute);
-    this.database.pragma("journal_mode = WAL");
-    this.database.pragma("foreign_keys = ON");
+    const { DatabaseSync } = require("node:sqlite") as typeof import("node:sqlite");
+    this.database = new DatabaseSync(absolute);
+    this.database.exec("PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON;");
     this.migrate();
     try {
       chmodSync(absolute, 0o600);
@@ -96,8 +98,12 @@ export class SqliteStorage implements StorageAdapter {
   }
 
   async deleteEvaluation(reportId: string): Promise<boolean> {
-    return this.database.prepare("DELETE FROM evaluations WHERE report_id = ?").run(reportId)
-      .changes > 0;
+    return (
+      Number(
+        this.database.prepare("DELETE FROM evaluations WHERE report_id = ?").run(reportId)
+          .changes
+      ) > 0
+    );
   }
 
   async saveProfile(profile: FounderProfile): Promise<void> {
@@ -127,8 +133,12 @@ export class SqliteStorage implements StorageAdapter {
   }
 
   async deleteProfile(profileId: string): Promise<boolean> {
-    return this.database.prepare("DELETE FROM profiles WHERE profile_id = ?").run(profileId)
-      .changes > 0;
+    return (
+      Number(
+        this.database.prepare("DELETE FROM profiles WHERE profile_id = ?").run(profileId)
+          .changes
+      ) > 0
+    );
   }
 
   async exportAll(): Promise<Record<string, unknown>> {
@@ -157,7 +167,10 @@ export class SqliteStorage implements StorageAdapter {
   }
 
   private migrate(): void {
-    const current = this.database.pragma("user_version", { simple: true }) as number;
+    const versionRow = this.database.prepare("PRAGMA user_version").get() as
+      | { user_version?: number | bigint }
+      | undefined;
+    const current = Number(versionRow?.user_version ?? 0);
     if (current > SCHEMA_VERSION) {
       throw new AgentError(
         "STORAGE_ERROR",

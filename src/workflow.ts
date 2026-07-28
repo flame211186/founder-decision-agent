@@ -75,6 +75,12 @@ export class FounderDecisionAgent {
         "Deep mode requires at least 3 model calls: research, synthesis and repair reserve"
       );
     }
+    if (request.mode === "deep" && budget.maxSearchCalls < 1) {
+      throw new AgentError(
+        "INVALID_INPUT",
+        "Deep mode requires at least 1 search call; use quick mode for a zero-search evaluation"
+      );
+    }
 
     const tracker = new BudgetTracker(budget);
     const manifest: RunManifest = {
@@ -281,8 +287,10 @@ export class FounderDecisionAgent {
           signal
         })
     );
-    const observedSearches = Math.max(result.queries.length, result.citations.length > 0 ? 1 : 0);
-    tracker.consumeSearchCalls(Math.min(observedSearches, tracker.budget.maxSearchCalls));
+    const observedSearches =
+      result.searchCalls ??
+      Math.max(result.queries.length, result.citations.length > 0 ? 1 : 0);
+    tracker.consumeSearchCalls(observedSearches);
     return result;
   }
 

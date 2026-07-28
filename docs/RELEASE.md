@@ -4,13 +4,56 @@
 
 1. Confirm `package.json` version is a prerelease such as `0.1.0-beta.0`.
 2. Run all commands in `docs/EVALS.md`.
-3. Run a live smoke evaluation with a non-sensitive test idea and BYOK key.
-4. Review `docs/KNOWN_LIMITATIONS.md` and `CHANGELOG.md`.
-5. Create and push a `v0.1.0-beta.0` tag, then publish a GitHub prerelease.
-6. Publish npm with the `beta` dist-tag.
-7. Install the published package in a clean temporary directory and run `founder-decision --help`.
+3. Put the BYOK key in the environment or the ignored, mode-`0600` `.env` file, then run:
 
-The GitHub publish workflow uses npm trusted publishing (OIDC), `id-token: write` and provenance. Before it can publish, the npm package must be associated with the exact GitHub repository/workflow in npm trusted-publisher settings. If npm requires a one-time bootstrap publish, perform it interactively with 2FA and no saved long-lived repository token, then enable trusted publishing.
+   ```bash
+   npm run eval:live -- --mode quick
+   ```
+
+   The script uses a fixed synthetic idea, disables persistence, verifies canonical output and
+   budget/privacy invariants, and writes the full outcome to a mode-`0600` temporary file for
+   inspection. Do not publish that artifact as a real-case evaluation.
+
+4. Review `docs/KNOWN_LIMITATIONS.md` and `CHANGELOG.md`.
+5. Commit the final release state, require a clean worktree, create
+   `v0.1.0-beta.0`, and push the tag.
+6. Use the exact npm version declared by `packageManager`, then pack once from that exact tag.
+   If the npm package does not yet exist, perform the one-time
+   bootstrap from that tarball:
+
+   ```bash
+   npm publish ./sangfei-founder-decision-agent-0.1.0-beta.0.tgz \
+     --access public \
+     --tag beta \
+     --provenance=false
+   ```
+
+   This interactive bootstrap may require 2FA. The explicit override is needed because local
+   machines cannot create GitHub provenance even though this repository defaults
+   `provenance=true`.
+
+7. Once the package exists, configure its trusted publisher:
+
+   ```bash
+   npm trust github @sangfei/founder-decision-agent \
+     --file publish.yml \
+     --repository flame211186/founder-decision-agent \
+     --allow-publish
+   npm trust list @sangfei/founder-decision-agent
+   ```
+
+8. Publish a GitHub prerelease for the pushed tag. The release workflow:
+   - reruns the release quality gate;
+   - packs the exact tagged source;
+   - skips only an existing bootstrap version with identical registry integrity;
+   - otherwise publishes through trusted OIDC with provenance;
+   - verifies the registry integrity and `beta` dist-tag;
+   - installs the published artifact in a clean directory and runs the packaged CLI.
+
+The first interactive bootstrap cannot carry GitHub provenance. Its GitHub release workflow still
+requires byte-integrity equivalence with the artifact packed from the release tag. Later versions
+publish directly through OIDC and receive automatic provenance. Do not store a long-lived npm token
+in GitHub.
 
 ## Stable
 
@@ -24,8 +67,8 @@ npm package versions are immutable. Do not overwrite or unpublish a version as a
 
 - Public Apache-2.0 repository.
 - Lockfile committed.
-- CI uses `npm ci`.
-- npm provenance enabled.
+- CI uses `npm ci --strict-allow-scripts`.
+- Trusted OIDC releases use npm provenance; the documented one-time local bootstrap cannot.
 - GitHub secret scanning and Dependabot configuration.
 - CodeQL and dependency review workflows.
 - No API keys or long-lived npm tokens committed.

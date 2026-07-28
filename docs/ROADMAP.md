@@ -14,7 +14,7 @@
 
 - 已实现显式 TypeScript 快速/深度工作流、OpenAI BYOK、SQLite、版本化 Schema 和确定性校验；
 - 已实现 CLI、SDK、MCP、HTTP、身份资料、组合分析、融资字段、B2B SaaS 与 AI-native 行业包；
-- 已建立 37 个离线测试和 5 个完整 fixture 报告；
+- 已建立 39 个离线测试和 5 个完整 fixture 报告；
 - 已建立 Apache-2.0、双语 README、安全/隐私/限制文档、Docker 与 GitHub/npm 发布工作流；
 - 已完成干净 npm tarball 安装并公开 GitHub 源码；尚未完成实时 OpenAI smoke、GitHub Release、npm beta、真实案例和专家盲评；
 - `/Users/frame/Documents/lmao app` 仍未修改。
@@ -217,7 +217,7 @@
 - 发布包与源码对应；
 - 新用户试用反馈通过预设标准。
 
-当前状态：公开源码仓库与 `main` 已上线，文档、许可证、CI、Docker、发布工作流及干净 tarball 安装已验证；实时 OpenAI smoke、GitHub beta Release、npm beta 和新用户反馈尚未完成。
+当前状态：公开源码仓库与 `main` 已上线，文档、许可证、CI、Docker、完整性保护发布工作流、干净 tarball 安装及可重复 live smoke 工具已实现；Ubuntu Node 22.14/24 已纳入 CI，macOS arm64 Node 22.14/24 已本地验证，Windows 明确为 beta 未经 CI 验证且文件权限加固仅为 best-effort；实时 OpenAI smoke、GitHub beta Release、npm beta 和新用户反馈尚未完成。
 
 ## Phase 7：接入想法收集产品
 

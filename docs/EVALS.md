@@ -27,7 +27,21 @@ npm run check
 npm test
 npm run test:coverage
 npm run validate:fixtures
+npm run validate:docs
+npm run build
 ```
+
+The maintainer-only live smoke is:
+
+```bash
+npm run eval:live -- --mode quick
+```
+
+It uses a fixed synthetic B2B SaaS idea, `persist: false`, the normal OpenAI adapter and the
+canonical workflow. A pass requires a completed manifest, an independently valid report, no budget
+overrun, zero quick-mode searches/external facts, no false human-review claim, and no raw API key or
+safety identifier in the outcome. The full artifact is written to a permission-restricted temporary
+path and remains human-review status `not_reviewed`.
 
 ## What is not automatically proven
 

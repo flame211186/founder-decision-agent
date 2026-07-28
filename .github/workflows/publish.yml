@@ -8,28 +8,120 @@ permissions:
   contents: read
   id-token: write
 
+concurrency:
+  group: founder-decision-agent-npm-publish
+  cancel-in-progress: false
+
 jobs:
   publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v6
         with:
           node-version: "24"
           registry-url: "https://registry.npmjs.org"
-          cache: npm
-      - run: npm install --global npm@11
-      - run: npm ci
+          package-manager-cache: false
+      - run: npm install --global npm@11.16.0
+      - run: npm ci --strict-allow-scripts
       - name: Verify release tag matches package version
         run: |
+          set -euo pipefail
           RELEASE_VERSION="${GITHUB_REF_NAME#v}"
           PACKAGE_VERSION="$(node -p "require('./package.json').version")"
           test "$RELEASE_VERSION" = "$PACKAGE_VERSION"
-      - name: Publish with provenance
+      - name: Run release quality gate
         run: |
+          set -euo pipefail
+          npm run check
+          npm run test:coverage
+          npm run validate:fixtures
+          npm run validate:docs
+          npm run build
+      - name: Pack the exact release artifact
+        id: pack
+        run: |
+          set -euo pipefail
+          PACK_JSON="$RUNNER_TEMP/npm-pack.json"
+          npm pack --json --ignore-scripts > "$PACK_JSON"
+          TARBALL="$(node -e "const [entry]=JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')); process.stdout.write(entry.filename)" "$PACK_JSON")"
+          INTEGRITY="$(node -e "const [entry]=JSON.parse(require('node:fs').readFileSync(process.argv[1], 'utf8')); process.stdout.write(entry.integrity)" "$PACK_JSON")"
+          test -n "$TARBALL"
+          test -n "$INTEGRITY"
+          echo "tarball=$TARBALL" >> "$GITHUB_OUTPUT"
+          echo "integrity=$INTEGRITY" >> "$GITHUB_OUTPUT"
+      - name: Resolve package metadata
+        id: metadata
+        run: |
+          set -euo pipefail
+          PACKAGE_NAME="$(node -p "require('./package.json').name")"
           PACKAGE_VERSION="$(node -p "require('./package.json').version")"
           if [[ "$PACKAGE_VERSION" == *-* ]]; then
-            npm publish --access public --provenance --tag beta
+            DIST_TAG="beta"
           else
-            npm publish --access public --provenance --tag latest
+            DIST_TAG="latest"
           fi
+          echo "name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"
+          echo "version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
+          echo "dist_tag=$DIST_TAG" >> "$GITHUB_OUTPUT"
+      - name: Detect an exact bootstrap publication
+        id: registry
+        env:
+          PACKAGE_NAME: ${{ steps.metadata.outputs.name }}
+          PACKAGE_VERSION: ${{ steps.metadata.outputs.version }}
+          LOCAL_INTEGRITY: ${{ steps.pack.outputs.integrity }}
+        run: |
+          set -euo pipefail
+          PACKAGE_SPEC="$PACKAGE_NAME@$PACKAGE_VERSION"
+          if REGISTRY_INTEGRITY="$(npm view "$PACKAGE_SPEC" dist.integrity --registry=https://registry.npmjs.org/ 2>/dev/null)"; then
+            test -n "$REGISTRY_INTEGRITY"
+            if [[ "$REGISTRY_INTEGRITY" != "$LOCAL_INTEGRITY" ]]; then
+              echo "Registry artifact integrity does not match the tagged source artifact." >&2
+              exit 1
+            fi
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Publish with trusted OIDC and provenance
+        if: steps.registry.outputs.exists != 'true'
+        env:
+          DIST_TAG: ${{ steps.metadata.outputs.dist_tag }}
+          TARBALL: ${{ steps.pack.outputs.tarball }}
+        run: |
+          set -euo pipefail
+          npm publish "$TARBALL" --access public --provenance --tag "$DIST_TAG"
+      - name: Verify registry integrity and dist-tag
+        env:
+          PACKAGE_NAME: ${{ steps.metadata.outputs.name }}
+          PACKAGE_VERSION: ${{ steps.metadata.outputs.version }}
+          DIST_TAG: ${{ steps.metadata.outputs.dist_tag }}
+          LOCAL_INTEGRITY: ${{ steps.pack.outputs.integrity }}
+        run: |
+          set -euo pipefail
+          PACKAGE_SPEC="$PACKAGE_NAME@$PACKAGE_VERSION"
+          for ATTEMPT in 1 2 3 4 5; do
+            REGISTRY_INTEGRITY="$(npm view "$PACKAGE_SPEC" dist.integrity --registry=https://registry.npmjs.org/ 2>/dev/null || true)"
+            if [[ "$REGISTRY_INTEGRITY" == "$LOCAL_INTEGRITY" ]]; then
+              break
+            fi
+            if [[ "$ATTEMPT" == "5" ]]; then
+              echo "Published registry integrity did not converge to the local artifact." >&2
+              exit 1
+            fi
+            sleep 5
+          done
+          TAGGED_VERSION="$(npm view "$PACKAGE_NAME" "dist-tags.$DIST_TAG" --registry=https://registry.npmjs.org/)"
+          test "$TAGGED_VERSION" = "$PACKAGE_VERSION"
+      - name: Clean-install the published artifact
+        env:
+          PACKAGE_NAME: ${{ steps.metadata.outputs.name }}
+          PACKAGE_VERSION: ${{ steps.metadata.outputs.version }}
+        run: |
+          set -euo pipefail
+          VERIFY_DIR="$(mktemp -d "$RUNNER_TEMP/founder-decision-install.XXXXXX")"
+          cd "$VERIFY_DIR"
+          npm init --yes >/dev/null
+          npm install "$PACKAGE_NAME@$PACKAGE_VERSION" --registry=https://registry.npmjs.org/
+          ./node_modules/.bin/founder-decision --version | grep -Fx "$PACKAGE_VERSION"

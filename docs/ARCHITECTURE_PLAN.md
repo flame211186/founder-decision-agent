@@ -235,7 +235,7 @@ Ports / Adapters
 
 - 独立 TypeScript package：领域对象、工作流、验证器和渲染，不导入 Cloudflare 专用绑定；
 - 独立 CLI：本地运行、文件输入输出和离线评测；
-- 本地存储适配器：SQLite；
+- 本地存储适配器：基于 Node 内置 `node:sqlite` 的 SQLite，避免消费者安装原生二进制；
 - 可选远端存储适配器：D1、PostgreSQL 或其他经契约测试的实现；
 - 可选对象存储适配器：R2、S3 兼容服务或本地文件；
 - 模型与研究端口：首发只完整支持一个默认组合，但接口不写死；

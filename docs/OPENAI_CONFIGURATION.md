@@ -25,6 +25,10 @@ Model names are adapter configuration, not public report contracts. Changes shou
 export OPENAI_API_KEY="..."
 ```
 
+For maintainer live smoke runs, a local `.env` file is also supported. It is ignored by Git and
+should be mode `0600`. Never send the key through chat, commit it, or put it directly in shell
+history.
+
 The default adapter fails fast with `MISSING_API_KEY` when the variable is absent. The SDK also accepts an `apiKey` constructor option, but applications should inject it from a secret manager and never serialize the adapter options.
 
 ## Stable safety identifier
@@ -41,5 +45,8 @@ The user who owns the API key pays provider charges. Default budgets are guardra
 - deep: 8 model calls, 10 searches, 15 minutes.
 
 The workflow may use fewer calls. Deep mode reserves final synthesis and one repair call, skipping optional role passes when the configured cap is low.
+Quick mode always forces the search cap to `0`. Deep mode requires at least one allowed search;
+choose quick mode for a zero-search evaluation. The OpenAI adapter records the number of actual
+`web_search_call` items, while deduplicating query text only for display.
 
 Always review current provider pricing and organizational spend limits. This project intentionally does not estimate a fixed per-report price because models, token counts and web-search prices change.

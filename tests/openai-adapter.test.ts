@@ -175,6 +175,7 @@ describe("OpenAI Responses adapter", () => {
     expect(result).toMatchObject({
       text: "research",
       model: "search-model",
+      searchCalls: 2,
       queries: ["primary query", "secondary query", "third query"]
     });
     expect(result.citations).toEqual([

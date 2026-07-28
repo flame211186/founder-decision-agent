@@ -63,6 +63,50 @@ describe("explicit evaluation workflow", () => {
     });
   });
 
+  it("rejects zero-search deep mode instead of sending an invalid research request", async () => {
+    const model = new FixtureModel([
+      fixtureReport("001_idea_evaluator_agent")
+    ]);
+    const agent = new FounderDecisionAgent({ model, now });
+    await expect(
+      agent.evaluate({
+        schemaVersion: "evaluation_request.v1",
+        idea: "An evidence-calibrated founder idea decision agent",
+        mode: "deep",
+        persist: false,
+        budget: { maxSearchCalls: 0 }
+      })
+    ).rejects.toMatchObject({
+      code: "INVALID_INPUT"
+    });
+    expect(model.calls).toEqual([]);
+  });
+
+  it("fails closed if a research adapter reports more searches than allowed", async () => {
+    const model = new FixtureModel(
+      [fixtureReport("001_idea_evaluator_agent")],
+      {
+        text: "Research exceeded the configured tool cap.",
+        citations: [],
+        queries: ["first", "second"],
+        searchCalls: 2,
+        model: "fixture-model"
+      }
+    );
+    const agent = new FounderDecisionAgent({ model, now });
+    await expect(
+      agent.evaluate({
+        schemaVersion: "evaluation_request.v1",
+        idea: "An evidence-calibrated founder idea decision agent",
+        mode: "deep",
+        persist: false,
+        budget: { maxModelCalls: 3, maxSearchCalls: 1 }
+      })
+    ).rejects.toMatchObject({
+      code: "BUDGET_EXHAUSTED"
+    });
+  });
+
   it("runs independent research, supporter, opponent, verifier and synthesis passes", async () => {
     const report = fixtureReport("001_idea_evaluator_agent");
     const citations = report.evidence
@@ -72,6 +116,7 @@ describe("explicit evaluation workflow", () => {
       text: "Primary-source research",
       citations,
       queries: ["idea evaluation agent alternatives"],
+      searchCalls: 2,
       model: "fixture-model"
     });
     const agent = new FounderDecisionAgent({ model, now });
@@ -91,7 +136,7 @@ describe("explicit evaluation workflow", () => {
       "synthesizer"
     ]);
     expect(result.manifest.budgetUsed.modelCalls).toBe(5);
-    expect(result.manifest.budgetUsed.searchCalls).toBe(1);
+    expect(result.manifest.budgetUsed.searchCalls).toBe(2);
     expect(result.report.validation.citation_support_status).toBe("draft_reviewed");
   });
 });

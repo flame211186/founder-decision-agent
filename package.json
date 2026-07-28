@@ -25,6 +25,7 @@
   "engines": {
     "node": ">=22.14.0"
   },
+  "packageManager": "npm@11.16.0",
   "bin": {
     "founder-decision": "./dist/cli.js",
     "founder-decision-mcp": "./dist/mcp.js",
@@ -48,6 +49,7 @@
   "files": [
     "dist",
     "schemas",
+    "scripts/live-smoke.mjs",
     "docs",
     "README.md",
     "LICENSE",
@@ -57,14 +59,17 @@
     "access": "public"
   },
   "allowScripts": {
-    "better-sqlite3@12.11.1": true
+    "esbuild@0.28.1": true,
+    "fsevents@2.3.3": true
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "check": "tsc -p tsconfig.json --noEmit",
+    "check": "tsc -p tsconfig.json --noEmit && npm run check:scripts",
+    "check:scripts": "node --check scripts/live-smoke.mjs && node --check scripts/validate-all-reports.mjs && node --check scripts/validate-doc-links.mjs && node --check scripts/validate-report-semantics.mjs",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "eval:offline": "vitest run tests/evals",
+    "eval:live": "node scripts/live-smoke.mjs",
     "validate:fixtures": "node scripts/validate-all-reports.mjs",
     "validate:docs": "node scripts/validate-doc-links.mjs",
     "prepack": "npm run build && npm run test && npm run validate:fixtures && npm run validate:docs",
@@ -76,13 +81,11 @@
     "@modelcontextprotocol/sdk": "^1.25.3",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
-    "better-sqlite3": "^12.6.2",
     "commander": "^14.0.3",
     "openai": "^6.17.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^24.10.1",
     "@vitest/coverage-v8": "^4.0.18",
     "tsx": "^4.21.0",

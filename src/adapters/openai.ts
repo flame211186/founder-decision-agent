@@ -109,11 +109,13 @@ export class OpenAiAdapter implements ModelAdapter {
       input.signal
     );
     const text = this.extractText(response);
-    const citations = extractCitations(response.output ?? []);
+    const output = response.output ?? [];
+    const citations = extractCitations(output);
     return {
       text,
       citations,
-      queries: extractSearchQueries(response.output ?? []),
+      queries: extractSearchQueries(output),
+      searchCalls: countSearchCalls(output),
       model: response.model ?? input.model,
       ...(response.usage ? { usage: mapUsage(response.usage) } : {})
     };
@@ -294,6 +296,15 @@ function extractSearchQueries(output: unknown[]): string[] {
     for (const query of typed.action?.queries ?? typed.queries ?? []) queries.add(query);
   }
   return [...queries];
+}
+
+function countSearchCalls(output: unknown[]): number {
+  return output.filter(
+    (item) =>
+      item &&
+      typeof item === "object" &&
+      (item as { type?: string }).type === "web_search_call"
+  ).length;
 }
 
 function extractAllowedUrls(context: string): string[] {

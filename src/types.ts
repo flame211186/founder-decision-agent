@@ -81,6 +81,7 @@ export interface ResearchResult {
   text: string;
   citations: Citation[];
   queries: string[];
+  searchCalls?: number;
   model: string;
   usage?: TokenUsage;
 }
