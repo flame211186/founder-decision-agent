@@ -15,6 +15,7 @@ import type {
   PortfolioRequest,
   StorageAdapter
 } from "./types.js";
+import { validateFounderProfile, validationMessages } from "./validation.js";
 import { FounderDecisionAgent } from "./workflow.js";
 import { VERSION } from "./version.js";
 
@@ -68,6 +69,12 @@ export function createFounderDecisionHttpServer(options: HttpServerOptions) {
       }
       if (profileId && request.method === "PUT") {
         const body = await readJson<FounderProfile>(request, maxBodyBytes);
+        const validation = validateFounderProfile(body);
+        if (!validation.valid) {
+          throw new AgentError("INVALID_INPUT", validationMessages(validation).join("\n"), {
+            details: { issues: validation.issues }
+          });
+        }
         if (body.profileId !== profileId) {
           throw new AgentError("INVALID_INPUT", "Path profile ID must match body profileId");
         }

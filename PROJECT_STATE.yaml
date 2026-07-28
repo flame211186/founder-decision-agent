@@ -58,7 +58,7 @@ current_deliverables:
   industry_packs: b2b_saas_and_ai_native_implemented_expert_review_pending
   jurisdiction_guidance: us_and_mainland_china_primary_entrypoints_implemented
   fixture_reports: five_covering_all_verdicts_structurally_verified_not_expert_validated
-  offline_tests: thirty_nine_passing
+  offline_tests: forty_five_passing
   coverage_gate: passing
   live_smoke_harness: implemented_and_offline_checked_live_key_pending
   release_engineering: public_github_source_published_integrity_aware_release_flow_verified_locally_release_and_npm_pending
@@ -95,7 +95,7 @@ external_blockers:
 
 completed_beta_checks:
   - strict_typescript_build
-  - thirty_nine_offline_tests_and_coverage_gate
+  - forty_five_offline_tests_and_coverage_gate
   - five_fixture_schema_and_semantic_validation
   - local_markdown_link_validation
   - npm_tarball_generation

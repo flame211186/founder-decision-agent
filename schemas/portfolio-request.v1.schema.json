@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:founder-decision-agent:schema:portfolio-request:v1",
+  "title": "Founder Decision Agent Portfolio Request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "reports"],
+  "properties": {
+    "schemaVersion": { "const": "portfolio_request.v1" },
+    "reports": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "urn:founder-decision-agent:schema:evaluation-report:v1"
+      }
+    },
+    "profile": {
+      "$ref": "urn:founder-decision-agent:schema:founder-profile:v1"
+    },
+    "language": {
+      "enum": ["zh-CN", "en"],
+      "default": "zh-CN"
+    }
+  }
+}

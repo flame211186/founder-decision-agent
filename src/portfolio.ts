@@ -1,3 +1,4 @@
+import { AgentError } from "./errors.js";
 import { newId } from "./ids.js";
 import type {
   DimensionAssessment,
@@ -6,13 +7,19 @@ import type {
   PortfolioReport,
   PortfolioRequest
 } from "./types.js";
+import { validatePortfolioRequest, validationMessages } from "./validation.js";
 
 export function analyzePortfolio(
   request: PortfolioRequest,
   now: () => Date = () => new Date()
 ): PortfolioReport {
-  if (request.schemaVersion !== "portfolio_request.v1") {
-    throw new Error("schemaVersion must be portfolio_request.v1");
+  const inputValidation = validatePortfolioRequest(request);
+  if (!inputValidation.valid) {
+    throw new AgentError(
+      "INVALID_INPUT",
+      validationMessages(inputValidation).join("\n"),
+      { details: { issues: inputValidation.issues } }
+    );
   }
   if (request.reports.length < 2) {
     return {

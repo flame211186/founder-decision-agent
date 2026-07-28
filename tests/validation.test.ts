@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { getOpenAiReportSchema } from "../src/openai-schema.js";
-import { validateReport } from "../src/validation.js";
+import {
+  validateEvaluationRequest,
+  validateFounderProfile,
+  validatePortfolioRequest,
+  validateReport
+} from "../src/validation.js";
 import { fixtureReport } from "./helpers.js";
 
 describe("canonical report validation", () => {
@@ -38,6 +43,37 @@ describe("canonical report validation", () => {
     report.claims[0]!.claim_type = "external_fact";
     const result = validateReport(report);
     expect(result.issues.some((item) => item.code === "QUICK_EXTERNAL_FACT")).toBe(true);
+  });
+});
+
+describe("public input validation", () => {
+  it("rejects malformed evaluation requests before normalization", () => {
+    const result = validateEvaluationRequest({
+      schemaVersion: "evaluation_request.v1",
+      idea: "     ",
+      unexpected: true
+    });
+    expect(result.valid).toBe(false);
+    expect(result.issues.map((item) => item.code)).toContain("INPUT_SCHEMA_INVALID");
+    expect(result.issues.map((item) => item.code)).toContain("INPUT_IDEA");
+  });
+
+  it("validates founder profiles and portfolio requests against public schemas", () => {
+    expect(
+      validateFounderProfile({
+        schemaVersion: "founder_profile.v1",
+        profileId: "profile_test",
+        version: 0
+      }).valid
+    ).toBe(false);
+
+    expect(
+      validatePortfolioRequest({
+        schemaVersion: "portfolio_request.v1",
+        reports: [fixtureReport("002_niche_agency_feedback_saas")],
+        language: "en"
+      })
+    ).toEqual({ valid: true, issues: [] });
   });
 });
 

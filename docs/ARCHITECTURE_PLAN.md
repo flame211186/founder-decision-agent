@@ -22,7 +22,7 @@ Interfaces
   ├─ CLI
   ├─ HTTP API
   ├─ Library SDK
-  └─ Future MCP / product adapter
+  └─ MCP server / future product adapter
 
 Application
   ├─ EvaluateIdea
@@ -314,4 +314,4 @@ Ports / Adapters
 - 贡献指南；
 - 版本和迁移说明；
 - 可选 npm/PyPI 包；
-- 后续可选 MCP Server。
+- MCP Server。

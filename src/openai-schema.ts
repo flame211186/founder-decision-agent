@@ -5,14 +5,36 @@ type JsonSchema = Record<string, unknown>;
 
 let canonicalCache: JsonSchema | undefined;
 let openAiCache: JsonSchema | undefined;
+let evaluationRequestCache: JsonSchema | undefined;
+let founderProfileCache: JsonSchema | undefined;
+let portfolioRequestCache: JsonSchema | undefined;
 
-function schemaPath(): string {
-  return fileURLToPath(new URL("../schemas/evaluation-report.v1.schema.json", import.meta.url));
+function schemaPath(name: string): string {
+  return fileURLToPath(new URL(`../schemas/${name}`, import.meta.url));
+}
+
+function readSchema(name: string): JsonSchema {
+  return JSON.parse(readFileSync(schemaPath(name), "utf8")) as JsonSchema;
 }
 
 export function getCanonicalReportSchema(): JsonSchema {
-  canonicalCache ??= JSON.parse(readFileSync(schemaPath(), "utf8")) as JsonSchema;
+  canonicalCache ??= readSchema("evaluation-report.v1.schema.json");
   return structuredClone(canonicalCache);
+}
+
+export function getEvaluationRequestSchema(): JsonSchema {
+  evaluationRequestCache ??= readSchema("evaluation-request.v1.schema.json");
+  return structuredClone(evaluationRequestCache);
+}
+
+export function getFounderProfileSchema(): JsonSchema {
+  founderProfileCache ??= readSchema("founder-profile.v1.schema.json");
+  return structuredClone(founderProfileCache);
+}
+
+export function getPortfolioRequestSchema(): JsonSchema {
+  portfolioRequestCache ??= readSchema("portfolio-request.v1.schema.json");
+  return structuredClone(portfolioRequestCache);
 }
 
 function nullable(schema: JsonSchema): JsonSchema {

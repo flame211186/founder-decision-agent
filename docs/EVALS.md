@@ -17,7 +17,10 @@ Last updated: 2026-07-28
 - Model inability to self-mark expert review.
 - Configurable quick/deep budgets.
 - SQLite save, export and deletion.
+- Runtime validation of versioned evaluation, founder-profile and portfolio inputs.
 - SDK workflow, HTTP routes/authentication and deterministic portfolio analysis.
+- MCP protocol discovery, evaluation, persistence, explicit-consent and portfolio calls over an
+  in-memory transport.
 - Five structurally complete fixtures covering all five verdicts.
 
 Run:

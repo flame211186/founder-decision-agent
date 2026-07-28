@@ -6,6 +6,31 @@ import { FixtureModel, fixtureReport } from "./helpers.js";
 const now = () => new Date("2026-07-28T10:00:00.000Z");
 
 describe("explicit evaluation workflow", () => {
+  it("rejects malformed SDK input before normalization or model use", async () => {
+    const model = new FixtureModel([
+      fixtureReport("002_niche_agency_feedback_saas")
+    ]);
+    const agent = new FounderDecisionAgent({ model, now });
+
+    await expect(agent.evaluate(undefined as never)).rejects.toMatchObject({
+      code: "INVALID_INPUT"
+    });
+    await expect(
+      agent.evaluate({
+        schemaVersion: "evaluation_request.v1",
+        idea: "A focused feedback SaaS for small agencies",
+        profile: {
+          schemaVersion: "founder_profile.v1",
+          profileId: "profile_invalid",
+          version: 0
+        }
+      })
+    ).rejects.toMatchObject({
+      code: "INVALID_INPUT"
+    });
+    expect(model.calls).toEqual([]);
+  });
+
   it("runs quick mode in one valid model call", async () => {
     const model = new FixtureModel([
       fixtureReport("002_niche_agency_feedback_saas")

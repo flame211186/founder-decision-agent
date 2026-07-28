@@ -179,6 +179,26 @@ describe("HTTP API", () => {
     });
     expect(mismatch.status).toBe(400);
 
+    const invalid = await invoke(server, {
+      method: "PUT",
+      path: "/v1/profiles/profile_http",
+      headers,
+      body: { ...profile, version: 0 }
+    });
+    expect(invalid).toMatchObject({
+      status: 400,
+      body: {
+        error: {
+          code: "INVALID_INPUT",
+          details: {
+            issues: [
+              expect.objectContaining({ code: "PROFILE_SCHEMA_INVALID" })
+            ]
+          }
+        }
+      }
+    });
+
     const saved = await invoke(server, {
       method: "PUT",
       path: "/v1/profiles/profile_http",

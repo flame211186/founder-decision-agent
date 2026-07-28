@@ -50,6 +50,11 @@ describe("SQLite storage", () => {
 
     await storage.saveEvaluation(outcome);
     await storage.saveProfile(profile);
+    await expect(
+      storage.saveProfile({ ...profile, version: 0 })
+    ).rejects.toMatchObject({
+      code: "INVALID_INPUT"
+    });
     expect((await storage.getEvaluation(report.report_id))?.report.idea_id).toBe(report.idea_id);
     expect((await storage.getProfile(profile.profileId))?.currentRoles).toEqual(["developer"]);
     expect((await storage.exportAll()).evaluations).toHaveLength(1);

@@ -14,6 +14,7 @@ const schemaNames = [
   "evaluation-report.v1.schema.json",
   "founder-profile.v1.schema.json",
   "evaluation-request.v1.schema.json",
+  "portfolio-request.v1.schema.json",
   "run-manifest.v1.schema.json",
   "portfolio-report.v1.schema.json"
 ];

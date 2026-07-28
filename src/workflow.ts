@@ -51,13 +51,13 @@ export class FounderDecisionAgent {
   }
 
   async evaluate(rawRequest: EvaluationRequest): Promise<EvaluationOutcome> {
-    const request = normalizeRequest(rawRequest, this.now());
-    const inputValidation = validateEvaluationRequest(request);
+    const inputValidation = validateEvaluationRequest(rawRequest);
     if (!inputValidation.valid) {
       throw new AgentError("INVALID_INPUT", validationMessages(inputValidation).join("\n"), {
         details: { issues: inputValidation.issues }
       });
     }
+    const request = normalizeRequest(rawRequest, this.now());
 
     const runId = newId("run");
     const ideaId = request.ideaId ?? newId("idea");

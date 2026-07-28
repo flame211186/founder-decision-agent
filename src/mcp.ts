@@ -10,20 +10,26 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { OpenAiAdapter } from "./adapters/openai.js";
 import { SqliteStorage } from "./adapters/sqlite.js";
-import { toAgentError } from "./errors.js";
+import { AgentError, toAgentError } from "./errors.js";
 import { analyzePortfolio } from "./portfolio.js";
 import type {
   EvaluationRequest,
   FounderProfile,
   IndustryPackId,
-  PortfolioRequest
+  PortfolioRequest,
+  StorageAdapter
 } from "./types.js";
+import {
+  isFounderProfile,
+  validateFounderProfile,
+  validationMessages
+} from "./validation.js";
 import { FounderDecisionAgent } from "./workflow.js";
 import { VERSION } from "./version.js";
 
 export async function createFounderDecisionMcpServer(options?: {
   agent?: FounderDecisionAgent;
-  storage?: SqliteStorage;
+  storage?: StorageAdapter;
 }) {
   const defaultModel = options?.agent ? undefined : new OpenAiAdapter();
   const storage =
@@ -187,7 +193,13 @@ export async function createFounderDecisionMcpServer(options?: {
       }
     },
     async ({ profile }) => {
-      await storage.saveProfile(profile as unknown as FounderProfile);
+      if (!isFounderProfile(profile)) {
+        const validation = validateFounderProfile(profile);
+        throw new AgentError("INVALID_INPUT", validationMessages(validation).join("\n"), {
+          details: { issues: validation.issues }
+        });
+      }
+      await storage.saveProfile(profile);
       return {
         content: [{ type: "text" as const, text: "Profile saved locally." }],
         structuredContent: { saved: true }

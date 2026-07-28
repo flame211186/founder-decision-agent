@@ -3,30 +3,72 @@ import type { ErrorObject, ValidateFunction } from "ajv";
 import type {
   EvaluationReport,
   EvaluationRequest,
+  FounderProfile,
+  PortfolioRequest,
   ValidationIssue,
   ValidationResult
 } from "./types.js";
-import { getCanonicalReportSchema } from "./openai-schema.js";
+import {
+  getCanonicalReportSchema,
+  getEvaluationRequestSchema,
+  getFounderProfileSchema,
+  getPortfolioRequestSchema
+} from "./openai-schema.js";
 
-let compiledSchema: ValidateFunction | undefined;
+let compiledReportSchema: ValidateFunction | undefined;
+let compiledEvaluationRequestSchema: ValidateFunction | undefined;
+let compiledFounderProfileSchema: ValidateFunction | undefined;
+let compiledPortfolioRequestSchema: ValidateFunction | undefined;
 const require = createRequire(import.meta.url);
 const Ajv = require("ajv") as typeof import("ajv")["default"];
 const addFormats = require("ajv-formats") as typeof import("ajv-formats")["default"];
 
-function getValidator(): ValidateFunction {
-  if (!compiledSchema) {
-    const ajv = new Ajv({ allErrors: true, strict: false });
-    addFormats(ajv);
-    const validator = ajv.compile(getCanonicalReportSchema());
-    compiledSchema = validator;
-    return validator;
-  }
-  return compiledSchema;
+function createAjv(): InstanceType<typeof Ajv> {
+  const ajv = new Ajv({ allErrors: true, strict: false });
+  addFormats(ajv);
+  return ajv;
 }
 
-function schemaIssue(error: ErrorObject): ValidationIssue {
+function getReportValidator(): ValidateFunction {
+  if (!compiledReportSchema) {
+    const ajv = createAjv();
+    const validator = ajv.compile(getCanonicalReportSchema());
+    compiledReportSchema = validator;
+    return validator;
+  }
+  return compiledReportSchema;
+}
+
+function getEvaluationRequestValidator(): ValidateFunction {
+  if (!compiledEvaluationRequestSchema) {
+    const ajv = createAjv();
+    ajv.addSchema(getFounderProfileSchema());
+    compiledEvaluationRequestSchema = ajv.compile(getEvaluationRequestSchema());
+  }
+  return compiledEvaluationRequestSchema;
+}
+
+function getFounderProfileValidator(): ValidateFunction {
+  if (!compiledFounderProfileSchema) {
+    const ajv = createAjv();
+    compiledFounderProfileSchema = ajv.compile(getFounderProfileSchema());
+  }
+  return compiledFounderProfileSchema;
+}
+
+function getPortfolioRequestValidator(): ValidateFunction {
+  if (!compiledPortfolioRequestSchema) {
+    const ajv = createAjv();
+    ajv.addSchema(getFounderProfileSchema());
+    ajv.addSchema(getCanonicalReportSchema());
+    compiledPortfolioRequestSchema = ajv.compile(getPortfolioRequestSchema());
+  }
+  return compiledPortfolioRequestSchema;
+}
+
+function schemaIssue(error: ErrorObject, code = "SCHEMA_INVALID"): ValidationIssue {
   return {
-    code: "SCHEMA_INVALID",
+    code,
     severity: "P1",
     path: error.instancePath || "$",
     message: error.message ?? "Schema validation failed"
@@ -43,24 +85,64 @@ function issue(
   issues.push({ code, severity, path, message });
 }
 
-export function validateEvaluationRequest(request: EvaluationRequest): ValidationResult {
-  const issues: ValidationIssue[] = [];
-  if (request.schemaVersion !== "evaluation_request.v1") {
-    issue(issues, "INPUT_VERSION", "schemaVersion must be evaluation_request.v1");
-  }
-  if (typeof request.idea !== "string" || request.idea.trim().length < 5) {
-    issue(issues, "INPUT_IDEA", "idea must contain at least 5 non-whitespace characters");
-  }
-  if (request.mode && !["quick", "deep"].includes(request.mode)) {
-    issue(issues, "INPUT_MODE", "mode must be quick or deep");
-  }
-  if (request.language && !["zh-CN", "en"].includes(request.language)) {
-    issue(issues, "INPUT_LANGUAGE", "language must be zh-CN or en");
-  }
-  if ((request.industryPacks?.length ?? 0) > 2) {
-    issue(issues, "INPUT_INDUSTRY_PACKS", "At most two industry packs can be active");
+function validatePublicInput(
+  value: unknown,
+  validator: ValidateFunction,
+  code: string
+): ValidationIssue[] {
+  return validator(value)
+    ? []
+    : (validator.errors ?? []).map((error) => schemaIssue(error, code));
+}
+
+export function validateEvaluationRequest(request: unknown): ValidationResult {
+  const issues = validatePublicInput(
+    request,
+    getEvaluationRequestValidator(),
+    "INPUT_SCHEMA_INVALID"
+  );
+  const typed = request as Partial<EvaluationRequest> | null;
+  if (
+    typed &&
+    typeof typed === "object" &&
+    typeof typed.idea === "string" &&
+    typed.idea.trim().length < 5 &&
+    !issues.some((item) => item.path === "/idea")
+  ) {
+    issue(
+      issues,
+      "INPUT_IDEA",
+      "idea must contain at least 5 non-whitespace characters",
+      "/idea"
+    );
   }
   return { valid: issues.length === 0, issues };
+}
+
+export function validateFounderProfile(profile: unknown): ValidationResult {
+  const issues = validatePublicInput(
+    profile,
+    getFounderProfileValidator(),
+    "PROFILE_SCHEMA_INVALID"
+  );
+  return { valid: issues.length === 0, issues };
+}
+
+export function validatePortfolioRequest(request: unknown): ValidationResult {
+  const issues = validatePublicInput(
+    request,
+    getPortfolioRequestValidator(),
+    "PORTFOLIO_SCHEMA_INVALID"
+  );
+  return { valid: issues.length === 0, issues };
+}
+
+export function isFounderProfile(profile: unknown): profile is FounderProfile {
+  return validateFounderProfile(profile).valid;
+}
+
+export function isPortfolioRequest(request: unknown): request is PortfolioRequest {
+  return validatePortfolioRequest(request).valid;
 }
 
 export interface SemanticValidationOptions {
@@ -72,9 +154,9 @@ export function validateReport(
   options: SemanticValidationOptions = {}
 ): ValidationResult {
   const issues: ValidationIssue[] = [];
-  const schemaValid = getValidator()(report);
+  const schemaValid = getReportValidator()(report);
   if (!schemaValid) {
-    issues.push(...(getValidator().errors ?? []).map(schemaIssue));
+    issues.push(...(getReportValidator().errors ?? []).map((error) => schemaIssue(error)));
   }
 
   const claims = new Map<string, EvaluationReport["claims"][number]>();

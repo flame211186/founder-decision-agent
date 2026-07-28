@@ -9,6 +9,7 @@ import type {
   FounderProfile,
   StorageAdapter
 } from "../types.js";
+import { validateFounderProfile, validationMessages } from "../validation.js";
 
 const SCHEMA_VERSION = 1;
 const require = createRequire(import.meta.url);
@@ -107,6 +108,12 @@ export class SqliteStorage implements StorageAdapter {
   }
 
   async saveProfile(profile: FounderProfile): Promise<void> {
+    const validation = validateFounderProfile(profile);
+    if (!validation.valid) {
+      throw new AgentError("INVALID_INPUT", validationMessages(validation).join("\n"), {
+        details: { issues: validation.issues }
+      });
+    }
     try {
       this.database
         .prepare(

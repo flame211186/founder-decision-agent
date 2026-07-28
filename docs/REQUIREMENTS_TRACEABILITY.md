@@ -22,7 +22,7 @@
 | REQ-007 | 有价值时说明如何落地现实 | implemented | `EVALUATION_METHODOLOGY.md §8`、语义校验器 | active verdict 必须有完整实验；人工执行性待评审 |
 | REQ-008 | 说明未来投入与产出，包括时间、资金、资源和证据 | implemented | 报告 Schema、`src/validation.ts` | resource/scenario/range fixture 验证通过 |
 | REQ-009 | 提供融资准备、投资人问题和现实融资路径 | implemented | 报告 Schema、`src/jurisdictions.ts` | 美国/中国大陆官方入口单测；法域安全人工检查待完成 |
-| REQ-010 | 支持不止一个想法 | verified | `src/portfolio.ts` | `tests/portfolio.test.ts`、`tests/schema-contracts.test.ts` |
+| REQ-010 | 支持不止一个想法 | verified | `src/portfolio.ts`、`schemas/portfolio-request.v1.schema.json` | `tests/portfolio.test.ts`、`tests/schema-contracts.test.ts`、`tests/mcp.test.ts` |
 | REQ-011 | 从多个想法发现个人漏洞、专长和思维模式 | implemented | `EVALUATION_METHODOLOGY.md §9`、`src/portfolio.ts` | 两想法证据阈值测试通过；用户纠正测试待完成 |
 | REQ-012 | 引导用户思考和产品迭代 | implemented | `PRODUCT_SPEC.md §2.3, §3.2`、`src/prompts.ts` | 澄清最多三项和实验结构验证；真实迭代案例待完成 |
 | REQ-013 | Agent 先独立开源，再接入另一个开源项目 | implemented | `ARCHITECTURE_PLAN.md §5, §9`、公共 SDK/HTTP | 独立构建与 HTTP 契约测试通过；`lmao app` 集成明确延期 |
@@ -31,12 +31,12 @@
 | REQ-016 | 不急于求成，不以堆代码代替质量 | implemented | `PROJECT_CHARTER.md §5`、`AGENTS.md §2`、`docs/EVALS.md` | 覆盖率门和稳定版硬门已执行/记录；人工门仍开放 |
 | REQ-017 | 降低幻觉、上下文压缩和目标丢失 | implemented | `AGENTS.md`、`EVALUATION_METHODOLOGY.md §6–11`、`src/validation.ts` | 状态恢复、外部事实/引用/提示词边界测试；深研真实搜索调用计数与超限失败关闭测试；语义引用人工评测待完成 |
 | REQ-018 | 评估应具有较高判断正确性 | captured | `EVALUATION_METHODOLOGY.md §10` | 专家盲评、反事实、稳定性和事实性指标 |
-| REQ-019 | 用户可以纠正 Agent 对其想法和个人模式的理解 | implemented | `PRODUCT_SPEC.md §1.3`、`answers`、版本化 profile | 输入契约已实现；纠正与重评真实端到端测试待完成 |
+| REQ-019 | 用户可以纠正 Agent 对其想法和个人模式的理解 | implemented | `PRODUCT_SPEC.md §1.3`、`answers`、版本化 profile | 画像公共 Schema 与 CLI/SDK/MCP/HTTP/SQLite 运行时校验已实现，SDK/HTTP/MCP/SQLite 拒绝路径有直接测试；纠正与重评真实端到端测试待完成 |
 | REQ-020 | 不同价值类型不能被一个 VC 总分覆盖 | verified | `PROJECT_CHARTER.md §2.2`、报告 Schema | 五份 fixture 和 case 002 独立 value assessments |
 | REQ-021 | 模型调用次数采用可调默认值 | verified | `DECISIONS.md DEC-010`、`src/budget.ts` | `tests/safety-and-budget.test.ts`、`tests/workflow.test.ts`；实际 `web_search_call` 计数且超限失败关闭 |
 | REQ-022 | 用户通过 BYOK 承担费用，Agent 不保存 Key | implemented | `DECISIONS.md DEC-010/011`、`src/adapters/openai.ts`、`scripts/live-smoke.mjs` | 适配器请求/隐私测试和 live smoke 泄漏断言已实现；实际账单归属与实时输出待 BYOK smoke 验证 |
 | REQ-023 | 使用显式 TypeScript 工作流 | verified | `DECISIONS.md DEC-009`、`src/workflow.ts` | quick/deep/repair/角色顺序单测和严格 TS 检查 |
-| REQ-024 | 提供 CLI、SDK、MCP 和 HTTP 使用面 | verified | `src/cli.ts`、`src/index.ts`、`src/mcp.ts`、`src/server.ts` | SDK/HTTP 测试、干净 tarball 安装和三个 bin 入口 smoke 通过；Node 22.14/24 CI 矩阵覆盖 |
+| REQ-024 | 提供 CLI、SDK、MCP 和 HTTP 使用面 | verified | `src/cli.ts`、`src/index.ts`、`src/mcp.ts`、`src/server.ts` | SDK/HTTP 测试、MCP 内存传输协议集成测试、干净 tarball 安装和三个 bin 入口 smoke 通过；Node 22.14/24 CI 矩阵覆盖 |
 | REQ-025 | 首批支持 B2B SaaS、AI-native、中文和英文 | implemented | `src/industry-packs.ts`、`src/prompts.ts` | industry/context 单测与中英文 fixture；领域人工评测待完成 |
 | REQ-026 | 先公开 beta，稳定 v1 需真实案例和专家盲评 | implemented | `DECISIONS.md DEC-014`、`docs/EVALS.md`、publish workflow | live smoke 断言与 bootstrap/OIDC 完整性发布门已编码；beta 与 v1 实际发布证据待完成 |
 

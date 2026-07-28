@@ -7,10 +7,20 @@ export { analyzePortfolio } from "./portfolio.js";
 export { renderReport } from "./renderer.js";
 export {
   validateEvaluationRequest,
+  validateFounderProfile,
+  validatePortfolioRequest,
   validateReport,
+  isFounderProfile,
+  isPortfolioRequest,
   validationMessages
 } from "./validation.js";
-export { getCanonicalReportSchema, getOpenAiReportSchema } from "./openai-schema.js";
+export {
+  getCanonicalReportSchema,
+  getEvaluationRequestSchema,
+  getFounderProfileSchema,
+  getOpenAiReportSchema,
+  getPortfolioRequestSchema
+} from "./openai-schema.js";
 export { DEFAULT_BUDGETS, resolveBudget } from "./budget.js";
 export { INDUSTRY_PACKS } from "./industry-packs.js";
 export {

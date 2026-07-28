@@ -143,7 +143,10 @@ Non-loopback HTTP binding refuses to start without a bearer token. See [API docu
 
 ## What a report guarantees—and does not
 
-The implementation enforces versioned JSON Schema, claim/evidence references, verdict/disposition consistency, D1–D12 coverage, scenario structure, citation allowlists for deep mode, numerical traceability fields and report validation status.
+The implementation enforces versioned JSON Schema for evaluation, founder-profile and portfolio
+inputs as well as report outputs, plus claim/evidence references, verdict/disposition consistency,
+D1–D12 coverage, scenario structure, citation allowlists for deep mode, numerical traceability
+fields and report validation status.
 
 It does **not** prove that a cited page semantically supports every sentence, that the model made the right business judgment, or that the idea will succeed. Automated citation review is always labeled as draft review. Stable `v1` requires the [expert review protocol](docs/EXPERT_REVIEW_PROTOCOL.md).
 

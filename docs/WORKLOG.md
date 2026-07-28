@@ -532,3 +532,42 @@ Phase 0：进行中。
 - 远端 CI run `30353777901` 成功，覆盖 Ubuntu Node 22.14 与 24 矩阵；
 - 远端 CodeQL run `30353777927` 成功；
 - GitHub beta Release 与 npm beta 仍未创建，继续等待用户 BYOK 实时 smoke 通过。
+
+## 2026-07-28（公共输入与 MCP 协议证据补强）
+
+### 审计发现
+
+- MCP 只有发布包进程入口 smoke，没有通过 MCP 协议真正发现和调用工具的集成测试；
+- `FounderProfile` 在 CLI、HTTP、MCP 和 SQLite 的运行时校验强度不一致；
+- `PortfolioRequest` 只有 TypeScript 版本字段，没有公开 JSON Schema；
+- SDK 的畸形输入会在规范化阶段先触发普通 TypeError，而不是稳定的 `INVALID_INPUT`。
+
+### 已完成
+
+- 新增 `portfolio-request.v1.schema.json`，引用 canonical report 与 founder profile 契约；
+- 评估、画像和组合请求统一使用 Ajv Draft 7 运行时校验；
+- SDK 在规范化和模型调用前拒绝畸形请求与无效嵌套画像；
+- CLI、HTTP、MCP 与公开 SQLite 适配器在持久化前拒绝无效画像；
+- `createFounderDecisionMcpServer` 接受通用 `StorageAdapter`，默认仍使用 SQLite；
+- 新增内存 MCP client/server 协议测试，覆盖：
+  - 七个工具发现；
+  - quick 评估与持久化；
+  - 删除必须 `confirm: true`；
+  - 敏感画像保存必须明确同意且通过 Schema；
+  - 两份报告文件的组合分析。
+
+### 仍未证明
+
+- 新增离线证据不替代真实 OpenAI 输出、真实用户纠正或专家盲评；
+- npm registry 复核仍为 404；BYOK Key 仍未设置，因此不创建 beta Release。
+
+### 验证
+
+- `npm run check` 通过；
+- 10 个测试文件、45/45 测试通过；
+- coverage：statements 85.45%、branches 75.77%、functions 87.64%、lines 87.10%；
+- 5/5 fixture、33 个 Markdown 链接与 TypeScript build 通过；
+- Node 22.14 上的 check、45 项测试和 build 通过，只有已公开的上游 SQLite 实验警告；
+- 实际 tarball 包含 106 个文件和新增组合请求 Schema，约 127 kB；
+- tarball 在全新消费者目录严格安装成功，包内 CLI、SDK Schema getter、公开 Schema
+  子路径和 SQLite 无效画像拒绝路径均通过。

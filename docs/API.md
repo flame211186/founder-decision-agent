@@ -10,6 +10,7 @@ The SDK, CLI, MCP and HTTP interfaces share the same domain workflow and JSON co
 - Input: `evaluation_request.v1`
 - Primary output: `evaluation_report.v1`
 - Founder profile: `founder_profile.v1`
+- Portfolio input: `portfolio_request.v1`
 - Run metadata: `run_manifest.v1`
 - Portfolio output: `portfolio_report.v1`
 
@@ -40,6 +41,10 @@ const agent = new FounderDecisionAgent({
 ```
 
 The `ModelAdapter` port supports `analyze`, `generateReport` and optional `research`. Deep mode returns `RESEARCH_UNAVAILABLE` when the adapter has no research implementation. `StorageAdapter` supports evaluation/profile save, read, list, export and deletion.
+
+The SDK exports `validateEvaluationRequest`, `validateFounderProfile`,
+`validatePortfolioRequest` and their public Schema getters. Runtime entry points reject invalid
+public inputs before model calls, persistence or portfolio inference.
 
 ## Error contract
 
@@ -103,6 +108,8 @@ Beta limitation: evaluation requests are synchronous. A deep run can occupy a co
 - `delete_founder_profile`
 
 Sensitive profile persistence and destructive tools require literal `confirm: true`. The MCP server communicates over stdio and writes only to its configured local SQLite file.
+The same tools are exercised through an in-memory MCP client/server protocol test; this is distinct
+from merely checking that the stdio process starts.
 
 ## Compatibility policy
 

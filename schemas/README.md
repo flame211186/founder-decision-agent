@@ -26,5 +26,6 @@ Schema 能验证字段、类型、枚举和基础约束，但以下语义需要�
 
 - `evaluation-request.v1.schema.json`
 - `founder-profile.v1.schema.json`
+- `portfolio-request.v1.schema.json`
 - `portfolio-report.v1.schema.json`
 - `run-manifest.v1.schema.json`

@@ -18,6 +18,10 @@ All notable changes follow semantic versioning once stable.
 - Built-in `node:sqlite` storage driver with no runtime native-addon install script.
 - TypeScript SDK, CLI, MCP server and Node HTTP API.
 - Deterministic portfolio analysis.
+- Versioned `portfolio_request.v1` contract and runtime validation for evaluation, profile and
+  portfolio inputs.
+- In-memory MCP protocol integration tests covering evaluation, persistence, consent and portfolio
+  tools.
 - Offline fixtures covering all five verdicts.
 - Permission-restricted live OpenAI smoke harness and integrity-aware npm release workflow.
 

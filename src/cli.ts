@@ -17,6 +17,7 @@ import type {
   PortfolioRequest,
   ResourceBudget
 } from "./types.js";
+import { validateFounderProfile, validationMessages } from "./validation.js";
 import { FounderDecisionAgent } from "./workflow.js";
 import { VERSION } from "./version.js";
 
@@ -110,8 +111,11 @@ profile
     const storage = new SqliteStorage(options.db);
     try {
       const parsed = JSON.parse(await readFile(resolve(file), "utf8")) as FounderProfile;
-      if (parsed.schemaVersion !== "founder_profile.v1" || !parsed.profileId) {
-        throw new AgentError("INVALID_INPUT", "Invalid founder_profile.v1 document");
+      const validation = validateFounderProfile(parsed);
+      if (!validation.valid) {
+        throw new AgentError("INVALID_INPUT", validationMessages(validation).join("\n"), {
+          details: { issues: validation.issues }
+        });
       }
       await storage.saveProfile(parsed);
       process.stdout.write(`${parsed.profileId}\n`);
