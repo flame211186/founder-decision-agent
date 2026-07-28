@@ -57,7 +57,24 @@ in GitHub.
 
 ## Stable
 
-Do not remove the prerelease suffix or publish the `latest` dist-tag until the stable gate in `docs/EVALS.md` passes.
+Do not remove the prerelease suffix or publish the `latest` dist-tag until every stable gate in
+`docs/EVALS.md` has direct evidence. Freeze and approve the release policy before inspecting the
+final aggregate result, then run:
+
+```bash
+npm run audit:stable -- \
+  --consents /private/path/to/consents \
+  --reviews /private/path/to/expert-reviews \
+  --reports /private/path/to/frozen-reports \
+  --quality-summary /private/path/to/live-quality-summary.json \
+  --quality-review /private/path/to/live-quality-review.json \
+  --release-evidence /private/path/to/stable-release-evidence.json
+```
+
+The audit checks declared schemas, hashes, version links and frozen thresholds. Its highest status
+is `evidence_ready_for_human_release_decision`, never “stable approved.” The product owner and
+independent review group must still verify authenticity, record their release decision, confirm
+zero unresolved P0/P1 findings, and only then create the stable tag and `latest` dist-tag.
 
 ## Rollback
 

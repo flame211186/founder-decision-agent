@@ -9,8 +9,10 @@
     "review_id",
     "case_id",
     "case_version",
+    "case_artifact_sha256",
     "report_id",
     "report_version",
+    "report_sha256",
     "rubric_version",
     "reviewer",
     "blinding",
@@ -31,11 +33,17 @@
     "case_version": {
       "$ref": "#/definitions/nonEmptyString"
     },
+    "case_artifact_sha256": {
+      "$ref": "#/definitions/sha256"
+    },
     "report_id": {
       "$ref": "#/definitions/nonEmptyString"
     },
     "report_version": {
       "$ref": "#/definitions/nonEmptyString"
+    },
+    "report_sha256": {
+      "$ref": "#/definitions/sha256"
     },
     "rubric_version": {
       "const": "0.1"
@@ -67,6 +75,10 @@
     "nonEmptyString": {
       "type": "string",
       "minLength": 1
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
     },
     "stringList": {
       "type": "array",

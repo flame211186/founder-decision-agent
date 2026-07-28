@@ -30,7 +30,7 @@
 | REQ-015 | 中途关键事项由用户决策 | verified | `DECISIONS.md`、`ROADMAP.md` | DEC-001 至 DEC-014 用户确认历史；DEC-015 为记录清楚的可逆发布实现决定 |
 | REQ-016 | 不急于求成，不以堆代码代替质量 | implemented | `PROJECT_CHARTER.md §5`、`AGENTS.md §2`、`docs/EVALS.md` | 覆盖率门和稳定版硬门已执行/记录；人工门仍开放 |
 | REQ-017 | 降低幻觉、上下文压缩和目标丢失 | implemented | `AGENTS.md`、`EVALUATION_METHODOLOGY.md §6–11`、`src/validation.ts` | 状态恢复、外部事实/引用/提示词边界测试；深研真实搜索调用计数与超限失败关闭测试；语义引用人工评测待完成 |
-| REQ-018 | 评估应具有较高判断正确性 | captured | `EVALUATION_METHODOLOGY.md §10`、`EXPERT_REVIEW_PROTOCOL.md` | 专家评审记录验证器与 `scripts/live-quality-eval.mjs` 已实现，离线测试覆盖重复/反事实/引用样本结构；实际 BYOK 运行、专家盲评和事实性人工指标仍待执行 |
+| REQ-018 | 评估应具有较高判断正确性 | captured | `EVALUATION_METHODOLOGY.md §10`、`EXPERT_REVIEW_PROTOCOL.md` | 专家评审、实时质量人工复核和统一稳定版证据审计已实现；测试覆盖不可变案例/报告/质量汇总哈希、重复/反事实/引用样本及 P0–P3/裁决逻辑；实际 BYOK 运行、专家盲评和事实性人工指标仍待执行 |
 | REQ-019 | 用户可以纠正 Agent 对其想法和个人模式的理解 | implemented | `PRODUCT_SPEC.md §1.3`、`answers`、版本化 profile | 画像公共 Schema 与 CLI/SDK/MCP/HTTP/SQLite 运行时校验已实现，SDK/HTTP/MCP/SQLite 拒绝路径有直接测试；纠正与重评真实端到端测试待完成 |
 | REQ-020 | 不同价值类型不能被一个 VC 总分覆盖 | verified | `PROJECT_CHARTER.md §2.2`、报告 Schema | 五份 fixture 和 case 002 独立 value assessments |
 | REQ-021 | 模型调用次数采用可调默认值 | verified | `DECISIONS.md DEC-010`、`src/budget.ts` | `tests/safety-and-budget.test.ts`、`tests/workflow.test.ts`；实际 `web_search_call` 计数且超限失败关闭 |
@@ -38,7 +38,7 @@
 | REQ-023 | 使用显式 TypeScript 工作流 | verified | `DECISIONS.md DEC-009`、`src/workflow.ts` | quick/deep/repair/角色顺序单测和严格 TS 检查 |
 | REQ-024 | 提供 CLI、SDK、MCP 和 HTTP 使用面 | verified | `src/cli.ts`、`src/index.ts`、`src/mcp.ts`、`src/server.ts` | SDK/HTTP 测试、MCP 内存传输协议集成测试、干净 tarball 安装和三个 bin 入口 smoke 通过；Node 22.14/24 CI 矩阵覆盖 |
 | REQ-025 | 首批支持 B2B SaaS、AI-native、中文和英文 | implemented | `src/industry-packs.ts`、`src/prompts.ts` | industry/context 单测与中英文 fixture；领域人工评测待完成 |
-| REQ-026 | 先公开 beta，稳定 v1 需真实案例和专家盲评 | implemented | `DECISIONS.md DEC-014`、`docs/EVALS.md`、publish workflow | 实时质量、专家评审、真实案例同意/去标识化验证器与发布完整性门已编码并离线测试；实际真实案例、beta 与 v1 发布证据待完成 |
+| REQ-026 | 先公开 beta，稳定 v1 需真实案例和专家盲评 | implemented | `DECISIONS.md DEC-014`、`docs/EVALS.md`、publish workflow | `founder-stable-audit` 已将冻结门槛、3–5 案例、案例/报告哈希、专家复核、实时质量人工复核、已发布包安装、独立集成与发布说明证据统一机检，并固定不自批稳定版；实际真实案例、beta 与 v1 发布证据待完成 |
 
 ## 需求变更规则
 

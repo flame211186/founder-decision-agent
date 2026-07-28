@@ -81,8 +81,9 @@ npm run validate:reviews -- /private/path/to/review-records
 founder-review-validate /private/path/to/review-records
 ```
 
-This validates the review form and deterministic cross-field invariants and emits aggregate counts
-plus local issue locations, never review bodies. Its summary deliberately reports
+This validates the review form, required deidentified-case/report SHA-256 bindings and deterministic
+cross-field invariants, and emits aggregate counts plus local issue locations, never review bodies.
+Its summary deliberately reports
 `stableGateStatus: not_assessed`; consent, reviewer independence, expertise and adjudication remain
 human evidence.
 
@@ -101,6 +102,25 @@ check, artifact SHA-256 and an available deletion process. Public-release consen
 may remain false. Raw submissions, identities and contact details stay outside the repository.
 This validator checks declarations and consistency; it cannot authenticate the receipt, inspect the
 raw source, detect every identifier or establish legal compliance.
+
+After a deep live-quality run, a human reviewer records citation support, repeat stability and both
+counterfactual judgments in `live_quality_review.v1` and binds the review to the exact summary
+bytes:
+
+```bash
+npm run validate:quality-review -- \
+  /private/path/to/live-quality-summary.json \
+  /private/path/to/live-quality-review.json
+
+# after installing the npm package
+founder-quality-review-validate \
+  /private/path/to/live-quality-summary.json \
+  /private/path/to/live-quality-review.json
+```
+
+The validator requires exact citation-claim and counterfactual coverage, checks severity and
+adjudication consistency, and reports unresolved findings separately by P0–P3. It cannot determine
+whether a human actually read each source or whether the reviewer is independent.
 
 ## What is not automatically proven
 
@@ -138,6 +158,25 @@ Stable `v1` is blocked until all of the following exist:
 8. release notes that separate proven behavior from open limitations.
 
 Model self-critique, JSON validity, test presence, exit code zero and report length cannot substitute for these gates.
+
+The final private mechanical audit links every eligible consent to a case/version, every expert
+review to its frozen report, the human quality review to the exact live-quality summary, and the
+published-install, independent-integration and release-note files to a frozen policy:
+
+```bash
+npm run audit:stable -- \
+  --consents /private/path/to/consents \
+  --reviews /private/path/to/expert-reviews \
+  --reports /private/path/to/frozen-reports \
+  --quality-summary /private/path/to/live-quality-summary.json \
+  --quality-review /private/path/to/live-quality-review.json \
+  --release-evidence /private/path/to/stable-release-evidence.json
+```
+
+The manifest uses `stable_release_evidence.v1`. A successful result is only
+`evidence_ready_for_human_release_decision`; `stableGateStatus` remains `not_assessed`. The audit
+cannot authenticate consent, prove that pseudonymous cases are real, verify reviewer credentials or
+independence, inspect npm registry history, or replace the recorded human release decision.
 
 ## Fixture policy
 

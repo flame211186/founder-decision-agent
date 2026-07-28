@@ -1,0 +1,285 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:founder-decision-agent:schema:stable-release-evidence:v1",
+  "title": "Founder Decision Agent Stable Release External Evidence v1",
+  "description": "A private, pseudonymous manifest linking the frozen release policy, published package installation, independent integration test and release notes for one stable candidate. Structural validity is not release approval.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "candidate_version",
+    "source_commit_sha",
+    "policy",
+    "published_artifact",
+    "independent_integration",
+    "release_notes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "stable_release_evidence.v1"
+    },
+    "candidate_version": {
+      "$ref": "#/definitions/stableSemver"
+    },
+    "source_commit_sha": {
+      "$ref": "#/definitions/gitSha"
+    },
+    "policy": {
+      "$ref": "#/definitions/policy"
+    },
+    "published_artifact": {
+      "$ref": "#/definitions/publishedArtifact"
+    },
+    "independent_integration": {
+      "$ref": "#/definitions/independentIntegration"
+    },
+    "release_notes": {
+      "$ref": "#/definitions/releaseNotes"
+    }
+  },
+  "definitions": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pseudonymousId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{7,63}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "gitSha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "stableSemver": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)$"
+    },
+    "fileEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "sha256": {
+          "$ref": "#/definitions/sha256"
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policy_id",
+        "frozen_at",
+        "approvals",
+        "minimum_reviews_per_case",
+        "require_reviewer_role_coverage",
+        "minimum_citation_claims",
+        "maximum_unresolved_p0",
+        "maximum_unresolved_p1"
+      ],
+      "properties": {
+        "policy_id": {
+          "$ref": "#/definitions/pseudonymousId"
+        },
+        "frozen_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "approvals": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "approver_id",
+              "role",
+              "approved_at"
+            ],
+            "properties": {
+              "approver_id": {
+                "$ref": "#/definitions/pseudonymousId"
+              },
+              "role": {
+                "enum": [
+                  "product_owner",
+                  "review_group"
+                ]
+              },
+              "approved_at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        },
+        "minimum_reviews_per_case": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "require_reviewer_role_coverage": {
+          "type": "boolean"
+        },
+        "minimum_citation_claims": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "maximum_unresolved_p0": {
+          "const": 0
+        },
+        "maximum_unresolved_p1": {
+          "const": 0
+        }
+      }
+    },
+    "publishedArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "package_name",
+        "package_version",
+        "registry_tarball_url",
+        "registry_integrity",
+        "tested_at",
+        "platform",
+        "node_version",
+        "installed_from_registry",
+        "cli_smoke_passed",
+        "sdk_import_passed",
+        "storage_smoke_passed",
+        "executor_id",
+        "independent_of_implementation",
+        "evidence_file"
+      ],
+      "properties": {
+        "package_name": {
+          "const": "@sangfei/founder-decision-agent"
+        },
+        "package_version": {
+          "$ref": "#/definitions/stableSemver"
+        },
+        "registry_tarball_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://registry\\.npmjs\\.org/"
+        },
+        "registry_integrity": {
+          "type": "string",
+          "pattern": "^sha512-[A-Za-z0-9+/]+={0,2}$"
+        },
+        "tested_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "platform": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "node_version": {
+          "type": "string",
+          "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "installed_from_registry": {
+          "const": true
+        },
+        "cli_smoke_passed": {
+          "const": true
+        },
+        "sdk_import_passed": {
+          "const": true
+        },
+        "storage_smoke_passed": {
+          "const": true
+        },
+        "executor_id": {
+          "$ref": "#/definitions/pseudonymousId"
+        },
+        "independent_of_implementation": {
+          "type": "boolean"
+        },
+        "evidence_file": {
+          "$ref": "#/definitions/fileEvidence"
+        }
+      }
+    },
+    "independentIntegration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "surface",
+        "package_version",
+        "source_commit_sha",
+        "executed_at",
+        "passed",
+        "executor_id",
+        "independent_of_implementation",
+        "evidence_file"
+      ],
+      "properties": {
+        "surface": {
+          "enum": [
+            "sdk",
+            "http"
+          ]
+        },
+        "package_version": {
+          "$ref": "#/definitions/stableSemver"
+        },
+        "source_commit_sha": {
+          "$ref": "#/definitions/gitSha"
+        },
+        "executed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "passed": {
+          "const": true
+        },
+        "executor_id": {
+          "$ref": "#/definitions/pseudonymousId"
+        },
+        "independent_of_implementation": {
+          "const": true
+        },
+        "evidence_file": {
+          "$ref": "#/definitions/fileEvidence"
+        }
+      }
+    },
+    "releaseNotes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "proven_behavior_separated",
+        "open_limitations_listed"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "sha256": {
+          "$ref": "#/definitions/sha256"
+        },
+        "proven_behavior_separated": {
+          "const": true
+        },
+        "open_limitations_listed": {
+          "const": true
+        }
+      }
+    }
+  }
+}

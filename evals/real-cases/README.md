@@ -24,3 +24,7 @@ npm run validate:consents -- /private/path/to/consent-records
 允许用于私有评测不等于允许公开案例。只有
 `consent.scopes.public_release: true` 时，去标识化案例才可以另行考虑进入公开
 fixture；即便如此也必须再次人工检查重识别风险。
+
+完成真实案例、专家盲评和实时质量人工复核后，使用 `founder-stable-audit` 将这些
+私有记录与冻结报告及发布证据串联。审计命令见 `docs/EVALS.md`；成功结果仍不证明
+案例真实性，也不替代人工稳定版发布决定。

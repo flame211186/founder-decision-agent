@@ -30,12 +30,19 @@ Schema 能验证字段、类型、枚举和基础约束，但以下语义需要�
 - `portfolio-report.v1.schema.json`
 - `run-manifest.v1.schema.json`
 - `live-quality-eval.v1.schema.json`
+- `live-quality-review.v1.schema.json`
 - `real-case-consent.v1.schema.json`
+- `stable-release-evidence.v1.schema.json`
 
 专家盲评记录契约位于 `evals/review/review-form.v1.schema.json`，安装包可通过
 `@sangfei/founder-decision-agent/schemas/expert-review.v1.schema.json` 导入。它只证明
 记录结构有效，不证明评审者独立性、专业性或结论正确性。
 
 `live-quality-eval.v1` 保存重复运行、反事实和引用抽样诊断，固定不自评稳定版通过。
+`live-quality-review.v1` 将人工事实性、重复稳定性和反事实判断绑定到质量汇总的准确
+SHA-256，并分别保留 P0–P3 与裁决状态；结构有效不证明人工确实查看了来源。
 `real-case-consent.v1` 只保存去标识化流程记录，不得保存姓名、联系方式、原始想法或
 密钥；结构通过也不等于同意真实性、去标识化完整性或法律合规已被证明。
+`stable-release-evidence.v1` 记录冻结门槛、已发布包干净安装、独立 SDK/HTTP 集成和
+发布说明的哈希清单；统一审计成功也只表示证据可交给人工发布决定，不会自动批准
+稳定版。

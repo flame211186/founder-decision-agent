@@ -671,3 +671,61 @@ Phase 0：进行中。
 - 没有真实案例或真实同意记录，验证器存在不等于有效同意、绝对去标识化或法律合规；
 - 没有独立专家评审和裁决，稳定 `v1` 质量门继续开放；
 - npm beta 和 GitHub beta Release 仍未发布。
+
+## 2026-07-28（人工质量复核与稳定版统一证据审计）
+
+### 审计发现
+
+- 实时质量工具能生成重复、反事实和引用抽样，但没有一个版本化人工记录把判断绑定到
+  原始汇总字节；
+- 真实案例同意、专家评审、报告、质量结果和发布证据此前分别验证，无法一次检查完整
+  链路；
+- 专家评审表只有案例/报告 ID 和版本，没有案例与报告 SHA-256；同名报告在评审后被
+  替换时可能无法察觉；
+- “结构通过”和“稳定版批准”必须继续分开，不能让统一工具因所有输入为绿色就自行
+  发布稳定版。
+
+### 已完成
+
+- 新增公共 `live_quality_review.v1` Schema 和
+  `founder-quality-review-validate`：
+  - 将人工评审绑定到实时质量汇总的准确 SHA-256；
+  - 要求恰好覆盖两个反事实和全部抽样引用主张；
+  - 分别检查重复稳定性、反事实和引用支持的判断、P0–P3 严重度、冲突声明和裁决；
+  - 输出观测与未解决失败数量，`stableGateStatus` 固定为 `not_assessed`。
+- 专家评审 `expert_review.v1` 增加必填 `case_artifact_sha256` 与
+  `report_sha256`；统一审计将前者与同意记录中的去标识化案例哈希核对，并对实际报告
+  文件逐字节计算后者。
+- 新增 `stable_release_evidence.v1` 与 `founder-stable-audit`：
+  - 接受维护者显式传入的私有同意、专家评审、冻结报告、实时质量汇总/人工复核及发布
+    证据路径，不自动扫描或复制私密记录；
+  - 检查 3–5 个 eligible 案例、案例版本、报告 ID/版本/哈希、冻结评审最低数量和可选
+    角色覆盖、零未解决 P0/P1、决策改变遗漏、深度模式引用抽样；
+  - 检查冻结门槛的产品负责人/评审组批准、候选版本/源码提交、已发布 npm 包干净安装、
+    独立 SDK/HTTP 集成和发布说明证据文件哈希；
+  - 最高只输出 `evidence_ready_for_human_release_decision`，
+    `stableGateStatus` 仍为 `not_assessed`；
+  - 明确说明工具无法认证同意、真实案例、评审者资历/独立性、npm 历史或人工发布决定。
+- README、评测、发布、Schema、真实案例/专家评审说明、路线图、需求追踪和变更日志
+  已同步；`/Users/frame/Documents/lmao app` 未修改。
+
+### 验证
+
+- `npm run check` 通过；
+- `npm run eval:offline` 通过：15 个测试文件、76/76 测试、5/5 fixture；
+- coverage：statements 86.15%、branches 76.08%、functions 90.26%、lines 87.55%；
+- 34 个 Markdown 文件链接、TypeScript build 和 `git diff --check` 通过；
+- 合成证据测试覆盖完整链路、损坏的发布清单、报告版本漂移与报告字节哈希漂移；测试
+  明确声明合成记录不满足真实案例门；
+- 最终 npm tarball 为 119 个文件、159,321 bytes，解包 604,597 bytes；
+- tarball 在全新临时项目安装 96 个依赖成功；安装包内
+  `founder-quality-review-validate`、`founder-stable-audit`、两个新公共 Schema 导出
+  以及专家评审必填哈希字段均通过。
+
+### 尚未证明
+
+- 工作区仍没有 `OPENAI_API_KEY`，未执行付费实时 smoke/质量运行；
+- 没有 3–5 个真实同意案例、真实专家盲评、人工事实性复核或裁决；
+- 本次干净安装来自本地候选 tarball，不是 npm registry 已发布制品，因此不满足稳定版
+  的 published-artifact gate；
+- npm beta 和 GitHub beta Release 尚未发布，稳定版也未被人工评审组批准。

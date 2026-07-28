@@ -18,7 +18,9 @@ const schemaNames = [
   "run-manifest.v1.schema.json",
   "portfolio-report.v1.schema.json",
   "live-quality-eval.v1.schema.json",
-  "real-case-consent.v1.schema.json"
+  "live-quality-review.v1.schema.json",
+  "real-case-consent.v1.schema.json",
+  "stable-release-evidence.v1.schema.json"
 ];
 
 function loadSchema(name: string): Record<string, unknown> {

@@ -1,0 +1,314 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:founder-decision-agent:schema:live-quality-review:v1",
+  "title": "Founder Decision Agent Live Quality Human Review v1",
+  "description": "A human review of one immutable live-quality summary. It records factuality, repeat-stability and counterfactual judgments without mutating the model-generated artifact or self-approving a stable release.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "review_id",
+    "quality_summary_sha256",
+    "reviewed_at",
+    "reviewers",
+    "repeat_stability",
+    "counterfactual_reviews",
+    "citation_claim_reviews",
+    "adjudication"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "live_quality_review.v1"
+    },
+    "review_id": {
+      "$ref": "#/definitions/pseudonymousId"
+    },
+    "quality_summary_sha256": {
+      "$ref": "#/definitions/sha256"
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reviewers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/reviewer"
+      }
+    },
+    "repeat_stability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assessment",
+        "failure_severity",
+        "rationale",
+        "recommended_change"
+      ],
+      "properties": {
+        "assessment": {
+          "enum": [
+            "acceptable",
+            "not_acceptable",
+            "cannot_determine"
+          ]
+        },
+        "failure_severity": {
+          "$ref": "#/definitions/nullableSeverity"
+        },
+        "rationale": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "recommended_change": {
+          "$ref": "#/definitions/nullableString"
+        }
+      }
+    },
+    "counterfactual_reviews": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "assessment",
+          "failure_severity",
+          "rationale",
+          "recommended_change"
+        ],
+        "properties": {
+          "case_id": {
+            "enum": [
+              "stronger_traction",
+              "limited_founder_time"
+            ]
+          },
+          "assessment": {
+            "enum": [
+              "expected_response",
+              "partially_expected",
+              "unexpected_response",
+              "cannot_determine"
+            ]
+          },
+          "failure_severity": {
+            "$ref": "#/definitions/nullableSeverity"
+          },
+          "rationale": {
+            "$ref": "#/definitions/nonEmptyString"
+          },
+          "recommended_change": {
+            "$ref": "#/definitions/nullableString"
+          }
+        }
+      }
+    },
+    "citation_claim_reviews": {
+      "type": "array",
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claim_id",
+          "support_status",
+          "failure_severity",
+          "reviewed_evidence_urls",
+          "rationale",
+          "recommended_change"
+        ],
+        "properties": {
+          "claim_id": {
+            "$ref": "#/definitions/nonEmptyString"
+          },
+          "support_status": {
+            "enum": [
+              "supported",
+              "partially_supported",
+              "unsupported",
+              "unverifiable",
+              "stale"
+            ]
+          },
+          "failure_severity": {
+            "$ref": "#/definitions/nullableSeverity"
+          },
+          "reviewed_evidence_urls": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "rationale": {
+            "$ref": "#/definitions/nonEmptyString"
+          },
+          "recommended_change": {
+            "$ref": "#/definitions/nullableString"
+          }
+        }
+      }
+    },
+    "adjudication": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/definitions/adjudication"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nullableString": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pseudonymousId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{7,63}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "severity": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ]
+    },
+    "nullableSeverity": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/severity"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "reviewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pseudonymous_id",
+        "roles",
+        "independent_of_generation",
+        "has_conflict",
+        "conflict_notes"
+      ],
+      "properties": {
+        "pseudonymous_id": {
+          "$ref": "#/definitions/pseudonymousId"
+        },
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "founder_operator",
+              "product_leader",
+              "angel_investor",
+              "venture_investor",
+              "incubator_coach",
+              "domain_expert",
+              "researcher",
+              "legal_privacy_security_expert",
+              "other"
+            ]
+          }
+        },
+        "independent_of_generation": {
+          "const": true
+        },
+        "has_conflict": {
+          "type": "boolean"
+        },
+        "conflict_notes": {
+          "$ref": "#/definitions/nullableString"
+        }
+      }
+    },
+    "findingId": {
+      "type": "string",
+      "pattern": "^(?:repeat_stability|counterfactual:(?:stronger_traction|limited_founder_time)|citation:.+)$"
+    },
+    "adjudication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "adjudicator_ids",
+        "accepted_findings",
+        "rejected_findings",
+        "required_changes",
+        "unresolved_points",
+        "adjudicated_at"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "accepted",
+            "accepted_with_changes",
+            "needs_rewrite",
+            "unsafe",
+            "unresolved_disagreement"
+          ]
+        },
+        "adjudicator_ids": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/pseudonymousId"
+          }
+        },
+        "accepted_findings": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/findingId"
+          }
+        },
+        "rejected_findings": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/findingId"
+          }
+        },
+        "required_changes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/nonEmptyString"
+          }
+        },
+        "unresolved_points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/nonEmptyString"
+          }
+        },
+        "adjudicated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

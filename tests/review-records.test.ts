@@ -24,8 +24,10 @@ function reviewRecord() {
     review_id: "review_synthetic_001",
     case_id: "case_synthetic_001",
     case_version: "1",
+    case_artifact_sha256: "0".repeat(64),
     report_id: "report_synthetic_001",
     report_version: "evaluation_report.v1",
+    report_sha256: "1".repeat(64),
     rubric_version: "0.1",
     reviewer: {
       pseudonymous_id: "reviewer_synthetic_a",

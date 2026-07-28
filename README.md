@@ -146,12 +146,32 @@ Expert-review records can be validated without placing private records in the re
 ```bash
 founder-review-validate /private/path/to/review-records
 founder-consent-validate /private/path/to/consent-records
+founder-quality-review-validate \
+  /private/path/to/live-quality-summary.json \
+  /private/path/to/live-quality-review.json
 ```
 
 The commands check record structure and deterministic consistency only. Consent records are
 pseudonymous process receipts and must never contain names, contact details, raw submissions or
-secrets. Neither command claims legal compliance, expert independence or a passed stable-release
-gate.
+secrets. The quality-review command binds human factuality, repeat-stability and counterfactual
+judgments to the exact summary SHA-256. None of these commands claims legal compliance, expert
+independence or a passed stable-release gate.
+
+Maintainers can link all private gate evidence without copying it into the repository:
+
+```bash
+founder-stable-audit \
+  --consents /private/path/to/consents \
+  --reviews /private/path/to/expert-reviews \
+  --reports /private/path/to/frozen-reports \
+  --quality-summary /private/path/to/live-quality-summary.json \
+  --quality-review /private/path/to/live-quality-review.json \
+  --release-evidence /private/path/to/stable-release-evidence.json
+```
+
+Even a clean audit only means the declared evidence is mechanically ready for a separate human
+release decision. Synthetic IDs, valid JSON or exit code zero do not prove real cases or approve
+stable `v1`.
 
 ## What a report guarantees—and does not
 
