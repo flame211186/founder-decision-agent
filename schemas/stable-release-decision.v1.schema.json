@@ -1,0 +1,161 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:founder-decision-agent:schema:stable-release-decision:v1",
+  "title": "Founder Decision Agent Stable Release Human Decision v1",
+  "description": "A pseudonymous record of the final human decision over one immutable stable-release audit. Structural validity and hashes cannot authenticate the people or underlying evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "decision_id",
+    "stable_audit_sha256",
+    "candidate_version",
+    "source_commit_sha",
+    "decided_at",
+    "decision",
+    "approvers",
+    "acknowledgements",
+    "rationale",
+    "open_conditions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "stable_release_decision.v1"
+    },
+    "decision_id": {
+      "$ref": "#/definitions/pseudonymousId"
+    },
+    "stable_audit_sha256": {
+      "$ref": "#/definitions/sha256"
+    },
+    "candidate_version": {
+      "$ref": "#/definitions/stableSemver"
+    },
+    "source_commit_sha": {
+      "$ref": "#/definitions/gitSha"
+    },
+    "decided_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "decision": {
+      "enum": [
+        "approved",
+        "rejected"
+      ]
+    },
+    "approvers": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "$ref": "#/definitions/approver"
+      }
+    },
+    "acknowledgements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "audit_status_evidence_ready",
+        "evidence_authenticity_manually_checked",
+        "reviewer_independence_manually_checked",
+        "zero_unresolved_p0_p1_confirmed",
+        "limitations_reviewed",
+        "published_artifact_evidence_reviewed"
+      ],
+      "properties": {
+        "audit_status_evidence_ready": {
+          "type": "boolean"
+        },
+        "evidence_authenticity_manually_checked": {
+          "type": "boolean"
+        },
+        "reviewer_independence_manually_checked": {
+          "type": "boolean"
+        },
+        "zero_unresolved_p0_p1_confirmed": {
+          "type": "boolean"
+        },
+        "limitations_reviewed": {
+          "type": "boolean"
+        },
+        "published_artifact_evidence_reviewed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "rationale": {
+      "$ref": "#/definitions/nonEmptyString"
+    },
+    "open_conditions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/nonEmptyString"
+      }
+    }
+  },
+  "definitions": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pseudonymousId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{7,63}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "gitSha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "stableSemver": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)$"
+    },
+    "nullableString": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "approver": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approver_id",
+        "role",
+        "independent_of_evidence_generation",
+        "has_conflict",
+        "conflict_notes",
+        "affirmed_at"
+      ],
+      "properties": {
+        "approver_id": {
+          "$ref": "#/definitions/pseudonymousId"
+        },
+        "role": {
+          "enum": [
+            "product_owner",
+            "review_group"
+          ]
+        },
+        "independent_of_evidence_generation": {
+          "type": "boolean"
+        },
+        "has_conflict": {
+          "type": "boolean"
+        },
+        "conflict_notes": {
+          "$ref": "#/definitions/nullableString"
+        },
+        "affirmed_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

@@ -34,7 +34,8 @@
     "founder-consent-validate": "./scripts/validate-real-case-consents.mjs",
     "founder-quality-review-validate": "./scripts/validate-live-quality-review.mjs",
     "founder-quality-eval": "./scripts/live-quality-eval.mjs",
-    "founder-stable-audit": "./scripts/audit-stable-release.mjs"
+    "founder-stable-audit": "./scripts/audit-stable-release.mjs",
+    "founder-stable-decision-validate": "./scripts/validate-stable-release-decision.mjs"
   },
   "exports": {
     ".": {
@@ -53,6 +54,8 @@
     "./schemas/live-quality-eval.v1.schema.json": "./schemas/live-quality-eval.v1.schema.json",
     "./schemas/live-quality-review.v1.schema.json": "./schemas/live-quality-review.v1.schema.json",
     "./schemas/real-case-consent.v1.schema.json": "./schemas/real-case-consent.v1.schema.json",
+    "./schemas/stable-release-audit.v1.schema.json": "./schemas/stable-release-audit.v1.schema.json",
+    "./schemas/stable-release-decision.v1.schema.json": "./schemas/stable-release-decision.v1.schema.json",
     "./schemas/stable-release-evidence.v1.schema.json": "./schemas/stable-release-evidence.v1.schema.json",
     "./schemas/*": "./schemas/*"
   },
@@ -66,6 +69,7 @@
     "scripts/validate-live-quality-review.mjs",
     "scripts/validate-real-case-consents.mjs",
     "scripts/validate-review-records.mjs",
+    "scripts/validate-stable-release-decision.mjs",
     "evals/review/review-form.v1.schema.json",
     "docs",
     "README.md",
@@ -82,7 +86,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "check": "tsc -p tsconfig.json --noEmit && npm run check:scripts",
-    "check:scripts": "node --check scripts/live-smoke.mjs && node --check scripts/live-quality-eval.mjs && node --check scripts/audit-stable-release.mjs && node --check scripts/validate-all-reports.mjs && node --check scripts/validate-doc-links.mjs && node --check scripts/validate-live-quality-review.mjs && node --check scripts/validate-report-semantics.mjs && node --check scripts/validate-real-case-consents.mjs && node --check scripts/validate-review-records.mjs",
+    "check:scripts": "node --check scripts/live-smoke.mjs && node --check scripts/live-quality-eval.mjs && node --check scripts/audit-stable-release.mjs && node --check scripts/verify-release-gate.mjs && node --check scripts/validate-all-reports.mjs && node --check scripts/validate-doc-links.mjs && node --check scripts/validate-live-quality-review.mjs && node --check scripts/validate-report-semantics.mjs && node --check scripts/validate-real-case-consents.mjs && node --check scripts/validate-review-records.mjs && node --check scripts/validate-stable-release-decision.mjs",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "eval:offline": "npm run test:coverage && npm run validate:fixtures",
@@ -92,6 +96,7 @@
     "validate:consents": "node scripts/validate-real-case-consents.mjs",
     "validate:reviews": "node scripts/validate-review-records.mjs",
     "audit:stable": "node scripts/audit-stable-release.mjs",
+    "validate:stable-decision": "node scripts/validate-stable-release-decision.mjs",
     "validate:fixtures": "node scripts/validate-all-reports.mjs",
     "validate:docs": "node scripts/validate-doc-links.mjs",
     "prepack": "npm run build && npm run test && npm run validate:fixtures && npm run validate:docs",

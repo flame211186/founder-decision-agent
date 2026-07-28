@@ -35,6 +35,11 @@ All notable changes follow semantic versioning once stable.
 - `founder-stable-audit` for linking private consent, report, expert-review, quality-review,
   clean-install, independent-integration and release-note evidence against a frozen policy without
   self-approving stable `v1`.
+- Versioned stable-audit output and `founder-stable-decision-validate` for binding the final
+  product-owner/review-group decision to exact audit bytes without claiming identity authentication.
+- Fail-closed npm release gating: prerelease/stable GitHub flags must match SemVer, and stable
+  publishing requires protected version, source, audit and decision hashes repeated in release
+  notes.
 - Offline fixtures covering all five verdicts.
 - Permission-restricted live OpenAI smoke harness and integrity-aware npm release workflow.
 - Reproducible Docker build using the pinned npm toolchain, with CI smoke checks for the packaged

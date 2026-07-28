@@ -11,6 +11,8 @@ import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
+import Ajv from "ajv";
+import addFormats from "ajv-formats";
 import {
   buildQualityEvalPlan,
   summarizeQualityEval
@@ -20,6 +22,12 @@ import { fixtureReport } from "./helpers.js";
 
 const script = fileURLToPath(
   new URL("../scripts/audit-stable-release.mjs", import.meta.url)
+);
+const auditOutputSchemaPath = fileURLToPath(
+  new URL(
+    "../schemas/stable-release-audit.v1.schema.json",
+    import.meta.url
+  )
 );
 const rubricDimensions = [
   "R1_stage_correctness",
@@ -452,6 +460,16 @@ function run(evidence: Awaited<ReturnType<typeof createSyntheticEvidence>>) {
   );
 }
 
+async function expectValidAuditOutput(output: unknown) {
+  const ajv = new Ajv({ allErrors: true, strict: false });
+  addFormats(ajv);
+  const schema = JSON.parse(
+    await readFile(auditOutputSchemaPath, "utf8")
+  );
+  const validate = ajv.compile(schema);
+  expect(validate(output), JSON.stringify(validate.errors)).toBe(true);
+}
+
 describe("stable release evidence audit", () => {
   it("publishes the audit command and external-evidence Schema", async () => {
     const packagePath = fileURLToPath(new URL("../package.json", import.meta.url));
@@ -493,6 +511,7 @@ describe("stable release evidence audit", () => {
         reports: 3
       }
     });
+    await expectValidAuditOutput(output);
     expect(output.qualityReview.sampledCitationClaimCount).toBeGreaterThan(0);
     expect(output.notes.join(" ")).toContain(
       "Synthetic records that imitate real-case IDs do not satisfy"
@@ -507,6 +526,7 @@ describe("stable release evidence audit", () => {
     const malformedResult = run(malformed);
     expect(malformedResult.status).toBe(1);
     const malformedOutput = JSON.parse(malformedResult.stderr);
+    await expectValidAuditOutput(malformedOutput);
     expect(malformedOutput.status).toBe("blocked");
     expect(malformedOutput.externalEvidence).toBeNull();
     expect(

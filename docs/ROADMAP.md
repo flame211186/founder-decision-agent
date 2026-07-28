@@ -14,11 +14,12 @@
 
 - 已实现显式 TypeScript 快速/深度工作流、OpenAI BYOK、SQLite、版本化 Schema 和确定性校验；
 - 已实现 CLI、SDK、MCP、HTTP、身份资料、组合分析、融资字段、B2B SaaS 与 AI-native 行业包；
-- 已建立 76 个离线测试和 5 个完整 fixture 报告；
+- 已建立 89 个离线测试和 5 个完整 fixture 报告；
 - 已建立实时质量人工复核契约和统一稳定版证据审计，逐字节绑定案例、报告与质量汇总，
   但未用真实证据执行；
+- 已建立最终人工决定记录和 stable 发布失败关闭门，防止仅修改版本号绕过真人质量门；
 - 已建立 Apache-2.0、双语 README、安全/隐私/限制文档、Docker 与 GitHub/npm 发布工作流；
-- Docker 构建、容器 CLI 和非 root SQLite smoke 已加入远端 CI，等待首次运行证据；
+- Docker 构建、容器 CLI 和非 root SQLite smoke 已在远端 CI 实际通过；
 - 已完成干净 npm tarball 安装并公开 GitHub 源码；尚未完成实时 OpenAI smoke、GitHub Release、npm beta、真实案例和专家盲评；
 - `/Users/frame/Documents/lmao app` 仍未修改。
 

@@ -1,0 +1,381 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:founder-decision-agent:schema:stable-release-audit:v1",
+  "title": "Founder Decision Agent Stable Release Audit Output v1",
+  "description": "The deterministic output of founder-stable-audit. An evidence-ready status means the linked records passed mechanical checks; it is not a human stable-release approval.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "generatedAt",
+    "candidateVersion",
+    "sourceCommitSha",
+    "status",
+    "stableGateStatus",
+    "counts",
+    "cases",
+    "qualityReview",
+    "externalEvidence",
+    "issues",
+    "notes"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "stable_release_audit.v1"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "candidateVersion": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/stableSemver"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sourceCommitSha": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/gitSha"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status": {
+      "enum": [
+        "blocked",
+        "evidence_ready_for_human_release_decision"
+      ]
+    },
+    "stableGateStatus": {
+      "const": "not_assessed"
+    },
+    "counts": {
+      "$ref": "#/definitions/counts"
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/caseAudit"
+      }
+    },
+    "qualityReview": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/qualityReview"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "externalEvidence": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/externalEvidence"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/issue"
+      }
+    },
+    "notes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/nonEmptyString"
+      }
+    }
+  },
+  "definitions": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stableSemver": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)$"
+    },
+    "gitSha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "severityCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "properties": {
+        "P0": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "P1": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "P2": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "P3": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eligibleRealCases",
+        "reviewRecords",
+        "reviewers",
+        "reports"
+      ],
+      "properties": {
+        "eligibleRealCases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reviewRecords": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reviewers": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reports": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "roleCoverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "founderOrProductOperator",
+        "investorOrIncubator",
+        "domainFamiliarity"
+      ],
+      "properties": {
+        "founderOrProductOperator": {
+          "type": "boolean"
+        },
+        "investorOrIncubator": {
+          "type": "boolean"
+        },
+        "domainFamiliarity": {
+          "type": "boolean"
+        }
+      }
+    },
+    "caseAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "caseId",
+        "caseVersion",
+        "reportIds",
+        "reportHashes",
+        "reviewCount",
+        "reviewerCount",
+        "roleCoverage",
+        "unresolvedP0",
+        "unresolvedP1",
+        "decisionChangingMisses",
+        "blockingAdjudications"
+      ],
+      "properties": {
+        "caseId": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "caseVersion": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "reportIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/nonEmptyString"
+          }
+        },
+        "reportHashes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/sha256"
+          }
+        },
+        "reviewCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reviewerCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "roleCoverage": {
+          "$ref": "#/definitions/roleCoverage"
+        },
+        "unresolvedP0": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unresolvedP1": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "decisionChangingMisses": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "blockingAdjudications": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "qualityReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "mode",
+        "reviewerCount",
+        "sampledCitationClaimCount",
+        "counterfactualReviewCount",
+        "observedFailureCounts",
+        "unresolvedFailureCounts",
+        "adjudicationStatus",
+        "factualitySamplingApplicable",
+        "stableGateStatus",
+        "stableGateNotes"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "live_quality_review_summary.v1"
+        },
+        "mode": {
+          "enum": [
+            "quick",
+            "deep"
+          ]
+        },
+        "reviewerCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "sampledCitationClaimCount": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12
+        },
+        "counterfactualReviewCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "observedFailureCounts": {
+          "$ref": "#/definitions/severityCounts"
+        },
+        "unresolvedFailureCounts": {
+          "$ref": "#/definitions/severityCounts"
+        },
+        "adjudicationStatus": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "factualitySamplingApplicable": {
+          "type": "boolean"
+        },
+        "stableGateStatus": {
+          "const": "not_assessed"
+        },
+        "stableGateNotes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/nonEmptyString"
+          }
+        }
+      }
+    },
+    "externalEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policyId",
+        "policyFrozenAt",
+        "publishedArtifactInstall",
+        "independentIntegration",
+        "releaseNotes"
+      ],
+      "properties": {
+        "policyId": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "policyFrozenAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "publishedArtifactInstall": {
+          "const": "declared_and_hash_linked"
+        },
+        "independentIntegration": {
+          "const": "declared_and_hash_linked"
+        },
+        "releaseNotes": {
+          "const": "hash_linked"
+        }
+      }
+    },
+    "issue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "file",
+        "path",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "file": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "path": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "message": {
+          "$ref": "#/definitions/nonEmptyString"
+        }
+      }
+    }
+  }
+}

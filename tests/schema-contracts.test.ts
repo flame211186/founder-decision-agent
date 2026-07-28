@@ -20,6 +20,8 @@ const schemaNames = [
   "live-quality-eval.v1.schema.json",
   "live-quality-review.v1.schema.json",
   "real-case-consent.v1.schema.json",
+  "stable-release-audit.v1.schema.json",
+  "stable-release-decision.v1.schema.json",
   "stable-release-evidence.v1.schema.json"
 ];
 

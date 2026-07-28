@@ -32,6 +32,8 @@ Schema 能验证字段、类型、枚举和基础约束，但以下语义需要�
 - `live-quality-eval.v1.schema.json`
 - `live-quality-review.v1.schema.json`
 - `real-case-consent.v1.schema.json`
+- `stable-release-audit.v1.schema.json`
+- `stable-release-decision.v1.schema.json`
 - `stable-release-evidence.v1.schema.json`
 
 专家盲评记录契约位于 `evals/review/review-form.v1.schema.json`，安装包可通过
@@ -46,3 +48,6 @@ SHA-256，并分别保留 P0–P3 与裁决状态；结构有效不证明人工�
 `stable-release-evidence.v1` 记录冻结门槛、已发布包干净安装、独立 SDK/HTTP 集成和
 发布说明的哈希清单；统一审计成功也只表示证据可交给人工发布决定，不会自动批准
 稳定版。
+`stable-release-audit.v1` 固定统一审计输出结构；`stable-release-decision.v1` 将产品
+负责人和独立评审组的最终决定绑定到准确审计字节。决定记录通过仍不能认证人员或底层
+私有证据，自动发布还会独立核对受保护环境变量与发布说明中的四项标记。

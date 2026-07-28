@@ -73,8 +73,37 @@ npm run audit:stable -- \
 
 The audit checks declared schemas, hashes, version links and frozen thresholds. Its highest status
 is `evidence_ready_for_human_release_decision`, never “stable approved.” The product owner and
-independent review group must still verify authenticity, record their release decision, confirm
-zero unresolved P0/P1 findings, and only then create the stable tag and `latest` dist-tag.
+independent review group must still verify authenticity, record their release decision and confirm
+zero unresolved P0/P1 findings:
+
+```bash
+npm run validate:stable-decision -- \
+  /private/path/to/stable-audit.json \
+  /private/path/to/stable-decision.json
+```
+
+Before publishing the GitHub release, configure the protected `stable-release` environment with an
+independent required reviewer and these environment variables:
+
+- `FOUNDER_DECISION_STABLE_APPROVED_VERSION`
+- `FOUNDER_DECISION_STABLE_APPROVED_SOURCE_SHA`
+- `FOUNDER_DECISION_STABLE_AUDIT_SHA256`
+- `FOUNDER_DECISION_STABLE_DECISION_SHA256`
+
+The stable GitHub release notes must contain exactly one matching line for each marker:
+
+```text
+Stable-Approval: approved
+Stable-Source-SHA: <40-character source commit>
+Stable-Audit-SHA256: <64-character audit hash>
+Stable-Decision-SHA256: <64-character decision-record hash>
+```
+
+The publish workflow routes prereleases through `beta-release` and stable versions through the
+protected `stable-release` environment. It rejects a prerelease version published as a normal
+release, a stable version published as a prerelease, or any stable version whose protected values
+and release-note markers do not exactly match. These controls create an auditable fail-closed
+release path; they still cannot authenticate private evidence on their own.
 
 ## Rollback
 

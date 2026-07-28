@@ -188,6 +188,19 @@ Even a clean audit only means the declared evidence is mechanically ready for a 
 release decision. Synthetic IDs, valid JSON or exit code zero do not prove real cases or approve
 stable `v1`.
 
+After the product owner and independent review group inspect the private evidence, validate their
+pseudonymous final decision against the exact audit bytes:
+
+```bash
+founder-stable-decision-validate \
+  /private/path/to/stable-audit.json \
+  /private/path/to/stable-decision.json
+```
+
+This records—but cannot authenticate—the human decision. Stable publishing additionally requires a
+protected GitHub `stable-release` environment whose approved version, source commit, audit SHA-256
+and decision SHA-256 exactly match the release notes.
+
 ## What a report guarantees—and does not
 
 The implementation enforces versioned JSON Schema for evaluation, founder-profile and portfolio

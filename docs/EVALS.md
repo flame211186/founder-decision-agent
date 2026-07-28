@@ -178,6 +178,25 @@ The manifest uses `stable_release_evidence.v1`. A successful result is only
 cannot authenticate consent, prove that pseudonymous cases are real, verify reviewer credentials or
 independence, inspect npm registry history, or replace the recorded human release decision.
 
+Save the exact audit JSON, have the product owner and independent review group inspect the private
+evidence, and record their result with `stable_release_decision.v1`:
+
+```bash
+npm run validate:stable-decision -- \
+  /private/path/to/stable-audit.json \
+  /private/path/to/stable-decision.json
+
+# after installing the npm package
+founder-stable-decision-validate \
+  /private/path/to/stable-audit.json \
+  /private/path/to/stable-decision.json
+```
+
+An approved record requires both roles, unique approvers, an evidence-generation-independent review
+group approver, every explicit acknowledgement, no conflicted approver and no open release
+condition. The command binds the decision to the audit SHA-256 and candidate source/version but
+cannot authenticate identities, expertise, independence or the private evidence.
+
 ## Fixture policy
 
 Fixtures contain synthetic or intentionally anonymized ideas only. Never add a real confidential idea, identity, API key, private investor material or customer record.

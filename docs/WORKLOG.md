@@ -756,6 +756,63 @@ Phase 0：进行中。
 
 ### 尚未证明
 
-- 本机仍没有 Docker 命令，无法本地执行镜像构建；
-- Docker build 与容器 smoke 必须以本次提交的 GitHub CI 终态作为直接证据；
+- 本机仍没有 Docker 命令，无法本地复验镜像构建；
 - Docker 验证不替代 BYOK 实时模型、npm beta 或稳定版真人质量门。
+
+### 远端验证
+
+- 实现提交 `02ba3e40b445c87fb3ed839137d704486e588f5d` 已推送到 `main`；
+- GitHub CI run `30365502105` 成功；
+- 其中 `docker` job `90295585578` 实际完成镜像构建、CLI 版本 smoke 和非 root SQLite
+  smoke，三步均为 `success`；
+- CodeQL run `30365502128` 成功。
+
+## 2026-07-28（稳定版最终决定与发布失败关闭门）
+
+### 审计发现
+
+- 原 publish workflow 只按 SemVer 是否含预发布后缀选择 `beta` 或 `latest`，没有检查
+  GitHub Release 的 prerelease 标记；
+- 仅把 `package.json` 改为 `1.0.0` 并创建普通 Release，就可能绕过真实案例、专家评审
+  和最终人工决定记录，直接尝试发布 npm `latest`；
+- 统一稳定版审计输出没有公共 Schema，最终产品负责人/评审组决定也没有不可变记录
+  契约。
+
+### 已完成
+
+- 新增 `stable_release_audit.v1`，固定统一审计的案例、报告哈希、质量复核、外部证据、
+  issue 和 `not_assessed` 输出结构；
+- 新增 `stable_release_decision.v1` 与 `founder-stable-decision-validate`：
+  - 将最终决定绑定到准确审计文件 SHA-256、候选版本和源码提交；
+  - 要求产品负责人和独立于证据生成的评审组、唯一审批者、冲突/时间一致性；
+  - approved 必须确认全部人工检查、零未解决 P0/P1、已发布包证据和公开限制，且不能
+    保留开放发布条件；
+  - 仍明确不能认证人员身份、专业性、独立性或底层私有证据。
+- 新增 `verify-release-gate.mjs` 并接入 publish workflow：
+  - 预发布 SemVer 必须对应 GitHub prerelease，使用 `beta`；
+  - 稳定 SemVer 必须对应普通 Release，并路由到 `stable-release` environment；
+  - stable 必须精确匹配受保护环境中的版本、源码提交、审计 SHA-256 和决定 SHA-256；
+  - Release notes 必须重复四项精确标记，缺失、重复或不匹配全部失败关闭；
+  - beta 路由到独立 `beta-release` environment，不要求伪造稳定版证据。
+- 发布、评测、README、Schema、路线图、追踪表、状态和变更日志已同步。
+
+### 验证
+
+- 首次全量运行的 86 项功能测试全部通过，但新脚本使 branches coverage 降至 74.33%，
+  低于 75% 门；未降低阈值；
+- 补充非 published event、draft、错误源码 SHA、无效 stable SemVer、缺失受保护哈希、
+  重复发布标记和 CLI 参数失败路径后：
+  - 17 个测试文件、89/89 测试通过；
+  - coverage：statements 85.25%、branches 76.25%、functions 88.98%、lines 86.46%；
+  - 5/5 fixture、34 个 Markdown 链接、TypeScript build、全部 workflow actionlint 与
+    `git diff --check` 通过。
+- 最终 npm tarball 为 122 个文件、166,481 bytes，解包 639,875 bytes；
+- tarball 在全新临时项目安装 96 个依赖成功；安装包内最终决定命令和两个新公共
+  Schema 导出均通过。
+
+### 尚未证明
+
+- 当前没有真实稳定版审计文件或真实最终决定记录；合成测试不满足真人质量门；
+- `stable-release` environment 尚未配置独立 required reviewer 或实际批准变量；
+- 工作区仍无 `OPENAI_API_KEY`，npm 包与 GitHub beta Release 仍未发布；
+- 发布门只能核对声明、哈希与 GitHub 保护状态，不能替代对私有证据真实性的人工核验。
