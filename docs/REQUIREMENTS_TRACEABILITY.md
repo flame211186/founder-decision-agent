@@ -13,7 +13,7 @@
 
 | ID | 用户需求 | 当前状态 | 设计位置 | 最终验证证据 |
 |---|---|---|---|---|
-| REQ-001 | 接收自然语言组成的基础想法 | implemented | `PRODUCT_SPEC.md §2`、`src/cli.ts`、`src/server.ts` | `tests/workflow.test.ts`、`tests/server.test.ts`；发布包 CLI smoke 待完成 |
+| REQ-001 | 接收自然语言组成的基础想法 | verified | `PRODUCT_SPEC.md §2`、`src/cli.ts`、`src/server.ts` | `tests/workflow.test.ts`、`tests/server.test.ts`；干净 tarball 的 CLI 入口 smoke 通过 |
 | REQ-002 | 用有经验的早期投资人视角进行多方面完整评估 | implemented | `PROJECT_CHARTER.md §1`、`EVALUATION_METHODOLOGY.md §4`、`src/prompts.ts` | 5 个完整 fixture 通过；专家盲评待执行 |
 | REQ-003 | 首先服务独立工作者、个人开发者和早期创业者 | designed | `PROJECT_CHARTER.md §3` | 用户测试样本覆盖 |
 | REQ-004 | 后续扩展到多个行业和身份模板 | implemented | `PRODUCT_SPEC.md §1.2, §8`、`src/industry-packs.ts` | 两个行业包和身份反事实 fixture；领域专家评测待完成 |
@@ -26,7 +26,7 @@
 | REQ-011 | 从多个想法发现个人漏洞、专长和思维模式 | implemented | `EVALUATION_METHODOLOGY.md §9`、`src/portfolio.ts` | 两想法证据阈值测试通过；用户纠正测试待完成 |
 | REQ-012 | 引导用户思考和产品迭代 | implemented | `PRODUCT_SPEC.md §2.3, §3.2`、`src/prompts.ts` | 澄清最多三项和实验结构验证；真实迭代案例待完成 |
 | REQ-013 | Agent 先独立开源，再接入另一个开源项目 | implemented | `ARCHITECTURE_PLAN.md §5, §9`、公共 SDK/HTTP | 独立构建与 HTTP 契约测试通过；`lmao app` 集成明确延期 |
-| REQ-014 | 发布到 GitHub，供别人使用 | implemented | `ROADMAP.md Phase 6`、`.github/`、Apache-2.0 | 本地发布工程已实现；公开仓库/Release 尚未完成 |
+| REQ-014 | 发布到 GitHub，供别人使用 | verified | `ROADMAP.md Phase 6`、`.github/`、Apache-2.0 | 公开源码仓库 `https://github.com/flame211186/founder-decision-agent` 已创建并推送 `main`；GitHub Release 仍受 beta 质量门约束 |
 | REQ-015 | 中途关键事项由用户决策 | verified | `DECISIONS.md`、`ROADMAP.md` | DEC-001 至 DEC-014 和用户确认历史 |
 | REQ-016 | 不急于求成，不以堆代码代替质量 | implemented | `PROJECT_CHARTER.md §5`、`AGENTS.md §2`、`docs/EVALS.md` | 覆盖率门和稳定版硬门已执行/记录；人工门仍开放 |
 | REQ-017 | 降低幻觉、上下文压缩和目标丢失 | implemented | `AGENTS.md`、`EVALUATION_METHODOLOGY.md §6–11`、`src/validation.ts` | 状态恢复、外部事实/引用/提示词边界测试；语义引用人工评测待完成 |

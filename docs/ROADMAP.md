@@ -217,7 +217,7 @@
 - 发布包与源码对应；
 - 新用户试用反馈通过预设标准。
 
-当前状态：本地 beta 发布候选进行中；文档、许可证、CI、Docker、发布工作流已实现，公开仓库/npm、干净安装和新用户反馈尚未完成。
+当前状态：公开源码仓库与 `main` 已上线，文档、许可证、CI、Docker、发布工作流及干净 tarball 安装已验证；实时 OpenAI smoke、GitHub beta Release、npm beta 和新用户反馈尚未完成。
 
 ## Phase 7：接入想法收集产品
 

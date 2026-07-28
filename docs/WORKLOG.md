@@ -403,14 +403,14 @@ Phase 0：进行中。
 - 真实、经同意和去标识化的 3–5 个案例尚未收集；
 - 专家盲评尚未执行；
 - Docker build 未执行，因为当前环境没有 `docker` 命令；
-- GitHub 仓库、GitHub Release 与 npm beta 尚未实际发布；
-- `gh` 尚未安装/登录，npm 账户和 trusted publisher 尚未确认；
-- 因此只能称为“未发布 beta 候选”，不能称为稳定完成。
+- GitHub 公开源码仓库已经发布，但 GitHub Release 与 npm beta 尚未实际发布；
+- npm 账户和 trusted publisher 尚未确认；
+- 因此只能称为“公开源码 beta 候选”，不能称为已发布 beta 或稳定完成。
 
 ### 下一步
 
 1. 使用用户 BYOK Key 运行非敏感实时 smoke；
-2. 安装并登录 `gh`，创建公开 GitHub 仓库和 beta release；
+2. 实时 smoke 通过后创建 GitHub beta Release；
 3. 确认 npm scope 权限，bootstrap/trusted publisher 后发布 `beta` dist-tag；
 4. 招募独立专家并完成 3–5 个真实匿名案例，满足后再发布稳定 `v1`。
 
@@ -435,3 +435,6 @@ Phase 0：进行中。
 - `git diff --check` 通过。
 - Homebrew 因 `formulae.brew.sh` DNS 失败无法安装 `gh`；随后从 GitHub 官方 release 下载 macOS arm64 `gh 2.96.0`，其 SHA-256 与官方 checksums 一致；
 - 首次 GitHub 设备授权因浏览器账号与当时记录的目标不同而主动取消；用户随后确认 `flame211186` 才是正确 GitHub 账号，项目记录与远端目标已更正。
+- GitHub 官方设备授权成功，CLI 核对登录账号为 `flame211186`；
+- 已创建公开仓库 `https://github.com/flame211186/founder-decision-agent`，并将本地 `main` 根提交推送到远端；
+- GitHub 仓库公开不等于 beta Release：实时 OpenAI smoke 和 npm 发布门仍保持开放。

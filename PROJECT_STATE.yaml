@@ -5,7 +5,7 @@ project:
   github_target: flame211186/founder-decision-agent
   npm_target: "@sangfei/founder-decision-agent"
   version: 0.1.0-beta.0
-  status: active_unpublished_beta_candidate
+  status: active_public_source_beta_candidate
   current_phase: cross_phase_beta_candidate_with_stable_quality_gate_open
   last_updated: 2026-07-28
 
@@ -60,7 +60,7 @@ current_deliverables:
   fixture_reports: five_covering_all_verdicts_structurally_verified_not_expert_validated
   offline_tests: thirty_seven_passing
   coverage_gate: passing
-  release_engineering: implemented_not_published
+  release_engineering: public_github_source_published_release_and_npm_pending
   expert_review: designed_not_executed
   real_anonymized_cases: not_collected
 
@@ -79,7 +79,6 @@ next_gate:
   name: public_beta_release
   required_before_beta:
     - live_openai_smoke_with_user_provided_byok_key
-    - github_auth_and_public_repository_creation
     - npm_account_auth_and_beta_publication
   required_before_stable_v1:
     - three_to_five_consented_anonymized_real_cases
@@ -91,7 +90,6 @@ next_gate:
 
 external_blockers:
   - OPENAI_API_KEY_not_present_for_live_smoke
-  - gh_cli_not_installed_or_authenticated
   - npm_account_and_trusted_publisher_not_yet_confirmed
 
 completed_beta_checks:
@@ -105,6 +103,7 @@ completed_beta_checks:
   - mcp_and_http_bin_entrypoint_smoke
   - npm_audit_zero_known_vulnerabilities
   - local_secret_pattern_scan_no_matches
+  - public_github_repository_created_and_main_pushed
 
 prohibited_shortcuts:
   - do_not_treat_offline_tests_as_live_model_quality
