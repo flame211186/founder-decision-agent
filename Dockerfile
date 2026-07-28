@@ -2,13 +2,14 @@ FROM node:24-bookworm-slim AS build
 
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm install --global npm@11.16.0 --ignore-scripts
+RUN npm ci --strict-allow-scripts
 COPY tsconfig.json tsconfig.build.json ./
 COPY src ./src
 COPY schemas ./schemas
 COPY README.md LICENSE NOTICE ./
 RUN npm run build
-RUN npm prune --omit=dev
+RUN npm prune --omit=dev --ignore-scripts
 
 FROM node:24-bookworm-slim AS runtime
 

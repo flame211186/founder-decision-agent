@@ -141,6 +141,21 @@ founder-decision-server
 
 Non-loopback HTTP binding refuses to start without a bearer token. See [API documentation](docs/API.md) for routes and the synchronous deep-mode limitation.
 
+To build and run the same HTTP server in Docker:
+
+```bash
+docker build -t founder-decision-agent .
+docker run --rm -p 8787:8787 \
+  -v founder-decision-data:/data \
+  -e OPENAI_API_KEY \
+  -e FOUNDER_DECISION_SERVER_TOKEN \
+  founder-decision-agent
+```
+
+Set both environment variables in the host shell first. The Key is injected at runtime and is not
+stored in the image. The container runs as the unprivileged `node` user and keeps SQLite data in the
+named volume.
+
 Expert-review records can be validated without placing private records in the repository:
 
 ```bash

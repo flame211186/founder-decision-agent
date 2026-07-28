@@ -18,6 +18,7 @@
 - 已建立实时质量人工复核契约和统一稳定版证据审计，逐字节绑定案例、报告与质量汇总，
   但未用真实证据执行；
 - 已建立 Apache-2.0、双语 README、安全/隐私/限制文档、Docker 与 GitHub/npm 发布工作流；
+- Docker 构建、容器 CLI 和非 root SQLite smoke 已加入远端 CI，等待首次运行证据；
 - 已完成干净 npm tarball 安装并公开 GitHub 源码；尚未完成实时 OpenAI smoke、GitHub Release、npm beta、真实案例和专家盲评；
 - `/Users/frame/Documents/lmao app` 仍未修改。
 
@@ -228,7 +229,8 @@
 工作流、干净 tarball 安装、live smoke、质量诊断及私有同意/评审记录验证器已实现；
 公共评估、画像和组合输入均有版本化运行时 Schema 校验，MCP 已通过内存协议集成
 测试；Ubuntu Node 22.14/24 已纳入 CI，macOS arm64 Node 22.14/24 已本地验证，
-Windows 明确为 beta 未经 CI 验证且文件权限加固仅为 best-effort；实时 OpenAI
+Docker 构建与非 root SQLite smoke 已纳入 CI；Windows 明确为 beta 未经 CI 验证且
+文件权限加固仅为 best-effort；实时 OpenAI
 smoke、GitHub beta Release、npm beta 和新用户反馈尚未完成。
 
 ## Phase 7：接入想法收集产品

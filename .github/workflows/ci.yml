@@ -28,3 +28,23 @@ jobs:
       - run: npm run validate:docs
       - run: npm run build
       - run: npm run pack:dry
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build runtime image
+        run: docker build --tag founder-decision-agent:ci .
+      - name: Smoke CLI from runtime image
+        run: |
+          docker run --rm \
+            --entrypoint node \
+            founder-decision-agent:ci \
+            dist/cli.js --version
+      - name: Smoke non-root SQLite runtime
+        run: |
+          docker run --rm \
+            --entrypoint node \
+            founder-decision-agent:ci \
+            --input-type=module \
+            --eval 'import { SqliteStorage } from "./dist/adapters/sqlite.js"; if (process.getuid?.() === 0) throw new Error("container must not run as root"); const storage = new SqliteStorage("/data/ci-smoke.sqlite"); await storage.close(); process.stdout.write("docker sqlite smoke passed\n");'

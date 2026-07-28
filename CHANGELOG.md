@@ -37,6 +37,8 @@ All notable changes follow semantic versioning once stable.
   self-approving stable `v1`.
 - Offline fixtures covering all five verdicts.
 - Permission-restricted live OpenAI smoke harness and integrity-aware npm release workflow.
+- Reproducible Docker build using the pinned npm toolchain, with CI smoke checks for the packaged
+  CLI, non-root runtime user and writable SQLite data volume.
 
 ### Limitations
 

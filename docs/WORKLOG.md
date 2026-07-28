@@ -731,3 +731,31 @@ Phase 0：进行中。
 - 本次干净安装来自本地候选 tarball，不是 npm registry 已发布制品，因此不满足稳定版
   的 published-artifact gate；
 - npm beta 和 GitHub beta Release 尚未发布，稳定版也未被人工评审组批准。
+
+## 2026-07-28（Docker 运行交付验证）
+
+### 审计发现
+
+- Dockerfile 已存在，但此前本机没有 Docker 命令，项目只能证明文件存在，不能证明
+  镜像能构建或容器运行正确；
+- Docker 构建使用基础镜像自带 npm，未与仓库声明和发布流程固定的 npm `11.16.0`
+  对齐；
+- README 没有提供安全注入 BYOK、服务 token 和持久化 SQLite volume 的 Docker
+  运行示例。
+
+### 已完成
+
+- Docker build 阶段固定安装 npm `11.16.0`，依赖安装使用
+  `npm ci --strict-allow-scripts`，生产裁剪禁止执行安装脚本；
+- CI 新增独立 `docker` job：
+  - 从仓库 Dockerfile 构建运行镜像；
+  - 从最终运行镜像执行 CLI 版本 smoke；
+  - 确认容器不是 root，并在 `/data` 创建和关闭真实 SQLite 数据库；
+- README 增加本地构建、运行时环境变量注入、bearer token 和命名 volume 示例；
+- 本地 actionlint、TypeScript/脚本检查、文档链接和 diff whitespace 检查通过。
+
+### 尚未证明
+
+- 本机仍没有 Docker 命令，无法本地执行镜像构建；
+- Docker build 与容器 smoke 必须以本次提交的 GitHub CI 终态作为直接证据；
+- Docker 验证不替代 BYOK 实时模型、npm beta 或稳定版真人质量门。
