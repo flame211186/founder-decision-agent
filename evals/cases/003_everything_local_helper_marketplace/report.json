@@ -1,0 +1,1107 @@
+{
+  "schema_version": "evaluation_report.v1",
+  "report_id": "eval_case_003_v1",
+  "idea_id": "case_003_everything_local_helper_marketplace",
+  "generated_at": "2026-07-28T20:00:00+08:00",
+  "as_of_date": "2026-07-28",
+  "report_language": "zh-CN",
+  "evaluation_mode": "quick",
+  "disclaimer": {
+    "decision_support_only": true,
+    "not_investment_advice": true,
+    "not_legal_or_tax_advice": true,
+    "limitations": [
+      "这是完全虚构的评测案例。",
+      "未进行外部市场、竞品、支付、保险、劳动关系或地区法规研究。",
+      "报告只判断当前方案和下一验证动作，不判断所有本地服务市场机会。",
+      "时间与金额均为验证情景假设。"
+    ]
+  },
+  "input_snapshot": {
+    "original_text": "做一个覆盖全球、所有城市和所有本地服务品类的双边市场，AI 匹配，从每笔交易收 5%，三年做到一亿用户；创始人是软件工程师，预算 5 万元，无用户、供给网络或线下运营经验。",
+    "user_objectives": [
+      "建立风险投资型全球平台",
+      "同时覆盖多个城市和服务品类",
+      "通过 5% 交易抽成变现",
+      "尽快开发完整 App 并融资"
+    ],
+    "profile_included": true,
+    "profile_summary": "软件工程师；预算 5 万元；无市场平台、线下运营、信任安全或供给网络经验。",
+    "attachments_included": false
+  },
+  "idea_normalization": {
+    "one_sentence": "建立一个覆盖所有本地服务需求与服务者的全球双边市场，用 AI 匹配并收取交易佣金。",
+    "problem": "本地服务需求和供给分散，用户可能难以快速找到可信、合适的服务者，服务者也可能缺少稳定订单。",
+    "target_users": [
+      "所有需要本地服务的人",
+      "所有愿意提供本地服务的人"
+    ],
+    "proposed_solution": "允许需求方发布任何本地服务需求，服务方自由加入，使用 AI 匹配并通过平台交易。",
+    "stage": "S0_idea",
+    "business_archetypes": [
+      "marketplace",
+      "software"
+    ],
+    "geographies": [
+      "计划全球",
+      "尚无首个城市"
+    ],
+    "assumptions": [
+      "不同城市和不同品类可以共用相同供需、信任和运营机制。",
+      "AI 匹配能在没有交易数据和市场流动性时创造核心优势。",
+      "5% 抽成能覆盖支付、客服、纠纷、风控、保险和获客。",
+      "服务者愿意在没有订单密度时加入并保持活跃。",
+      "需求方愿意把高差异、高风险的本地服务交给同一个泛化平台。",
+      "5 万元预算足以同时启动多城市多品类。",
+      "一亿用户目标可以用于推导融资价值。"
+    ]
+  },
+  "information_quality": {
+    "completeness": "low",
+    "research_status": "not_performed",
+    "missing_critical_information": [
+      "首个城市与首个服务品类",
+      "需求发生频率、客单价和现有替代",
+      "先获取需求侧还是供给侧",
+      "交易履约、取消、纠纷、支付和信任成本",
+      "5% 抽成下的单位经济性",
+      "创始人能触达的首批需求和服务者",
+      "不同品类的安全、保险、劳动和地区监管要求"
+    ],
+    "clarification_questions": [
+      {
+        "id": "q1",
+        "question": "你能在未来 7 天内直接找到哪一个城市、哪一种需求的 10 个真实买家和 10 个真实服务者？",
+        "rationale": "没有可触达的最小市场，就无法验证双边流动性。",
+        "could_change": [
+          "目标用户",
+          "切入点",
+          "分发",
+          "创始人适配度"
+        ]
+      },
+      {
+        "id": "q2",
+        "question": "哪个单一服务品类同时具有足够频率、较高痛点、可标准化履约和可承受的安全风险？",
+        "rationale": "不同服务的供需和信任机制差异很大，必须先选择一个可运营楔子。",
+        "could_change": [
+          "方案形态",
+          "单位经济性",
+          "风险",
+          "重构方向"
+        ]
+      },
+      {
+        "id": "q3",
+        "question": "如果没有 App 和 AI，你能否手工完成 20 笔交易，并记录每笔获客、撮合、履约和纠纷成本？",
+        "rationale": "手工交易能在最低开发成本下验证真正瓶颈是匹配、信任、供应还是需求。",
+        "could_change": [
+          "技术优先级",
+          "商业模式",
+          "是否值得开发完整 App"
+        ]
+      }
+    ]
+  },
+  "verdict": {
+    "label": "reframe",
+    "confidence": "high",
+    "one_sentence": "不要开发当前的全球全品类 App；先把它重构成一个城市、一个品类、一个供需获取机制的人工市场实验。",
+    "rationale_claim_ids": [
+      "c001",
+      "c002",
+      "c003",
+      "c004",
+      "c006",
+      "c007",
+      "c009",
+      "c011"
+    ],
+    "what_would_change": [
+      "如果创始人能在一个窄市场手工完成 20 笔以上交易并出现重复需求，结论可升级为先验证或推进。",
+      "如果 5% 抽成在真实获客、支付、履约和纠纷成本后仍有正向贡献，商业评分可提高。",
+      "如果某一侧已有独占或低成本渠道，冷启动风险会下降。",
+      "如果没有任何可直接触达的城市和品类，且创始人坚持多城市全品类开发，结论可能降为停止当前方案。"
+    ],
+    "authorized_next_step": "选择单一城市和单一品类，先进行人工供需与交易实验。",
+    "does_not_mean": [
+      "不代表开发全球全品类双端 App",
+      "不代表底层本地服务机会已被全部否定",
+      "不代表已经具备融资条件"
+    ],
+    "next_review_condition": "选定单一城市和单一品类，不开发完整 App，人工完成至少 20 笔可追踪交易。"
+  },
+  "executive_summary": {
+    "opportunity": "本地服务的匹配、信任和履约可能存在真实问题，市场平台也可能形成交易网络价值。",
+    "main_problem": "当前方案把城市、品类、供需两侧、信任安全、运营和单位经济性全部留作假设；一亿用户和 5% 抽成只是愿望，不是投资证据。",
+    "recommended_next_move": "删除全球、全品类和完整 App 范围，选择创始人能直接触达的一座城市和一个高痛点品类，以人工方式完成 20 笔交易。"
+  },
+  "value_assessments": {
+    "user_value": {
+      "score_status": "scored",
+      "score": 2,
+      "label": "底层问题可能存在，当前用户过宽",
+      "summary": "找不到可信本地服务者可能是真问题，但“所有人、所有服务”不能形成可验证用户需求。",
+      "rationale_claim_ids": [
+        "c001",
+        "c002",
+        "c008"
+      ]
+    },
+    "business_value": {
+      "score_status": "scored",
+      "score": 1,
+      "label": "当前商业模型没有证据",
+      "summary": "5% 抽成未与真实交易成本比较，供需密度和重复交易均未知。",
+      "rationale_claim_ids": [
+        "c006",
+        "c007",
+        "c010"
+      ]
+    },
+    "venture_scale_fit": {
+      "score_status": "scored",
+      "score": 2,
+      "label": "理论规模大，投资可行性弱",
+      "summary": "宏大终局不等于可投资起点；缺少楔子、流动性、增长和单位经济性。",
+      "rationale_claim_ids": [
+        "c005",
+        "c009",
+        "c011"
+      ]
+    },
+    "founder_fit": {
+      "score_status": "scored",
+      "score": 2,
+      "label": "技术匹配，运营资源不足",
+      "summary": "软件能力有助于后续产品，但当前最大风险是供需和线下运营，而非编码。",
+      "rationale_claim_ids": [
+        "c003",
+        "c004"
+      ]
+    }
+  },
+  "risk_assessments": {
+    "societal": {
+      "risk_level": "medium",
+      "summary": "陪伴、家教、维修和宠物照顾等服务涉及不同人身与财产风险，不能用同一轻量流程处理。",
+      "rationale_claim_ids": [
+        "c012"
+      ]
+    },
+    "ethical": {
+      "risk_level": "medium",
+      "summary": "服务者筛选、评分、歧视、申诉和弱势用户保护需要专门设计。",
+      "rationale_claim_ids": [
+        "c012"
+      ]
+    },
+    "legal_regulatory": {
+      "risk_level": "unknown",
+      "summary": "不同地区和品类可能涉及支付、劳动、税务、许可、保险和消费者保护要求，当前未研究。",
+      "rationale_claim_ids": [
+        "c012"
+      ]
+    },
+    "privacy_security": {
+      "risk_level": "high",
+      "summary": "本地服务通常需要地址、联系方式、身份和支付信息，早期验证也必须最小化收集并保护数据。",
+      "rationale_claim_ids": [
+        "c012"
+      ]
+    }
+  },
+  "dimension_assessments": [
+    {
+      "dimension_id": "D1",
+      "name": "问题强度",
+      "score_status": "scored",
+      "score": 1,
+      "summary": "没有访谈、订单或具体品类证据。",
+      "strengths": [
+        "本地服务匹配是可理解的问题类别"
+      ],
+      "weaknesses": [
+        "需求频率、痛点和替代全部未知"
+      ],
+      "rationale_claim_ids": [
+        "c001",
+        "c002"
+      ]
+    },
+    {
+      "dimension_id": "D2",
+      "name": "用户与切入点",
+      "score_status": "scored",
+      "score": 1,
+      "summary": "所有人、所有城市、所有服务不是可执行切入点。",
+      "strengths": [],
+      "weaknesses": [
+        "无首城",
+        "无首品类",
+        "无先启动的一侧"
+      ],
+      "rationale_claim_ids": [
+        "c001",
+        "c003"
+      ]
+    },
+    {
+      "dimension_id": "D3",
+      "name": "方案价值与行为变化",
+      "score_status": "scored",
+      "score": 2,
+      "summary": "匹配平台可能有价值，但 AI 匹配不能替代供给、信任和履约。",
+      "strengths": [
+        "交易平台能统一发现和支付"
+      ],
+      "weaknesses": [
+        "没有数据或流动性支持 AI 优势"
+      ],
+      "rationale_claim_ids": [
+        "c007",
+        "c010"
+      ]
+    },
+    {
+      "dimension_id": "D4",
+      "name": "时机",
+      "score_status": "scored",
+      "score": 2,
+      "summary": "AI 匹配是技术叙事，不是已证明的 why now。",
+      "strengths": [
+        "软件匹配和自动客服实现成本可能下降"
+      ],
+      "weaknesses": [
+        "没有行为、政策或供给变化证据"
+      ],
+      "rationale_claim_ids": [
+        "c010"
+      ]
+    },
+    {
+      "dimension_id": "D5",
+      "name": "市场与扩张",
+      "score_status": "scored",
+      "score": 3,
+      "summary": "终局范围理论上很大，但可触达市场为零。",
+      "strengths": [
+        "本地服务包含多个大类"
+      ],
+      "weaknesses": [
+        "没有最小可触达市场",
+        "一亿用户没有依据"
+      ],
+      "rationale_claim_ids": [
+        "c005",
+        "c009"
+      ]
+    },
+    {
+      "dimension_id": "D6",
+      "name": "竞争、替代与差异化",
+      "score_status": "scored",
+      "score": 1,
+      "summary": "没有竞品、现有线下关系或不同品类替代研究。",
+      "strengths": [],
+      "weaknesses": [
+        "AI 标签本身不是差异化",
+        "不同品类可能已有强本地平台"
+      ],
+      "rationale_claim_ids": [
+        "c009",
+        "c010"
+      ]
+    },
+    {
+      "dimension_id": "D7",
+      "name": "商业模式与经济性",
+      "score_status": "scored",
+      "score": 1,
+      "summary": "5% 抽成没有与获客、支付、纠纷和履约成本比较。",
+      "strengths": [
+        "交易抽成与平台使用量一致"
+      ],
+      "weaknesses": [
+        "客单价和复购未知",
+        "成本结构未知"
+      ],
+      "rationale_claim_ids": [
+        "c006"
+      ]
+    },
+    {
+      "dimension_id": "D8",
+      "name": "分发与销售",
+      "score_status": "scored",
+      "score": 1,
+      "summary": "没有任何一侧的直接渠道或冷启动计划。",
+      "strengths": [],
+      "weaknesses": [
+        "供需同时为零",
+        "多城市会进一步分散密度"
+      ],
+      "rationale_claim_ids": [
+        "c003",
+        "c007"
+      ]
+    },
+    {
+      "dimension_id": "D9",
+      "name": "可行性",
+      "score_status": "scored",
+      "score": 2,
+      "summary": "App 可以开发，但完整市场运营远超当前预算和能力。",
+      "strengths": [
+        "创始人有软件开发能力"
+      ],
+      "weaknesses": [
+        "信任安全、客服、支付和城市运营缺失"
+      ],
+      "rationale_claim_ids": [
+        "c004",
+        "c012"
+      ]
+    },
+    {
+      "dimension_id": "D10",
+      "name": "提出者适配度",
+      "score_status": "scored",
+      "score": 2,
+      "summary": "技术能力有用，但项目当前关键能力是市场运营和供需获取。",
+      "strengths": [
+        "可快速制作内部工具"
+      ],
+      "weaknesses": [
+        "没有线下运营和供给网络",
+        "预算与范围不匹配"
+      ],
+      "rationale_claim_ids": [
+        "c004"
+      ]
+    },
+    {
+      "dimension_id": "D11",
+      "name": "牵引与学习速度",
+      "score_status": "not_applicable",
+      "score": null,
+      "summary": "S0 阶段没有外部牵引，下一步应以交易学习而非下载量为目标。",
+      "strengths": [],
+      "weaknesses": [
+        "尚无用户、服务者或交易"
+      ],
+      "rationale_claim_ids": [
+        "c002"
+      ]
+    },
+    {
+      "dimension_id": "D12",
+      "name": "资本与回报形态",
+      "score_status": "scored",
+      "score": 1,
+      "summary": "当前范围与 5 万元预算严重不匹配，也不具备融资证据。",
+      "strengths": [
+        "可以通过人工撮合低成本验证"
+      ],
+      "weaknesses": [
+        "多城市多品类需要远超当前资源的运营投入"
+      ],
+      "rationale_claim_ids": [
+        "c004",
+        "c011"
+      ]
+    }
+  ],
+  "theses": {
+    "supporting": [
+      {
+        "statement": "某些本地服务品类可能存在搜索、信任和履约痛点，成功市场可能形成网络和交易价值。",
+        "claim_ids": [
+          "c008"
+        ]
+      },
+      {
+        "statement": "创始人有能力为人工运营制作轻量内部工具。",
+        "claim_ids": [
+          "c004"
+        ]
+      }
+    ],
+    "opposing": [
+      {
+        "statement": "当前没有任何可验证切入点、流动性或单位经济性，宏大终局无法指导第一笔交易。",
+        "claim_ids": [
+          "c002",
+          "c003",
+          "c006",
+          "c009"
+        ]
+      },
+      {
+        "statement": "AI 匹配在没有数据、供给密度和信任机制时不是核心优势。",
+        "claim_ids": [
+          "c007",
+          "c010"
+        ]
+      }
+    ],
+    "synthesis": "底层市场方向不能仅凭当前信息否定，但当前产品定义无法执行。正确动作不是开发完整 App，而是选择一个窄市场并手工完成交易，用真实数据决定是否值得产品化。"
+  },
+  "key_unknowns": [
+    {
+      "id": "u1",
+      "question": "哪个单一城市和品类具有最强、最高频且可触达的需求？",
+      "importance": "critical",
+      "why_it_matters": "市场必须先在一个足够密集的最小网络中成立。",
+      "cheapest_test": "列出创始人能直接触达的三个品类，各访谈 10 名需求方和 10 名服务者。",
+      "could_change_verdict": true
+    },
+    {
+      "id": "u2",
+      "question": "手工完成一笔交易的全成本和失败原因是什么？",
+      "importance": "critical",
+      "why_it_matters": "决定 5% 抽成是否有可能覆盖平台责任。",
+      "cheapest_test": "不开发 App，手工完成 20 笔并逐笔记录。",
+      "could_change_verdict": true
+    },
+    {
+      "id": "u3",
+      "question": "创始人是否有任何一侧的低成本供给或需求渠道？",
+      "importance": "critical",
+      "why_it_matters": "没有渠道就无法启动流动性。",
+      "cheapest_test": "要求创始人在 7 天内获得 10 个明确交易意向，而不是注册意向。",
+      "could_change_verdict": true
+    }
+  ],
+  "risks": [
+    {
+      "id": "r1",
+      "category": "distribution",
+      "severity": "critical",
+      "likelihood": "high",
+      "description": "供需两侧同时冷启动，多个城市和品类进一步分散交易密度。",
+      "mitigation": "单城市、单品类、先控制一侧，并用人工撮合。",
+      "is_fatal": true,
+      "fatal_scope": "current_plan",
+      "claim_ids": [
+        "c003",
+        "c007"
+      ]
+    },
+    {
+      "id": "r2",
+      "category": "business_model",
+      "severity": "high",
+      "likelihood": "unknown",
+      "description": "5% 抽成不足以覆盖获客、支付、客服、纠纷和保险。",
+      "mitigation": "逐笔记录贡献毛利，允许服务费、订阅或更高抽成等替代模式。",
+      "is_fatal": false,
+      "fatal_scope": "not_fatal",
+      "claim_ids": [
+        "c006"
+      ]
+    },
+    {
+      "id": "r3",
+      "category": "ethical",
+      "severity": "critical",
+      "likelihood": "unknown",
+      "description": "高风险服务发生欺诈、人身或财产损害。",
+      "mitigation": "从低风险可标准化品类开始，建立身份、支付、申诉和人工安全流程。",
+      "is_fatal": false,
+      "fatal_scope": "not_fatal",
+      "claim_ids": [
+        "c012"
+      ]
+    },
+    {
+      "id": "r4",
+      "category": "founder_fit",
+      "severity": "high",
+      "likelihood": "high",
+      "description": "创始人把编码当作核心进展，回避市场运营和手工交易。",
+      "mitigation": "在 20 笔手工交易前禁止开发完整 App。",
+      "is_fatal": false,
+      "fatal_scope": "not_fatal",
+      "claim_ids": [
+        "c004",
+        "c011"
+      ]
+    }
+  ],
+  "improvements": [
+    {
+      "title": "选择一个城市和一个品类",
+      "description": "只选创始人能直接触达且可安全手工履约的最小市场。",
+      "expected_effect": "集中流动性并使需求、价格和运营可测量。",
+      "validation_needed": "20 笔真实交易和重复需求。",
+      "claim_ids": [
+        "c003",
+        "c008"
+      ]
+    },
+    {
+      "title": "先做人工管理型市场",
+      "description": "用表单、聊天和人工匹配完成交易，不先开发消费者与服务者双端 App。",
+      "expected_effect": "以最低成本识别真正瓶颈。",
+      "validation_needed": "记录每笔撮合、履约和纠纷耗时。",
+      "claim_ids": [
+        "c007",
+        "c011"
+      ]
+    },
+    {
+      "title": "把信任与履约放在 AI 匹配之前",
+      "description": "明确服务者筛选、价格、取消、支付、证据、申诉和赔付边界。",
+      "expected_effect": "降低高风险交易失败并建立需求方信任。",
+      "validation_needed": "真实交易失败原因和用户复购。",
+      "claim_ids": [
+        "c010",
+        "c012"
+      ]
+    },
+    {
+      "title": "删除一亿用户和上市预测",
+      "description": "只保留可验证的首笔、前 20 笔和重复交易里程碑。",
+      "expected_effect": "避免宏大数字替代现实学习。",
+      "validation_needed": "每个增长目标都能由实际漏斗推导。",
+      "claim_ids": [
+        "c005",
+        "c009"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "bear",
+      "assumptions": [
+        "没有任何一侧的低成本渠道",
+        "人工撮合成本高于 5% 收入",
+        "交易一次性且纠纷多"
+      ],
+      "outcome": "市场无法形成足够密度，当前方案停止。",
+      "decision_implication": "停止市场平台，转向单侧工具或放弃该方向。"
+    },
+    {
+      "name": "base",
+      "assumptions": [
+        "一个窄品类可完成 20 笔交易",
+        "部分用户重复",
+        "人工运营成本可被更高服务费覆盖"
+      ],
+      "outcome": "形成一个本地管理型市场或服务业务。",
+      "decision_implication": "继续验证单品类经济性，不扩城市。"
+    },
+    {
+      "name": "bull",
+      "assumptions": [
+        "需求高频",
+        "供给侧有低成本渠道",
+        "重复交易强",
+        "信任和履约流程可标准化"
+      ],
+      "outcome": "单城单品类形成流动性，并出现相邻扩张路径。",
+      "decision_implication": "产品化已验证环节，再评估第二城市或第二品类。"
+    }
+  ],
+  "disposition_plan": {
+    "mode": "active_validation",
+    "rationale": "底层问题可以继续验证，但必须放弃全球全品类计划并缩成可运营的单一市场实验。",
+    "allowed_actions": [
+      "选择一个城市和一个低风险品类",
+      "手工获取供需并完成交易",
+      "记录获客、撮合、履约和纠纷成本"
+    ],
+    "prohibited_actions": [
+      "开发全球全品类双端 App",
+      "用注册或下载量替代真实交易",
+      "在没有交易密度和经济性前融资扩张"
+    ],
+    "reactivation_triggers": [],
+    "closure_actions": []
+  },
+  "experiments": [
+    {
+      "id": "exp_7d_choose_wedge",
+      "horizon": "7d",
+      "hypothesis": "创始人能找到一个可直接触达的城市和品类。",
+      "method": "列出三个候选品类，各联系需求与供给，选择交易意向最强且风险可控的一项。",
+      "inputs": {
+        "time_hours": {
+          "min": 15,
+          "max": 25
+        },
+        "cash": {
+          "min": 0,
+          "max": 1000,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "每个候选品类 10 名需求方和 10 名服务者"
+        ],
+        "skills": [
+          "访谈",
+          "线下运营"
+        ],
+        "channels": [
+          "创始人现有人脉",
+          "本地社群"
+        ],
+        "dependencies": [
+          "明确排除高风险和强监管品类"
+        ]
+      },
+      "expected_outputs": [
+        "一个首城",
+        "一个首品类",
+        "至少 10 个明确交易意向",
+        "现有替代和价格"
+      ],
+      "success_criteria": [
+        "一个品类同时获得至少 5 个需求方和 5 个服务者的近期交易意向"
+      ],
+      "failure_criteria": [
+        "三个品类都只有泛泛兴趣",
+        "创始人无法直接触达任何一侧"
+      ],
+      "decision_on_success": "进入 30 天人工交易实验。",
+      "decision_on_failure": "暂停市场平台，重新寻找有渠道优势的问题。"
+    },
+    {
+      "id": "exp_30d_manual_transactions",
+      "horizon": "30d",
+      "hypothesis": "单城单品类能形成真实交易和初步复购。",
+      "method": "用表单、聊天和人工匹配完成交易，不开发完整 App，逐笔记录全成本与失败。",
+      "inputs": {
+        "time_hours": {
+          "min": 40,
+          "max": 80
+        },
+        "cash": {
+          "min": 1000,
+          "max": 5000,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "至少 10 名需求方",
+          "至少 10 名服务者"
+        ],
+        "skills": [
+          "撮合",
+          "客服",
+          "安全和纠纷处理"
+        ],
+        "channels": [
+          "选定品类的直接渠道"
+        ],
+        "dependencies": [
+          "支付与取消规则",
+          "最小身份和安全流程"
+        ]
+      },
+      "expected_outputs": [
+        "20 笔交易记录",
+        "交易完成率",
+        "重复需求",
+        "每笔获客、撮合和纠纷成本"
+      ],
+      "success_criteria": [
+        "完成至少 20 笔真实交易",
+        "出现重复需求或转介绍",
+        "能识别一个可标准化的核心流程"
+      ],
+      "failure_criteria": [
+        "交易意向无法转为履约",
+        "获客和运营成本远高于可收费用",
+        "安全和纠纷无法以现有资源管理"
+      ],
+      "decision_on_success": "只产品化重复出现的瓶颈。",
+      "decision_on_failure": "停止当前市场形态或转为单侧服务。"
+    },
+    {
+      "id": "exp_90d_repeat_liquidity",
+      "horizon": "90d",
+      "hypothesis": "在不扩城市和品类时，市场能形成重复交易和更高密度。",
+      "method": "继续单一市场，跟踪 cohort、供给响应时间、复购、取消、纠纷和贡献毛利。",
+      "inputs": {
+        "time_hours": {
+          "min": 120,
+          "max": 240
+        },
+        "cash": {
+          "min": 5000,
+          "max": 30000,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "单城单品类交易参与者"
+        ],
+        "skills": [
+          "市场运营",
+          "信任安全",
+          "数据分析"
+        ],
+        "channels": [
+          "已验证的供需渠道"
+        ],
+        "dependencies": [
+          "30 天交易成立",
+          "可测量单位经济性"
+        ]
+      },
+      "expected_outputs": [
+        "复购",
+        "供给响应",
+        "交易成功率",
+        "贡献毛利",
+        "产品化优先级"
+      ],
+      "success_criteria": [
+        "重复交易和供给响应持续改善",
+        "贡献毛利路径成立",
+        "人工成本随交易增长没有线性失控"
+      ],
+      "failure_criteria": [
+        "每笔交易持续依赖高强度人工",
+        "市场密度没有改善",
+        "纠纷或安全风险不可接受"
+      ],
+      "decision_on_success": "评估产品化和有限资本需求。",
+      "decision_on_failure": "停止扩张或转为高价值托管服务。"
+    }
+  ],
+  "resource_plan": [
+    {
+      "horizon": "未来 7 天",
+      "inputs": {
+        "time_hours": {
+          "min": 15,
+          "max": 25
+        },
+        "cash": {
+          "min": 0,
+          "max": 1000,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "三个候选品类的需求和供给"
+        ],
+        "skills": [
+          "访谈",
+          "筛选"
+        ],
+        "channels": [
+          "本地直接渠道"
+        ],
+        "dependencies": [
+          "不开发完整 App"
+        ]
+      },
+      "expected_outputs": [
+        "单城单品类",
+        "明确交易意向"
+      ],
+      "decision_gate": "找到一个可直接触达且风险可控的最小市场。"
+    },
+    {
+      "horizon": "未来 30 天",
+      "inputs": {
+        "time_hours": {
+          "min": 40,
+          "max": 80
+        },
+        "cash": {
+          "min": 1000,
+          "max": 5000,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "单城单品类供需双方"
+        ],
+        "skills": [
+          "人工撮合",
+          "安全与客服"
+        ],
+        "channels": [
+          "已选择渠道"
+        ],
+        "dependencies": [
+          "交易规则"
+        ]
+      },
+      "expected_outputs": [
+        "20 笔交易",
+        "全成本",
+        "失败原因"
+      ],
+      "decision_gate": "交易和初步复购成立，且安全和成本可管理。"
+    },
+    {
+      "horizon": "未来 90 天",
+      "inputs": {
+        "time_hours": {
+          "min": 120,
+          "max": 240
+        },
+        "cash": {
+          "min": 5000,
+          "max": 30000,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "单一市场参与者"
+        ],
+        "skills": [
+          "市场运营",
+          "产品化"
+        ],
+        "channels": [
+          "已验证供需渠道"
+        ],
+        "dependencies": [
+          "30 天实验通过"
+        ]
+      },
+      "expected_outputs": [
+        "流动性",
+        "复购",
+        "贡献毛利"
+      ],
+      "decision_gate": "只在单市场改善后考虑扩张或融资。"
+    }
+  ],
+  "funding": {
+    "readiness": "not_ready",
+    "recommended_path": "not_now",
+    "rationale": "没有用户、交易、流动性、单位经济性或切入点；融资叙事无法替代这些基础证据。",
+    "current_blockers": [
+      "无首个城市和品类",
+      "无供需渠道",
+      "无交易",
+      "无单位经济性",
+      "无信任安全能力",
+      "范围与预算严重不匹配"
+    ],
+    "next_fundable_milestone": "单城单品类出现可重复交易、复购、供给响应改善和可信贡献毛利，并证明创始人能低成本获取至少一侧。",
+    "estimated_capital_need": null,
+    "likely_investor_questions": [
+      "为什么从这个城市和品类开始？",
+      "如何解决双边冷启动？",
+      "哪一侧有渠道优势？",
+      "5% 如何覆盖支付、客服、纠纷和保险？",
+      "AI 在没有交易数据时带来什么独特价值？",
+      "为什么现有本地平台没有覆盖该楔子？"
+    ],
+    "materials_needed": [
+      "20 笔以上真实交易记录",
+      "供需获取漏斗",
+      "复购与履约",
+      "逐笔贡献毛利",
+      "信任安全流程",
+      "单城扩密计划"
+    ],
+    "jurisdiction_notes": [
+      "不同服务和地区可能涉及不同许可、支付、保险、劳动和消费者保护要求。",
+      "深度评估前必须确定具体地区和品类，并由相关专业人士复核高风险事项。"
+    ]
+  },
+  "claims": [
+    {
+      "id": "c001",
+      "text": "当前目标用户被定义为所有本地服务需求方和所有服务者。",
+      "claim_type": "user_provided",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u001"
+      ]
+    },
+    {
+      "id": "c002",
+      "text": "当前没有访谈、用户、服务者或交易证据。",
+      "claim_type": "user_provided",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u001"
+      ]
+    },
+    {
+      "id": "c003",
+      "text": "当前没有首个城市、首个品类或先启动的一侧。",
+      "claim_type": "user_provided",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u001"
+      ]
+    },
+    {
+      "id": "c004",
+      "text": "创始人是软件工程师，预算 5 万元，没有本地市场运营和服务者网络经验。",
+      "claim_type": "user_provided",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u002"
+      ]
+    },
+    {
+      "id": "c005",
+      "text": "三年一亿用户是目标假设，不是由现有漏斗推导的预测。",
+      "claim_type": "inference",
+      "importance": "major",
+      "confidence": "high",
+      "verification_status": "partially_verified",
+      "evidence_ids": [
+        "ev_u001"
+      ]
+    },
+    {
+      "id": "c006",
+      "text": "5% 抽成没有与获客、支付、客服、纠纷、保险和履约成本比较。",
+      "claim_type": "unknown",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "not_applicable",
+      "evidence_ids": []
+    },
+    {
+      "id": "c007",
+      "text": "多城市多品类会把有限供需进一步分散，并显著增加冷启动难度。",
+      "claim_type": "inference",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "unverified",
+      "evidence_ids": [
+        "ev_u001"
+      ]
+    },
+    {
+      "id": "c008",
+      "text": "某些本地服务品类可能存在搜索、信任和履约问题，但当前没有具体证据。",
+      "claim_type": "inference",
+      "importance": "major",
+      "confidence": "low",
+      "verification_status": "unverified",
+      "evidence_ids": [
+        "ev_u001"
+      ]
+    },
+    {
+      "id": "c009",
+      "text": "当前没有可触达市场、竞品或扩张路径证据。",
+      "claim_type": "unknown",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "not_applicable",
+      "evidence_ids": []
+    },
+    {
+      "id": "c010",
+      "text": "AI 匹配在没有交易数据、供给密度和信任机制时不能单独构成可验证差异化。",
+      "claim_type": "inference",
+      "importance": "major",
+      "confidence": "medium",
+      "verification_status": "unverified",
+      "evidence_ids": [
+        "ev_u001"
+      ]
+    },
+    {
+      "id": "c011",
+      "text": "当前最小高信息量动作是人工交易，而不是开发完整双端 App。",
+      "claim_type": "inference",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "unverified",
+      "evidence_ids": [
+        "ev_u001",
+        "ev_u002"
+      ]
+    },
+    {
+      "id": "c012",
+      "text": "不同本地服务品类具有不同的人身、财产、隐私、支付和监管风险。",
+      "claim_type": "inference",
+      "importance": "critical",
+      "confidence": "medium",
+      "verification_status": "unverified",
+      "evidence_ids": [
+        "ev_u001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev_u001",
+      "evidence_type": "U",
+      "source_kind": "user_input",
+      "title": "合成市场平台想法输入",
+      "url": null,
+      "published_at": null,
+      "accessed_at": "2026-07-28",
+      "statement": "合成输入声明产品覆盖全球所有本地服务，收取 5%，目标一亿用户，当前无用户、供给、交易、首城或首品类。",
+      "supports_claim_ids": [
+        "c001",
+        "c002",
+        "c003",
+        "c005",
+        "c007",
+        "c008",
+        "c010",
+        "c011",
+        "c012"
+      ],
+      "limitations": [
+        "完全虚构",
+        "没有外部市场或用户证据"
+      ],
+      "verification_status": "verified",
+      "source_tier": null
+    },
+    {
+      "id": "ev_u002",
+      "evidence_type": "U",
+      "source_kind": "user_input",
+      "title": "合成创始人资源输入",
+      "url": null,
+      "published_at": null,
+      "accessed_at": "2026-07-28",
+      "statement": "合成输入声明创始人是软件工程师、预算 5 万元、没有本地服务运营和供给网络经验。",
+      "supports_claim_ids": [
+        "c004",
+        "c011"
+      ],
+      "limitations": [
+        "完全虚构",
+        "没有进一步技能和渠道资料"
+      ],
+      "verification_status": "verified",
+      "source_tier": null
+    }
+  ],
+  "validation": {
+    "schema_status": "passed",
+    "cross_reference_status": "passed",
+    "citation_structure_status": "passed",
+    "citation_support_status": "not_applicable",
+    "numerical_status": "passed",
+    "human_review_status": "draft_reviewed",
+    "warnings": [
+      "所有内容均为合成案例。",
+      "没有具体地区和品类，因此不能进行有效监管或竞品判断。",
+      "重构针对当前范围，不代表所有本地服务市场机会都无价值。"
+    ]
+  }
+}

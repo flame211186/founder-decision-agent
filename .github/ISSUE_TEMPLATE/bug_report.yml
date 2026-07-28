@@ -1,0 +1,54 @@
+name: Bug report
+description: Report a reproducible software or evaluation-contract defect.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Do not include API keys, confidential ideas, founder profiles or private customer data.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: 0.1.0-beta.0
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Surface
+      options:
+        - CLI
+        - SDK
+        - MCP
+        - HTTP
+        - Schema/validator
+        - Evaluation quality
+        - Documentation
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Synthetic reproduction
+      description: Use a synthetic or anonymized input and list exact commands.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: input
+    id: taxonomy
+    attributes:
+      label: Failure taxonomy ID
+      description: Optional, for example E01, R06 or S01.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy confirmation
+      options:
+        - label: I removed secrets and non-consented private data.
+          required: true

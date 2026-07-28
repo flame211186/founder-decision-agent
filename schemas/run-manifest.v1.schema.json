@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:founder-decision-agent:schema:run-manifest:v1",
+  "title": "Founder Decision Run Manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runId",
+    "ideaId",
+    "mode",
+    "startedAt",
+    "workflowVersion",
+    "promptVersion",
+    "schemaVersionUsed",
+    "provider",
+    "calls",
+    "budget",
+    "budgetUsed",
+    "validation",
+    "status",
+    "warnings"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "run_manifest.v1" },
+    "runId": { "type": "string", "minLength": 1 },
+    "reportId": { "type": "string", "minLength": 1 },
+    "ideaId": { "type": "string", "minLength": 1 },
+    "mode": { "enum": ["quick", "deep"] },
+    "startedAt": { "type": "string", "format": "date-time" },
+    "completedAt": { "type": "string", "format": "date-time" },
+    "workflowVersion": { "type": "string", "minLength": 1 },
+    "promptVersion": { "type": "string", "minLength": 1 },
+    "schemaVersionUsed": { "type": "string", "minLength": 1 },
+    "provider": { "type": "string", "minLength": 1 },
+    "calls": { "type": "array", "items": { "type": "object" } },
+    "budget": { "type": "object" },
+    "budgetUsed": { "type": "object" },
+    "validation": { "type": "object" },
+    "status": { "enum": ["running", "completed", "partial", "failed"] },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

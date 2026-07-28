@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:founder-decision-agent:schema:founder-profile:v1",
+  "title": "Founder Profile v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "profileId", "version"],
+  "properties": {
+    "schemaVersion": { "const": "founder_profile.v1" },
+    "profileId": { "type": "string", "minLength": 1 },
+    "version": { "type": "integer", "minimum": 1 },
+    "locale": { "type": "string" },
+    "geographies": { "$ref": "#/definitions/stringList" },
+    "currentRoles": { "$ref": "#/definitions/stringList" },
+    "industries": { "$ref": "#/definitions/stringList" },
+    "skills": { "$ref": "#/definitions/stringList" },
+    "proofOfWork": { "$ref": "#/definitions/stringList" },
+    "reachableUsers": { "$ref": "#/definitions/stringList" },
+    "channels": { "$ref": "#/definitions/stringList" },
+    "weeklyHours": { "type": "number", "minimum": 0 },
+    "availableCapital": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["amount", "currency"],
+      "properties": {
+        "amount": { "type": "number", "minimum": 0 },
+        "currency": { "type": "string", "minLength": 3 }
+      }
+    },
+    "runwayMonths": { "type": "number", "minimum": 0 },
+    "collaborators": { "$ref": "#/definitions/stringList" },
+    "riskTolerance": { "enum": ["low", "medium", "high"] },
+    "objectives": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": ["learning", "cash_flow", "sustainable_business", "venture_scale"]
+      }
+    },
+    "unacceptableTradeoffs": { "$ref": "#/definitions/stringList" },
+    "ethicalBoundaries": { "$ref": "#/definitions/stringList" },
+    "excludedIndustries": { "$ref": "#/definitions/stringList" },
+    "notes": { "$ref": "#/definitions/stringList" },
+    "correctedAt": { "type": "string", "format": "date-time" }
+  },
+  "definitions": {
+    "stringList": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:founder-decision-agent:schema:evaluation-request:v1",
+  "title": "Founder Decision Agent Evaluation Request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "idea"],
+  "properties": {
+    "schemaVersion": { "const": "evaluation_request.v1" },
+    "ideaId": { "type": "string", "minLength": 1 },
+    "idea": { "type": "string", "minLength": 5 },
+    "mode": { "enum": ["quick", "deep"], "default": "quick" },
+    "language": { "enum": ["zh-CN", "en"], "default": "zh-CN" },
+    "objectives": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "answers": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "profile": { "$ref": "urn:founder-decision-agent:schema:founder-profile:v1" },
+    "industryPacks": {
+      "type": "array",
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": { "enum": ["b2b_saas", "ai_native"] }
+    },
+    "jurisdiction": { "type": "string", "minLength": 1 },
+    "asOfDate": { "type": "string", "format": "date" },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "maxModelCalls": { "type": "integer", "minimum": 2 },
+        "maxSearchCalls": { "type": "integer", "minimum": 0 },
+        "maxWallTimeMs": { "type": "integer", "minimum": 1000 },
+        "maxOutputTokensPerCall": { "type": "integer", "minimum": 256 }
+      }
+    },
+    "safetyIdentifier": { "type": "string", "minLength": 1 },
+    "persist": { "type": "boolean", "default": true }
+  }
+}

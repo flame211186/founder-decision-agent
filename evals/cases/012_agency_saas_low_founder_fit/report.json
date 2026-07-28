@@ -1,0 +1,936 @@
+{
+  "schema_version": "evaluation_report.v1",
+  "report_id": "eval_case_012_v1",
+  "idea_id": "case_012_agency_saas_low_founder_fit",
+  "generated_at": "2026-07-28T20:00:00+08:00",
+  "as_of_date": "2026-07-28",
+  "report_language": "zh-CN",
+  "evaluation_mode": "quick",
+  "disclaimer": {
+    "decision_support_only": true,
+    "not_investment_advice": true,
+    "not_legal_or_tax_advice": true,
+    "limitations": [
+      "这是合成身份反事实案例，不代表真实公司、客户或创始人。",
+      "业务证据继承自 case_002，只有创始人时间、经营意愿和目标发生变化。",
+      "未进行外部市场、竞品或法律研究。",
+      "暂存是当前资源配置建议，不等于业务没有价值。"
+    ]
+  },
+  "input_snapshot": {
+    "original_text": "业务情况与有付费试点的设计工作室反馈 SaaS 相同，但创始人每周最多投入 3 小时，不愿主动销售、演示或支持，希望获得近乎被动收入。",
+    "user_objectives": [
+      "以很低的持续投入获得被动收入",
+      "避免主动销售和客户支持",
+      "判断是否应该继续该 SaaS",
+      "妥善处理已有试点"
+    ],
+    "profile_included": true,
+    "profile_summary": "有领域经验和直接渠道；每周最多投入 3 小时；拒绝主动销售与客户支持；目标为近乎被动收入。",
+    "attachments_included": false
+  },
+  "idea_normalization": {
+    "one_sentence": "一个已有付费试点的设计工作室反馈整理 SaaS，但当前提出者的时间、经营意愿和被动收入目标与早期 B2B SaaS 所需动作冲突。",
+    "problem": "小型设计工作室的客户反馈跨渠道分散，需要手工归并并转成任务。",
+    "target_users": [
+      "3–15 人的小型设计工作室",
+      "设计工作室项目经理",
+      "直接参与客户沟通的工作室负责人"
+    ],
+    "proposed_solution": "把微信、邮件、截图和会议记录中的反馈归并、去重并转成可分配任务。",
+    "stage": "S3_early_traction",
+    "business_archetypes": [
+      "software"
+    ],
+    "geographies": [
+      "中文设计工作室市场，具体地区未限定"
+    ],
+    "assumptions": [
+      "现有 5 家试点仍需要续费、支持与隐私边界处理。",
+      "早期销售和工作流支持尚未自动化。",
+      "每周 3 小时不足以同时承担产品、销售和支持。",
+      "创始人当前不愿改变被动收入目标。"
+    ]
+  },
+  "information_quality": {
+    "completeness": "medium",
+    "research_status": "not_performed",
+    "missing_critical_information": [
+      "现有 5 家试点每周实际支持负担",
+      "产品是否能在无人工介入下稳定运行",
+      "是否存在愿意负责销售和客户成功的合作伙伴",
+      "现有客户对暂停、移交或继续有限维护的接受度",
+      "创始人是否愿意出售或授权现有资产"
+    ],
+    "clarification_questions": [
+      {
+        "id": "q1",
+        "question": "过去四周，5 家试点每周实际占用多少支持、修复和客户沟通时间？",
+        "rationale": "这决定 3 小时上限能否至少履行现有承诺。",
+        "could_change": [
+          "提出者适配度",
+          "暂存处置方案",
+          "客户移交需求"
+        ]
+      },
+      {
+        "id": "q2",
+        "question": "你是否愿意让合作伙伴负责销售和客户成功，或把产品出售、授权给更匹配的经营者？",
+        "rationale": "业务价值可能保留，但需要把经营职责从当前提出者身上移开。",
+        "could_change": [
+          "暂存结论",
+          "经营模式",
+          "重新启动条件"
+        ]
+      },
+      {
+        "id": "q3",
+        "question": "如果没有被动收入承诺，你真正愿意为这个问题长期承担哪些工作？",
+        "rationale": "目标与日常工作是否匹配，比理论市场规模更能决定个人是否应继续。",
+        "could_change": [
+          "个人目标",
+          "提出者适配度",
+          "继续或退出路径"
+        ]
+      }
+    ]
+  },
+  "verdict": {
+    "label": "park",
+    "confidence": "medium",
+    "one_sentence": "业务证据仍有价值，但当前提出者的时间、经营意愿和目标不匹配；暂停新增投入，先履行或移交现有客户承诺，满足明确条件后再启动。",
+    "rationale_claim_ids": [
+      "c001",
+      "c002",
+      "c003",
+      "c004",
+      "c005",
+      "c006",
+      "c008",
+      "c009",
+      "c010"
+    ],
+    "what_would_change": [
+      "如果创始人愿意连续 90 天每周投入至少 8–10 小时并承担创始人销售，可改为推进。",
+      "如果找到能够负责销售和客户成功、权责清晰的经营伙伴，可重新评估。",
+      "如果产品证明每周维护低于 3 小时且客户可完全自助开通，个人适配度可提高。",
+      "如果现有客户不续费或支持负担超过可承受范围，可能转为停止当前产品经营。"
+    ],
+    "authorized_next_step": "暂停新增销售与功能开发；在 7 天内完成现有试点的续约、有限维护、移交或结束安排，并记录重新启动条件。",
+    "does_not_mean": [
+      "不代表这个业务没有用户或商业价值",
+      "不代表可以不履行现有客户承诺",
+      "不代表继续偷偷投入少量开发",
+      "不代表应该为了保留项目而融资招聘"
+    ],
+    "next_review_condition": "只有时间投入、经营意愿、合作伙伴或自助化负担中至少一项达到预先写明的触发条件时才复评。"
+  },
+  "executive_summary": {
+    "opportunity": "与对照案例相同，20 次访谈、5 家付费试点、6 周使用和直接渠道仍然说明业务问题值得认真对待。",
+    "main_problem": "当前瓶颈不是项目本身，而是提出者每周 3 小时、拒绝销售支持和被动收入目标与早期垂直 B2B SaaS 的真实经营动作冲突。",
+    "recommended_next_move": "不要继续新增客户或功能；先保护现有客户并选择有限维护、移交、出售或有序结束，然后等待明确重启条件。"
+  },
+  "value_assessments": {
+    "user_value": {
+      "score_status": "scored",
+      "score": 4,
+      "label": "业务层面仍有初步价值证据",
+      "summary": "付费试点和连续使用信号没有因创始人目标改变而消失。",
+      "rationale_claim_ids": [
+        "c001",
+        "c002"
+      ]
+    },
+    "business_value": {
+      "score_status": "scored",
+      "score": 3,
+      "label": "可持续性仍待成本与续费验证",
+      "summary": "业务可能成为垂直小 SaaS，但尚无低支持、自助获客和长期留存证据。",
+      "rationale_claim_ids": [
+        "c002",
+        "c007",
+        "c010"
+      ]
+    },
+    "venture_scale_fit": {
+      "score_status": "scored",
+      "score": 1,
+      "label": "当前不适合风险投资",
+      "summary": "项目和创始人目标都不支持高增长融资路径。",
+      "rationale_claim_ids": [
+        "c006",
+        "c011"
+      ]
+    },
+    "founder_fit": {
+      "score_status": "scored",
+      "score": 1,
+      "label": "当前适配度很低",
+      "summary": "领域经验和渠道是优势，但投入时间、经营意愿与目标同时冲突。",
+      "rationale_claim_ids": [
+        "c003",
+        "c004",
+        "c005",
+        "c008",
+        "c009"
+      ]
+    }
+  },
+  "risk_assessments": {
+    "societal": {
+      "risk_level": "low",
+      "summary": "作为内部工作流工具，社会层面风险较低。",
+      "rationale_claim_ids": [
+        "c012"
+      ]
+    },
+    "ethical": {
+      "risk_level": "medium",
+      "summary": "暂停经营时若忽略已有客户承诺，会造成信任和服务连续性问题。",
+      "rationale_claim_ids": [
+        "c010",
+        "c012"
+      ]
+    },
+    "legal_regulatory": {
+      "risk_level": "unknown",
+      "summary": "未研究合同、退款、数据处理和移交义务，真实处置前需按适用地区复核。",
+      "rationale_claim_ids": [
+        "c012"
+      ]
+    },
+    "privacy_security": {
+      "risk_level": "medium",
+      "summary": "暂停、移交或关闭时仍需保护和删除客户反馈数据。",
+      "rationale_claim_ids": [
+        "c012"
+      ]
+    }
+  },
+  "dimension_assessments": [
+    {
+      "dimension_id": "D1",
+      "name": "问题强度",
+      "score_status": "scored",
+      "score": 4,
+      "summary": "访谈、付费和连续使用支持问题真实。",
+      "strengths": [
+        "20 次访谈",
+        "5 家付费试点"
+      ],
+      "weaknesses": [
+        "长期依赖程度未知"
+      ],
+      "rationale_claim_ids": [
+        "c001",
+        "c002"
+      ]
+    },
+    {
+      "dimension_id": "D2",
+      "name": "用户与切入点",
+      "score_status": "scored",
+      "score": 4,
+      "summary": "3–15 人设计工作室是具体切入点。",
+      "strengths": [
+        "目标用户明确",
+        "已有直接渠道"
+      ],
+      "weaknesses": [
+        "不同工具栈仍可能增加支持"
+      ],
+      "rationale_claim_ids": [
+        "c001",
+        "c003"
+      ]
+    },
+    {
+      "dimension_id": "D3",
+      "name": "方案价值与行为变化",
+      "score_status": "scored",
+      "score": 4,
+      "summary": "已有 6 周使用，但自助程度和持续使用未知。",
+      "strengths": [
+        "进入真实工作流"
+      ],
+      "weaknesses": [
+        "可能依赖创始人协助"
+      ],
+      "rationale_claim_ids": [
+        "c002",
+        "c007"
+      ]
+    },
+    {
+      "dimension_id": "D4",
+      "name": "时机",
+      "score_status": "insufficient_information",
+      "score": null,
+      "summary": "身份变化不提供新的 why now 证据。",
+      "strengths": [],
+      "weaknesses": [
+        "外部时机未研究"
+      ],
+      "rationale_claim_ids": [
+        "c011"
+      ]
+    },
+    {
+      "dimension_id": "D5",
+      "name": "市场与扩张",
+      "score_status": "scored",
+      "score": 2,
+      "summary": "首个细分可验证独立生意，但不支持被动收入或 VC 规模。",
+      "strengths": [
+        "可触达约 80 家工作室"
+      ],
+      "weaknesses": [
+        "扩张和自动获客未知"
+      ],
+      "rationale_claim_ids": [
+        "c003",
+        "c011"
+      ]
+    },
+    {
+      "dimension_id": "D6",
+      "name": "竞争、替代与差异化",
+      "score_status": "scored",
+      "score": 3,
+      "summary": "工作流切入点合理，竞争研究仍缺失。",
+      "strengths": [
+        "针对分散反馈的具体流程"
+      ],
+      "weaknesses": [
+        "现有工具可能吸收功能"
+      ],
+      "rationale_claim_ids": [
+        "c011"
+      ]
+    },
+    {
+      "dimension_id": "D7",
+      "name": "商业模式与经济性",
+      "score_status": "scored",
+      "score": 3,
+      "summary": "订阅与初步付费成立，低支持和被动性没有成立。",
+      "strengths": [
+        "明确价格和付费试点"
+      ],
+      "weaknesses": [
+        "服务成本未知",
+        "自助转化未知"
+      ],
+      "rationale_claim_ids": [
+        "c002",
+        "c007",
+        "c010"
+      ]
+    },
+    {
+      "dimension_id": "D8",
+      "name": "分发与销售",
+      "score_status": "scored",
+      "score": 2,
+      "summary": "渠道存在，但创始人拒绝使用渠道完成销售。",
+      "strengths": [
+        "约 80 家直接触达"
+      ],
+      "weaknesses": [
+        "不愿主动联系或演示",
+        "无自动获客证据"
+      ],
+      "rationale_claim_ids": [
+        "c003",
+        "c005",
+        "c009"
+      ]
+    },
+    {
+      "dimension_id": "D9",
+      "name": "可行性",
+      "score_status": "scored",
+      "score": 3,
+      "summary": "产品可运行，但在 3 小时上限内经营尚未证明。",
+      "strengths": [
+        "已有试点产品"
+      ],
+      "weaknesses": [
+        "维护和支持负担未知"
+      ],
+      "rationale_claim_ids": [
+        "c002",
+        "c004",
+        "c010"
+      ]
+    },
+    {
+      "dimension_id": "D10",
+      "name": "提出者适配度",
+      "score_status": "scored",
+      "score": 1,
+      "summary": "知识和渠道匹配，但时间、意愿、目标与必要工作冲突。",
+      "strengths": [
+        "领域经验",
+        "直接渠道"
+      ],
+      "weaknesses": [
+        "每周仅 3 小时",
+        "拒绝销售和支持",
+        "追求近乎被动收入"
+      ],
+      "rationale_claim_ids": [
+        "c003",
+        "c004",
+        "c005",
+        "c006",
+        "c008"
+      ]
+    },
+    {
+      "dimension_id": "D11",
+      "name": "牵引与学习速度",
+      "score_status": "scored",
+      "score": 3,
+      "summary": "已有初步牵引，但当前提出者不愿继续完成关键学习动作。",
+      "strengths": [
+        "5 家付费并使用 6 周"
+      ],
+      "weaknesses": [
+        "不愿做续费、销售与支持验证"
+      ],
+      "rationale_claim_ids": [
+        "c002",
+        "c005",
+        "c009"
+      ]
+    },
+    {
+      "dimension_id": "D12",
+      "name": "资本与回报形态",
+      "score_status": "scored",
+      "score": 2,
+      "summary": "项目可资本高效经营，但不能用融资解决创始人不愿经营的问题。",
+      "strengths": [
+        "早期资本需求可能较低"
+      ],
+      "weaknesses": [
+        "回报形态与被动收入预期冲突"
+      ],
+      "rationale_claim_ids": [
+        "c006",
+        "c011"
+      ]
+    }
+  ],
+  "theses": {
+    "supporting": [
+      {
+        "statement": "业务问题、付费和使用证据仍然存在，项目不应被错误描述为没有价值。",
+        "claim_ids": [
+          "c001",
+          "c002",
+          "c003"
+        ]
+      },
+      {
+        "statement": "若由更匹配的经营者承担销售与客户成功，资产可能继续产生价值。",
+        "claim_ids": [
+          "c008",
+          "c010"
+        ]
+      }
+    ],
+    "opposing": [
+      {
+        "statement": "每周 3 小时、拒绝销售支持和被动收入目标与当前阶段需要的工作直接冲突。",
+        "claim_ids": [
+          "c004",
+          "c005",
+          "c006",
+          "c009"
+        ]
+      },
+      {
+        "statement": "融资或继续开发不能替代创始人当前不愿完成的客户学习。",
+        "claim_ids": [
+          "c009",
+          "c011"
+        ]
+      }
+    ],
+    "synthesis": "这是“项目可能有价值，但当前不适合这个人以这种方式继续”的典型情形。正确动作是保护客户、暂停新增投入并设置可观察的重启条件，而不是把低适配度误判为低业务价值。"
+  },
+  "key_unknowns": [
+    {
+      "id": "u1",
+      "question": "现有客户每周最低维护负担是多少？",
+      "importance": "critical",
+      "why_it_matters": "决定有限维护是否仍超过 3 小时上限。",
+      "cheapest_test": "回看过去四周支持和故障记录；没有记录则用 7 天补记。",
+      "could_change_verdict": true
+    },
+    {
+      "id": "u2",
+      "question": "是否存在愿意接手经营职责的合作伙伴或买方？",
+      "importance": "critical",
+      "why_it_matters": "可以保留业务价值，同时解决提出者适配问题。",
+      "cheapest_test": "只向可信行业联系人发出有限的经营合作或资产移交询问。",
+      "could_change_verdict": true
+    },
+    {
+      "id": "u3",
+      "question": "提出者的被动收入目标是否愿意改变？",
+      "importance": "critical",
+      "why_it_matters": "若目标不变，早期 B2B SaaS 的经营要求长期不匹配。",
+      "cheapest_test": "写下未来 90 天实际愿意承担的每周任务和工时上限。",
+      "could_change_verdict": true
+    }
+  ],
+  "risks": [
+    {
+      "id": "r1",
+      "category": "founder_fit",
+      "severity": "critical",
+      "likelihood": "high",
+      "description": "提出者的时间、经营意愿和目标与早期 B2B SaaS 的必要动作冲突。",
+      "mitigation": "暂停新增投入，改变目标、增加可投入时间或移交经营职责。",
+      "is_fatal": true,
+      "fatal_scope": "current_plan",
+      "claim_ids": [
+        "c004",
+        "c005",
+        "c006",
+        "c009"
+      ]
+    },
+    {
+      "id": "r2",
+      "category": "execution",
+      "severity": "high",
+      "likelihood": "high",
+      "description": "以“少量继续开发”代替销售和客户支持，消耗时间却不产生关键证据。",
+      "mitigation": "暂存期间禁止新功能和新客户，只有触发条件满足才复评。",
+      "is_fatal": false,
+      "fatal_scope": "not_fatal",
+      "claim_ids": [
+        "c005",
+        "c009"
+      ]
+    },
+    {
+      "id": "r3",
+      "category": "ethical",
+      "severity": "high",
+      "likelihood": "medium",
+      "description": "暂停项目时忽视现有付费试点的服务、退款或数据处置。",
+      "mitigation": "逐一沟通续约、有限维护、移交或结束，并记录数据删除和退款决定。",
+      "is_fatal": false,
+      "fatal_scope": "not_fatal",
+      "claim_ids": [
+        "c002",
+        "c010",
+        "c012"
+      ]
+    }
+  ],
+  "improvements": [
+    {
+      "title": "把经营者与产品资产分开",
+      "description": "考虑共同经营、授权、出售或移交，而不是默认只能由原提出者继续。",
+      "expected_effect": "保留已经形成的业务价值，同时消除个人目标冲突。",
+      "validation_needed": "明确候选经营者、权责、客户同意与经济安排。",
+      "claim_ids": [
+        "c008",
+        "c010"
+      ]
+    },
+    {
+      "title": "定义真实的低维护标准",
+      "description": "把“被动”改写为每周维护工时、自助开通率和支持响应范围。",
+      "expected_effect": "用可测量目标替代模糊生活方式愿望。",
+      "validation_needed": "至少四周客户级支持与故障数据。",
+      "claim_ids": [
+        "c004",
+        "c007"
+      ]
+    },
+    {
+      "title": "先处理存量承诺",
+      "description": "为 5 家试点逐一选择继续有限服务、移交、退款或删除数据。",
+      "expected_effect": "降低信任、合同和隐私风险。",
+      "validation_needed": "每家客户确认的处置记录。",
+      "claim_ids": [
+        "c002",
+        "c010",
+        "c012"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "bear",
+      "assumptions": [
+        "每周支持超过 3 小时",
+        "没有接手者",
+        "提出者目标不变"
+      ],
+      "outcome": "当前提出者无法可持续履约或继续学习。",
+      "decision_implication": "完成客户善后后停止本人继续经营。"
+    },
+    {
+      "name": "base",
+      "assumptions": [
+        "可在有限维护下完成现有承诺",
+        "项目暂停新增投入",
+        "未来出现时间或伙伴触发条件"
+      ],
+      "outcome": "资产和学习被保留，当前机会成本受控。",
+      "decision_implication": "维持暂存，只在触发条件满足时复评。"
+    },
+    {
+      "name": "bull",
+      "assumptions": [
+        "找到负责销售与客户成功的合适伙伴",
+        "产品支持负担可量化且可控",
+        "现有客户正式续费"
+      ],
+      "outcome": "业务可由更匹配的经营结构继续。",
+      "decision_implication": "重新评估为推进，但不自动改变融资结论。"
+    }
+  ],
+  "disposition_plan": {
+    "mode": "parked_watch",
+    "rationale": "项目证据值得保留，但当前不应继续主动经营或开发；暂存必须有客户处置和可观察重启条件。",
+    "allowed_actions": [
+      "履行、移交或有序结束现有试点承诺",
+      "保存脱敏业务学习和必要运行文档",
+      "被动记录时间、伙伴或自助化触发条件是否出现"
+    ],
+    "prohibited_actions": [
+      "新增客户或承诺新功能",
+      "继续以零散开发代替经营决策",
+      "为了维持项目而融资招聘",
+      "把暂存当作无限期拖延客户处置"
+    ],
+    "reactivation_triggers": [
+      "提出者愿意连续 90 天每周投入至少 8–10 小时并承担客户工作",
+      "有权责与收益清晰的伙伴承担销售和客户成功",
+      "四周数据证明全部客户维护可稳定控制在每周 3 小时以内"
+    ],
+    "closure_actions": [
+      "若 30 天内无法安全维护或移交，完成退款、数据导出或删除和服务关闭"
+    ]
+  },
+  "experiments": [],
+  "resource_plan": [
+    {
+      "horizon": "未来 7 天：存量处置",
+      "inputs": {
+        "time_hours": {
+          "min": 3,
+          "max": 8
+        },
+        "cash": {
+          "min": 0,
+          "max": 1495,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "5 家现有试点决策者"
+        ],
+        "skills": [
+          "客户沟通",
+          "数据处置"
+        ],
+        "channels": [
+          "现有客户沟通渠道"
+        ],
+        "dependencies": [
+          "核对现有服务与退款承诺"
+        ]
+      },
+      "expected_outputs": [
+        "每家客户的续约、有限维护、移交或结束安排",
+        "数据保留或删除记录",
+        "实际维护工时"
+      ],
+      "decision_gate": "所有现有客户都有明确处置，且没有新增承诺。"
+    },
+    {
+      "horizon": "暂存期",
+      "inputs": {
+        "time_hours": {
+          "min": 0,
+          "max": 3
+        },
+        "cash": {
+          "min": 0,
+          "max": 500,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [],
+        "skills": [
+          "最低限度维护"
+        ],
+        "channels": [],
+        "dependencies": [
+          "不新增客户与功能"
+        ]
+      },
+      "expected_outputs": [
+        "触发条件状态",
+        "维护负担记录"
+      ],
+      "decision_gate": "没有触发条件则保持暂存；无法履约则转为关闭。"
+    }
+  ],
+  "funding": {
+    "readiness": "not_applicable",
+    "recommended_path": "not_now",
+    "rationale": "融资不能解决提出者不愿承担经营动作的问题，反而会放大目标冲突。",
+    "current_blockers": [
+      "创始人目标与高增长经营不匹配",
+      "没有长期留存和单位经济性",
+      "没有承担销售与客户成功的人"
+    ],
+    "next_fundable_milestone": "当前不设置融资里程碑；只有经营责任、留存、销售复现和市场扩张同时成立后才重新讨论。",
+    "estimated_capital_need": null,
+    "likely_investor_questions": [
+      "谁会全职或持续经营这个业务？",
+      "为什么创始人不愿销售和支持？",
+      "留存与单位经济性如何？",
+      "资本将解决什么，而不是掩盖什么？"
+    ],
+    "materials_needed": [
+      "如果未来重启：客户处置记录",
+      "留存和支持负担",
+      "经营团队职责",
+      "可重复销售证据"
+    ],
+    "jurisdiction_notes": [
+      "真实暂停、退款、数据移交或出售应按合同与适用地区要求复核。",
+      "本报告不提供法律或证券发行意见。"
+    ]
+  },
+  "claims": [
+    {
+      "id": "c001",
+      "text": "合成案例声明已访谈 20 家目标设计工作室。",
+      "claim_type": "user_provided",
+      "importance": "major",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u001"
+      ]
+    },
+    {
+      "id": "c002",
+      "text": "合成案例声明 5 家工作室以每月 299 元付费试点并连续使用 6 周。",
+      "claim_type": "user_provided",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u001"
+      ]
+    },
+    {
+      "id": "c003",
+      "text": "创始人有领域经验并可触达约 80 家工作室。",
+      "claim_type": "user_provided",
+      "importance": "major",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u002"
+      ]
+    },
+    {
+      "id": "c004",
+      "text": "创始人每周最多愿意投入 3 小时。",
+      "claim_type": "user_provided",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u003"
+      ]
+    },
+    {
+      "id": "c005",
+      "text": "创始人不愿主动销售、演示或处理客户工作流问题。",
+      "claim_type": "user_provided",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u003"
+      ]
+    },
+    {
+      "id": "c006",
+      "text": "创始人希望该业务成为近乎不需要持续经营的被动收入。",
+      "claim_type": "user_provided",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u003"
+      ]
+    },
+    {
+      "id": "c007",
+      "text": "当前没有自助获客、低支持负担或长期留存证据。",
+      "claim_type": "unknown",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "not_applicable",
+      "evidence_ids": []
+    },
+    {
+      "id": "c008",
+      "text": "业务价值和提出者当前适配度必须分开判断。",
+      "claim_type": "inference",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "partially_verified",
+      "evidence_ids": [
+        "ev_u001",
+        "ev_u002",
+        "ev_u003"
+      ]
+    },
+    {
+      "id": "c009",
+      "text": "当前时间和经营意愿不足以完成续费、销售、支持与产品学习的组合动作。",
+      "claim_type": "inference",
+      "importance": "critical",
+      "confidence": "medium",
+      "verification_status": "unverified",
+      "evidence_ids": [
+        "ev_u003"
+      ]
+    },
+    {
+      "id": "c010",
+      "text": "暂存前必须先处理现有试点承诺，不能把暂停等同于遗弃客户。",
+      "claim_type": "inference",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "partially_verified",
+      "evidence_ids": [
+        "ev_u001",
+        "ev_u003"
+      ]
+    },
+    {
+      "id": "c011",
+      "text": "融资不能修复创始人目标与必要日常工作的冲突。",
+      "claim_type": "inference",
+      "importance": "major",
+      "confidence": "high",
+      "verification_status": "unverified",
+      "evidence_ids": [
+        "ev_u003"
+      ]
+    },
+    {
+      "id": "c012",
+      "text": "暂停、移交或关闭仍涉及客户沟通、退款、数据处理和服务连续性风险。",
+      "claim_type": "inference",
+      "importance": "major",
+      "confidence": "medium",
+      "verification_status": "unverified",
+      "evidence_ids": [
+        "ev_u001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev_u001",
+      "evidence_type": "U",
+      "source_kind": "user_input",
+      "title": "合成业务证据与现有试点",
+      "url": null,
+      "published_at": null,
+      "accessed_at": "2026-07-28",
+      "statement": "合成案例继承 20 次访谈、5 家每月 299 元付费试点和连续 6 周使用。",
+      "supports_claim_ids": [
+        "c001",
+        "c002",
+        "c008",
+        "c010",
+        "c012"
+      ],
+      "limitations": [
+        "完全虚构",
+        "没有账单、使用日志或客户沟通原件"
+      ],
+      "verification_status": "verified",
+      "source_tier": null
+    },
+    {
+      "id": "ev_u002",
+      "evidence_type": "U",
+      "source_kind": "user_input",
+      "title": "合成领域经验与渠道",
+      "url": null,
+      "published_at": null,
+      "accessed_at": "2026-07-28",
+      "statement": "合成案例声明创始人有相关经验并可直接触达约 80 家工作室。",
+      "supports_claim_ids": [
+        "c003",
+        "c008"
+      ],
+      "limitations": [
+        "完全虚构",
+        "联系人质量未验证"
+      ],
+      "verification_status": "verified",
+      "source_tier": null
+    },
+    {
+      "id": "ev_u003",
+      "evidence_type": "U",
+      "source_kind": "user_input",
+      "title": "合成身份与目标约束",
+      "url": null,
+      "published_at": null,
+      "accessed_at": "2026-07-28",
+      "statement": "合成案例声明每周最多投入 3 小时、拒绝主动销售和支持，并追求近乎被动收入。",
+      "supports_claim_ids": [
+        "c004",
+        "c005",
+        "c006",
+        "c008",
+        "c009",
+        "c010",
+        "c011"
+      ],
+      "limitations": [
+        "完全虚构",
+        "没有观察实际时间使用或行为"
+      ],
+      "verification_status": "verified",
+      "source_tier": null
+    }
+  ],
+  "validation": {
+    "schema_status": "passed",
+    "cross_reference_status": "passed",
+    "citation_structure_status": "passed",
+    "citation_support_status": "not_applicable",
+    "numerical_status": "passed",
+    "human_review_status": "draft_reviewed",
+    "warnings": [
+      "这是合成反事实案例，暂存结论尚未经过真实用户或专家评审。",
+      "业务证据来自输入声明，不能当作真实市场证据。",
+      "暂存不授权忽略现有客户承诺。"
+    ]
+  }
+}

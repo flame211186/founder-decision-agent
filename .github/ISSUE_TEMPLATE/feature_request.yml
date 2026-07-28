@@ -1,0 +1,31 @@
+name: Feature request
+description: Propose a requirement-driven improvement.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+      description: What decision or workflow is currently not handled?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and affected requirement
+      description: Link an existing REQ ID or explain why a new requirement is needed.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Smallest useful solution
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: How should it be verified?
+    validations:
+      required: true

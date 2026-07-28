@@ -1,0 +1,1155 @@
+{
+  "schema_version": "evaluation_report.v1",
+  "report_id": "eval_case_002_v1",
+  "idea_id": "case_002_niche_agency_feedback_saas",
+  "generated_at": "2026-07-28T18:00:00+08:00",
+  "as_of_date": "2026-07-28",
+  "report_language": "zh-CN",
+  "evaluation_mode": "quick",
+  "disclaimer": {
+    "decision_support_only": true,
+    "not_investment_advice": true,
+    "not_legal_or_tax_advice": true,
+    "limitations": [
+      "这是合成案例，所有客户、价格、渠道和创始人资料都是测试输入。",
+      "未进行外部市场、竞品或法律研究。",
+      "当前样本只有 5 家付费试点和 6 周使用，不能证明长期留存或可扩张性。",
+      "资金、时间和目标收入区间是情景假设，不是财务预测。"
+    ]
+  },
+  "input_snapshot": {
+    "original_text": "有四年设计工作室项目管理经验的个人，做了一个把分散客户反馈整理为任务的 SaaS；20 次访谈、5 家每月 299 元付费试点、连续使用 6 周，可直接触达约 80 家工作室，希望经营成独立小生意。",
+    "user_objectives": [
+      "建立可持续的独立 SaaS 生意",
+      "不以风险投资或独角兽规模为目标",
+      "确认下一阶段是否值得继续投入",
+      "降低客户反馈整理的人工成本"
+    ],
+    "profile_included": true,
+    "profile_summary": "四年小型设计工作室项目管理经验；有约 80 家可触达工作室渠道；目标为独立经营。",
+    "attachments_included": false
+  },
+  "idea_normalization": {
+    "one_sentence": "为 3–15 人的小型设计工作室提供一个将微信、邮件、截图和会议记录中的客户反馈去重并转成责任人与截止日期的轻量 SaaS。",
+    "problem": "小型设计工作室的客户反馈跨渠道分散，项目经理需要手工汇总、去重、确认责任人和截止日期，容易遗漏、重复和返工。",
+    "target_users": [
+      "3–15 人的小型设计工作室",
+      "设计工作室项目经理",
+      "直接参与客户沟通的工作室负责人"
+    ],
+    "proposed_solution": "导入或粘贴多渠道反馈，自动归并重复意见，转成可分配的任务并保留来源。",
+    "stage": "S3_early_traction",
+    "business_archetypes": [
+      "software"
+    ],
+    "geographies": [
+      "中文设计工作室市场，具体地区未限定"
+    ],
+    "assumptions": [
+      "6 周使用代表初步工作流嵌入，而不是试点新鲜感。",
+      "每月 299 元能覆盖支持、模型和基础设施成本。",
+      "可直接触达的 80 家工作室与 5 家试点具有相似问题。",
+      "跨渠道导入在平台规则和客户隐私要求下可持续。",
+      "创始人愿意承担早期销售、支持和工作流配置。"
+    ]
+  },
+  "information_quality": {
+    "completeness": "medium",
+    "research_status": "not_performed",
+    "missing_critical_information": [
+      "5 家试点的周活、核心行为和具体节省时间",
+      "试点结束后的续费意愿和真实流失原因",
+      "每家客户的模型、基础设施与人工支持成本",
+      "微信、邮件和文件导入的稳定性与权限边界",
+      "现有项目管理和反馈工具的替代情况",
+      "80 家可触达工作室的真实转化率"
+    ],
+    "clarification_questions": [
+      {
+        "id": "q1",
+        "question": "5 家试点过去两周分别有多少个项目使用、每周多少次导入、哪一步如果产品消失会最痛？",
+        "rationale": "这比满意度更能判断产品是否嵌入真实工作流。",
+        "could_change": [
+          "用户价值",
+          "牵引评分",
+          "推进结论"
+        ]
+      },
+      {
+        "id": "q2",
+        "question": "每家客户每月的模型、存储、导入维护和人工支持分别需要多少成本与时间？",
+        "rationale": "299 元价格是否能成为可持续独立生意取决于真实服务成本。",
+        "could_change": [
+          "商业价值",
+          "单位经济性",
+          "定价"
+        ]
+      },
+      {
+        "id": "q3",
+        "question": "80 家可触达工作室中，有多少愿意在未来 30 天看演示并开始付费试用？",
+        "rationale": "直接渠道是该项目最强优势，需要转成可测量的销售漏斗。",
+        "could_change": [
+          "分发评分",
+          "90 天收入情景",
+          "是否继续独立经营"
+        ]
+      }
+    ]
+  },
+  "verdict": {
+    "label": "pursue",
+    "confidence": "medium",
+    "one_sentence": "值得推进到“验证留存和单位经济性”的下一阶段；它目前更像一个有希望的独立垂直 SaaS，而不是需要融资的高增长公司。",
+    "rationale_claim_ids": [
+      "c001",
+      "c002",
+      "c003",
+      "c004",
+      "c007",
+      "c008",
+      "c011"
+    ],
+    "what_would_change": [
+      "如果 5 家试点中少于 3 家在试点结束后按当前或更高价格续费，结论降为先验证或重构。",
+      "如果每家客户每月需要超过约 2 小时人工支持，当前价格下的独立 SaaS 模式需要重构。",
+      "如果 80 家直接渠道中能在 30 天获得 10 家以上新增付费客户，结论置信度可提高。",
+      "如果跨渠道导入无法在隐私和平台限制下稳定运行，核心方案需要收窄。"
+    ],
+    "authorized_next_step": "推进正式续费、客户级成本记录和首批 20 家直接渠道销售实验。",
+    "does_not_mean": [
+      "不代表扩大到所有创意行业",
+      "不代表招聘团队或接受外部资本",
+      "不代表 6 周试点已经证明长期留存"
+    ],
+    "next_review_condition": "完成首轮正式续费、记录每家客户真实服务成本，并跑完 80 家渠道中的首批 20 家销售漏斗。"
+  },
+  "executive_summary": {
+    "opportunity": "问题、目标用户、创始人领域经验、付费试点和直接渠道已经形成一个比普通 S0 想法更强的闭环，适合以低资本继续验证。",
+    "main_problem": "6 周试点仍太短，当前不知道用户是否真正依赖产品，也不知道 299 元能否覆盖高质量导入、模型和人工支持。",
+    "recommended_next_move": "不要融资或扩展到所有创意团队；先把 5 家试点转为正式续费，并用 20 家可触达工作室测量演示到付费的漏斗和支持成本。"
+  },
+  "value_assessments": {
+    "user_value": {
+      "score_status": "scored",
+      "score": 4,
+      "label": "已有初步行为和付费证据",
+      "summary": "20 次访谈、5 家付费和连续 6 周使用说明问题不只是创始人的个人想象，但长期依赖程度仍未知。",
+      "rationale_claim_ids": [
+        "c001",
+        "c002",
+        "c007"
+      ]
+    },
+    "business_value": {
+      "score_status": "scored",
+      "score": 3,
+      "label": "可形成小型 SaaS，经济性待测",
+      "summary": "已有 1,495 元合成月度试点收入，但支持成本、续费和渠道转化未知。",
+      "rationale_claim_ids": [
+        "c002",
+        "c005",
+        "c006",
+        "c009"
+      ]
+    },
+    "venture_scale_fit": {
+      "score_status": "scored",
+      "score": 1,
+      "label": "当前不适合 VC",
+      "summary": "窄市场、增长和扩张尚未证明；这不降低其作为独立生意的价值。",
+      "rationale_claim_ids": [
+        "c004",
+        "c010"
+      ]
+    },
+    "founder_fit": {
+      "score_status": "scored",
+      "score": 4,
+      "label": "较强匹配",
+      "summary": "创始人拥有领域经验、问题洞察和直接渠道，目标也与资本高效的垂直 SaaS 相符。",
+      "rationale_claim_ids": [
+        "c003",
+        "c004",
+        "c008"
+      ]
+    }
+  },
+  "risk_assessments": {
+    "societal": {
+      "risk_level": "low",
+      "summary": "产品主要是内部工作流工具，社会层面风险较低。",
+      "rationale_claim_ids": [
+        "c012"
+      ]
+    },
+    "ethical": {
+      "risk_level": "low",
+      "summary": "主要伦理风险是错误归并导致客户意见被误解，应保留原始来源和人工确认。",
+      "rationale_claim_ids": [
+        "c012"
+      ]
+    },
+    "legal_regulatory": {
+      "risk_level": "unknown",
+      "summary": "未研究跨平台导入、客户素材版权、数据处理协议和地区隐私要求。",
+      "rationale_claim_ids": [
+        "c012"
+      ]
+    },
+    "privacy_security": {
+      "risk_level": "medium",
+      "summary": "客户反馈可能包含未公开项目、联系人和商业素材，需要最小权限、隔离和删除策略。",
+      "rationale_claim_ids": [
+        "c012"
+      ]
+    }
+  },
+  "dimension_assessments": [
+    {
+      "dimension_id": "D1",
+      "name": "问题强度",
+      "score_status": "scored",
+      "score": 4,
+      "summary": "访谈、付费和连续使用共同支持问题真实。",
+      "strengths": [
+        "20 次访谈",
+        "5 家付费试点"
+      ],
+      "weaknesses": [
+        "尚无量化时间节省和错误减少"
+      ],
+      "rationale_claim_ids": [
+        "c001",
+        "c002"
+      ]
+    },
+    {
+      "dimension_id": "D2",
+      "name": "用户与切入点",
+      "score_status": "scored",
+      "score": 4,
+      "summary": "3–15 人设计工作室是具体且可触达的切入点。",
+      "strengths": [
+        "用户规模明确",
+        "购买者与使用者相对接近"
+      ],
+      "weaknesses": [
+        "不同工作室工具栈可能分散"
+      ],
+      "rationale_claim_ids": [
+        "c001",
+        "c008"
+      ]
+    },
+    {
+      "dimension_id": "D3",
+      "name": "方案价值与行为变化",
+      "score_status": "scored",
+      "score": 4,
+      "summary": "连续 6 周使用是正面信号，但核心行为和不可替代环节未测量。",
+      "strengths": [
+        "嵌入真实项目反馈流程",
+        "已有付费"
+      ],
+      "weaknesses": [
+        "可能仍受试点新鲜感影响"
+      ],
+      "rationale_claim_ids": [
+        "c002",
+        "c007"
+      ]
+    },
+    {
+      "dimension_id": "D4",
+      "name": "时机",
+      "score_status": "scored",
+      "score": 2,
+      "summary": "未提供明确 why now；模型能力可能降低归并成本，但这不是独占优势。",
+      "strengths": [
+        "多模态和文本处理可能降低实现成本"
+      ],
+      "weaknesses": [
+        "时机证据缺失"
+      ],
+      "rationale_claim_ids": [
+        "c013"
+      ]
+    },
+    {
+      "dimension_id": "D5",
+      "name": "市场与扩张",
+      "score_status": "scored",
+      "score": 2,
+      "summary": "首个细分足够验证独立生意，但总体可触达市场和相邻扩张未知。",
+      "strengths": [
+        "已有 80 家直接渠道"
+      ],
+      "weaknesses": [
+        "没有市场规模和转化数据"
+      ],
+      "rationale_claim_ids": [
+        "c008",
+        "c010"
+      ]
+    },
+    {
+      "dimension_id": "D6",
+      "name": "竞争、替代与差异化",
+      "score_status": "scored",
+      "score": 3,
+      "summary": "跨渠道归并和来源保留是合理切入点，现有项目管理工具与手工流程仍需研究。",
+      "strengths": [
+        "围绕具体工作流而非通用任务管理"
+      ],
+      "weaknesses": [
+        "竞品研究缺失",
+        "功能可能被现有工具吸收"
+      ],
+      "rationale_claim_ids": [
+        "c001",
+        "c013"
+      ]
+    },
+    {
+      "dimension_id": "D7",
+      "name": "商业模式与经济性",
+      "score_status": "scored",
+      "score": 3,
+      "summary": "订阅和首批收入已成立，成本与续费仍是核心未知。",
+      "strengths": [
+        "明确月订阅价格",
+        "已有真实付费信号"
+      ],
+      "weaknesses": [
+        "支持和基础设施成本未知",
+        "尚无长期续费"
+      ],
+      "rationale_claim_ids": [
+        "c005",
+        "c006",
+        "c009"
+      ]
+    },
+    {
+      "dimension_id": "D8",
+      "name": "分发与销售",
+      "score_status": "scored",
+      "score": 4,
+      "summary": "直接触达 80 家工作室是强早期渠道，但转化尚未测量。",
+      "strengths": [
+        "创始人行业人脉",
+        "两个设计师社群"
+      ],
+      "weaknesses": [
+        "缺少演示到付费漏斗"
+      ],
+      "rationale_claim_ids": [
+        "c003",
+        "c008"
+      ]
+    },
+    {
+      "dimension_id": "D9",
+      "name": "可行性",
+      "score_status": "scored",
+      "score": 4,
+      "summary": "已有可用试点证明基础可行，主要风险转向导入稳定性、隐私和支持。",
+      "strengths": [
+        "产品已被 5 家使用"
+      ],
+      "weaknesses": [
+        "跨平台接口和数据处理边界未知"
+      ],
+      "rationale_claim_ids": [
+        "c002",
+        "c012"
+      ]
+    },
+    {
+      "dimension_id": "D10",
+      "name": "提出者适配度",
+      "score_status": "scored",
+      "score": 4,
+      "summary": "领域经验、渠道与独立经营目标高度匹配。",
+      "strengths": [
+        "四年相关经验",
+        "直接用户渠道",
+        "目标与资本需求匹配"
+      ],
+      "weaknesses": [
+        "尚未说明可投入时间和技术维护能力"
+      ],
+      "rationale_claim_ids": [
+        "c003",
+        "c004",
+        "c008"
+      ]
+    },
+    {
+      "dimension_id": "D11",
+      "name": "牵引与学习速度",
+      "score_status": "scored",
+      "score": 3,
+      "summary": "5 家付费、6 周使用属于正面早期牵引，但样本小且无正式续费。",
+      "strengths": [
+        "已有付费而非只有意向"
+      ],
+      "weaknesses": [
+        "活跃和续费数据缺失"
+      ],
+      "rationale_claim_ids": [
+        "c002",
+        "c007"
+      ]
+    },
+    {
+      "dimension_id": "D12",
+      "name": "资本与回报形态",
+      "score_status": "scored",
+      "score": 4,
+      "summary": "可通过创始人销售和小规模产品继续资本高效验证，符合独立经营目标。",
+      "strengths": [
+        "已有收入",
+        "早期渠道不依赖付费获客"
+      ],
+      "weaknesses": [
+        "尚不知道何时需要雇佣支持或销售"
+      ],
+      "rationale_claim_ids": [
+        "c004",
+        "c008",
+        "c011"
+      ]
+    }
+  ],
+  "theses": {
+    "supporting": [
+      {
+        "statement": "问题、付费、使用、领域经验和直接分发同时存在，已经超过单纯想法阶段。",
+        "claim_ids": [
+          "c001",
+          "c002",
+          "c003",
+          "c008"
+        ]
+      },
+      {
+        "statement": "创始人的目标是可持续独立生意，窄市场不是自动缺点。",
+        "claim_ids": [
+          "c004",
+          "c010"
+        ]
+      }
+    ],
+    "opposing": [
+      {
+        "statement": "短期付费试点可能掩盖低活跃、低续费或高人工支持。",
+        "claim_ids": [
+          "c006",
+          "c007",
+          "c009"
+        ]
+      },
+      {
+        "statement": "跨渠道导入和反馈归并可能被平台限制、隐私要求或现有工具吸收。",
+        "claim_ids": [
+          "c012",
+          "c013"
+        ]
+      }
+    ],
+    "synthesis": "这是一个应继续用真实续费和成本数据验证的垂直小 SaaS。当前最合理目标是形成稳定、低支持成本的独立生意，而不是为迎合投资叙事扩展到所有创意团队。"
+  },
+  "key_unknowns": [
+    {
+      "id": "u1",
+      "question": "试点结束后有多少客户按真实价格续费？",
+      "importance": "critical",
+      "why_it_matters": "正式续费比短期试点更能证明持续价值。",
+      "cheapest_test": "在第 7 周发出正式订阅账单，不延长免费或特殊试点条件。",
+      "could_change_verdict": true
+    },
+    {
+      "id": "u2",
+      "question": "每家客户的可变成本和人工支持是多少？",
+      "importance": "critical",
+      "why_it_matters": "决定 299 元是否能形成可持续毛利和个人工作量。",
+      "cheapest_test": "连续四周按客户记录模型、存储、故障和支持分钟数。",
+      "could_change_verdict": true
+    },
+    {
+      "id": "u3",
+      "question": "直接渠道能否转化为重复销售漏斗？",
+      "importance": "major",
+      "why_it_matters": "80 家名单只有产生演示和付费才是分发优势。",
+      "cheapest_test": "联系 20 家，记录回复、演示、试用和付费。",
+      "could_change_verdict": true
+    }
+  ],
+  "risks": [
+    {
+      "id": "r1",
+      "category": "business_model",
+      "severity": "high",
+      "likelihood": "unknown",
+      "description": "模型、导入维护和人工支持使每客户成本过高。",
+      "mitigation": "按客户记录成本和支持时间，设置超额用量或更高价格层。",
+      "is_fatal": false,
+      "fatal_scope": "not_fatal",
+      "claim_ids": [
+        "c006",
+        "c009"
+      ]
+    },
+    {
+      "id": "r2",
+      "category": "technical",
+      "severity": "high",
+      "likelihood": "unknown",
+      "description": "跨平台导入不稳定或依赖不可控接口。",
+      "mitigation": "先支持最可靠的输入方式，保留手工粘贴和文件导入退路。",
+      "is_fatal": false,
+      "fatal_scope": "not_fatal",
+      "claim_ids": [
+        "c012"
+      ]
+    },
+    {
+      "id": "r3",
+      "category": "privacy",
+      "severity": "high",
+      "likelihood": "medium",
+      "description": "客户反馈包含未公开设计和联系人信息。",
+      "mitigation": "最小权限、租户隔离、来源保留、删除能力和明确数据协议。",
+      "is_fatal": false,
+      "fatal_scope": "not_fatal",
+      "claim_ids": [
+        "c012"
+      ]
+    },
+    {
+      "id": "r4",
+      "category": "founder_fit",
+      "severity": "medium",
+      "likelihood": "unknown",
+      "description": "独立创始人可能被定制导入和客户支持拖成服务公司。",
+      "mitigation": "限定支持范围，测量每客户时间，拒绝不可复用定制。",
+      "is_fatal": false,
+      "fatal_scope": "not_fatal",
+      "claim_ids": [
+        "c006",
+        "c009"
+      ]
+    }
+  ],
+  "improvements": [
+    {
+      "title": "把来源可追溯作为核心价值",
+      "description": "每个归并后的任务保留原始微信、邮件、截图或会议记录来源，允许人工确认。",
+      "expected_effect": "降低错误归并风险，并区别于纯自动摘要。",
+      "validation_needed": "客户是否因来源可追溯更愿意直接采用自动结果。",
+      "claim_ids": [
+        "c012"
+      ]
+    },
+    {
+      "title": "按支持成本设计价格层",
+      "description": "基础层限制项目或导入量，高用量和复杂集成使用更高价格或设置费。",
+      "expected_effect": "避免 299 元客户产生不可持续服务工作。",
+      "validation_needed": "四周客户级成本和对更高价格的接受度。",
+      "claim_ids": [
+        "c006",
+        "c009"
+      ]
+    },
+    {
+      "title": "只扩展相邻工作流",
+      "description": "先从小型设计工作室验证，再考虑视频、营销等相近代理机构，不扩展为通用任务管理。",
+      "expected_effect": "保留领域切入点并控制产品范围。",
+      "validation_needed": "设计工作室留存稳定后，测试一个相邻细分。",
+      "claim_ids": [
+        "c010",
+        "c013"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "bear",
+      "assumptions": [
+        "5 家中只有 1 家正式续费",
+        "每客户每月需要 2 小时以上支持",
+        "直接渠道演示转化低"
+      ],
+      "outcome": "当前方案更像定制服务，299 元订阅无法覆盖投入。",
+      "decision_implication": "提高价格、收窄输入方式或转成高价服务；若客户仍不续费则停止。"
+    },
+    {
+      "name": "base",
+      "assumptions": [
+        "5 家中 3–4 家续费",
+        "每客户每月支持少于 45 分钟",
+        "20 家触达带来 3–5 家新增付费"
+      ],
+      "outcome": "形成一个可继续自筹的垂直 micro-SaaS。",
+      "decision_implication": "专注留存、支持自动化和创始人销售，不融资。"
+    },
+    {
+      "name": "bull",
+      "assumptions": [
+        "5 家全部续费并接受更高价格层",
+        "客户能量化节省时间和减少返工",
+        "渠道转化可重复",
+        "相邻代理机构出现自然需求"
+      ],
+      "outcome": "形成高毛利、低流失的垂直 SaaS，并有相邻扩张路径。",
+      "decision_implication": "先用收入招聘支持或产品人员；只有出现更大市场证据时再讨论外部资本。"
+    }
+  ],
+  "disposition_plan": {
+    "mode": "active_validation",
+    "rationale": "已有付费和使用证据，值得继续验证正式续费、单位经济性和销售复现。",
+    "allowed_actions": [
+      "向现有试点发出正式续费",
+      "记录客户级成本和支持时间",
+      "测试首批 20 家直接渠道销售漏斗"
+    ],
+    "prohibited_actions": [
+      "在留存和成本未知时扩展到所有创意行业",
+      "把推进理解为招聘或融资许可",
+      "用试点优惠延长替代正式续费证据"
+    ],
+    "reactivation_triggers": [],
+    "closure_actions": []
+  },
+  "experiments": [
+    {
+      "id": "exp_7d_formal_renewal",
+      "horizon": "7d",
+      "hypothesis": "付费试点客户愿意在没有特殊条件下正式续费。",
+      "method": "向 5 家发出下一周期正式账单，并记录每家续费、拒绝和价格异议。",
+      "inputs": {
+        "time_hours": {
+          "min": 3,
+          "max": 6
+        },
+        "cash": {
+          "min": 0,
+          "max": 300,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "5 家试点决策者"
+        ],
+        "skills": [
+          "客户访谈",
+          "订阅结算"
+        ],
+        "channels": [
+          "现有客户沟通渠道"
+        ],
+        "dependencies": [
+          "明确正式价格与服务范围"
+        ]
+      },
+      "expected_outputs": [
+        "正式续费率",
+        "拒绝原因",
+        "价格异议",
+        "不可缺少功能"
+      ],
+      "success_criteria": [
+        "至少 3 家按正式条件续费"
+      ],
+      "failure_criteria": [
+        "少于 2 家续费",
+        "续费完全依赖继续定制或折扣"
+      ],
+      "decision_on_success": "继续 30 天销售和成本实验。",
+      "decision_on_failure": "重构价格、用户或核心工作流；暂停扩大开发。"
+    },
+    {
+      "id": "exp_30d_sales_and_cost",
+      "horizon": "30d",
+      "hypothesis": "直接渠道可以低成本带来新增付费，且每客户支持成本可控。",
+      "method": "联系 20 家工作室并按客户记录演示漏斗、模型成本、故障和支持分钟数。",
+      "inputs": {
+        "time_hours": {
+          "min": 20,
+          "max": 40
+        },
+        "cash": {
+          "min": 300,
+          "max": 2000,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "20 家潜在客户",
+          "续费试点客户"
+        ],
+        "skills": [
+          "创始人销售",
+          "客户支持",
+          "成本记录"
+        ],
+        "channels": [
+          "历史合作网络",
+          "设计师社群"
+        ],
+        "dependencies": [
+          "统一演示与试用流程",
+          "客户级成本记录"
+        ]
+      },
+      "expected_outputs": [
+        "触达至付费漏斗",
+        "客户级可变成本",
+        "支持时间分布",
+        "正式月经常性收入"
+      ],
+      "success_criteria": [
+        "新增至少 3 家正式付费",
+        "活跃客户每月人工支持中位数低于 45 分钟",
+        "基础设施和模型成本低于收入的 20%"
+      ],
+      "failure_criteria": [
+        "20 家触达没有新增付费",
+        "大多数客户需要不可复用定制",
+        "单客户可变成本接近或超过收入"
+      ],
+      "decision_on_success": "继续独立经营并优化留存。",
+      "decision_on_failure": "提高价格、转服务模式或停止当前产品形态。"
+    },
+    {
+      "id": "exp_90d_retention",
+      "horizon": "90d",
+      "hypothesis": "产品能形成至少一个季度的稳定留存与低支持成本。",
+      "method": "追踪 cohort 留存、核心行为、扩容、流失和客户推荐，不扩展到新行业。",
+      "inputs": {
+        "time_hours": {
+          "min": 80,
+          "max": 160
+        },
+        "cash": {
+          "min": 2000,
+          "max": 10000,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "全部正式客户"
+        ],
+        "skills": [
+          "产品开发",
+          "客户成功",
+          "指标分析"
+        ],
+        "channels": [
+          "现有客户",
+          "客户转介绍"
+        ],
+        "dependencies": [
+          "稳定核心工作流",
+          "续费与事件记录"
+        ]
+      },
+      "expected_outputs": [
+        "90 天客户留存",
+        "核心行为频率",
+        "推荐率",
+        "月支持工时",
+        "可持续收入区间"
+      ],
+      "success_criteria": [
+        "正式客户 90 天留存达到预先设定并经用户确认的阈值",
+        "出现自然转介绍",
+        "总支持时间与独立经营目标兼容"
+      ],
+      "failure_criteria": [
+        "客户在项目结束后普遍流失",
+        "只有持续人工服务才能维持价值"
+      ],
+      "decision_on_success": "评估是否以收入招聘，并测试一个相邻细分。",
+      "decision_on_failure": "收缩为高价服务或停止 SaaS 扩张。"
+    }
+  ],
+  "resource_plan": [
+    {
+      "horizon": "未来 7 天",
+      "inputs": {
+        "time_hours": {
+          "min": 3,
+          "max": 6
+        },
+        "cash": {
+          "min": 0,
+          "max": 300,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "5 家试点"
+        ],
+        "skills": [
+          "续费沟通"
+        ],
+        "channels": [
+          "现有客户"
+        ],
+        "dependencies": [
+          "正式账单"
+        ]
+      },
+      "expected_outputs": [
+        "正式续费率",
+        "价格反馈"
+      ],
+      "decision_gate": "至少 3 家正式续费。"
+    },
+    {
+      "horizon": "未来 30 天",
+      "inputs": {
+        "time_hours": {
+          "min": 20,
+          "max": 40
+        },
+        "cash": {
+          "min": 300,
+          "max": 2000,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "20 家潜在客户"
+        ],
+        "skills": [
+          "销售",
+          "成本记录"
+        ],
+        "channels": [
+          "直接行业网络"
+        ],
+        "dependencies": [
+          "统一试用流程"
+        ]
+      },
+      "expected_outputs": [
+        "新增付费",
+        "销售漏斗",
+        "客户级成本"
+      ],
+      "decision_gate": "新增付费与单位经济性能支持独立经营。"
+    },
+    {
+      "horizon": "未来 90 天",
+      "inputs": {
+        "time_hours": {
+          "min": 80,
+          "max": 160
+        },
+        "cash": {
+          "min": 2000,
+          "max": 10000,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "全部正式客户"
+        ],
+        "skills": [
+          "产品",
+          "客户成功"
+        ],
+        "channels": [
+          "现有客户与转介绍"
+        ],
+        "dependencies": [
+          "核心行为和续费记录"
+        ]
+      },
+      "expected_outputs": [
+        "留存",
+        "推荐",
+        "支持负担",
+        "收入质量"
+      ],
+      "decision_gate": "业务能在创始人目标工时内持续，而不依赖不可复用服务。"
+    }
+  ],
+  "funding": {
+    "readiness": "not_applicable",
+    "recommended_path": "bootstrap",
+    "rationale": "创始人的目标、当前市场证据和低资本验证路径都更适合自筹；融资会引入与目标不匹配的增长压力。",
+    "current_blockers": [
+      "没有证明风险投资级市场和增长",
+      "没有长期留存与单位经济性",
+      "创始人明确不追求融资"
+    ],
+    "next_fundable_milestone": "如果未来目标改变，至少需要证明可重复销售、强留存、相邻市场扩张和高毛利；当前不应以融资作为成功标准。",
+    "estimated_capital_need": {
+      "min": 2000,
+      "max": 10000,
+      "currency": "CNY",
+      "basis": "scenario_assumption"
+    },
+    "likely_investor_questions": [
+      "市场是否足以支持基金回报？",
+      "为什么现有项目管理工具不能加入该功能？",
+      "跨渠道导入如何稳定并合规？",
+      "留存、净收入留存和获客效率如何？"
+    ],
+    "materials_needed": [
+      "如果未来融资：留存 cohort",
+      "单位经济性",
+      "可重复销售漏斗",
+      "相邻市场证据"
+    ],
+    "jurisdiction_notes": [
+      "本案例不需要立即进行证券融资或制作发行材料。",
+      "未来若正式融资，应按公司和投资人所在地区咨询专业人士。"
+    ]
+  },
+  "claims": [
+    {
+      "id": "c001",
+      "text": "创始人访谈了 20 家 3–15 人的设计工作室。",
+      "claim_type": "user_provided",
+      "importance": "major",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u001"
+      ]
+    },
+    {
+      "id": "c002",
+      "text": "5 家工作室以每月 299 元参加付费试点并连续使用 6 周。",
+      "claim_type": "user_provided",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u002"
+      ]
+    },
+    {
+      "id": "c003",
+      "text": "创始人有四年设计工作室项目管理经验。",
+      "claim_type": "user_provided",
+      "importance": "major",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u003"
+      ]
+    },
+    {
+      "id": "c004",
+      "text": "创始人目标是可持续独立生意，不追求风险投资规模。",
+      "claim_type": "user_provided",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u003"
+      ]
+    },
+    {
+      "id": "c005",
+      "text": "按 5 家、每家每月 299 元计算，合成试点月收入为 1,495 元。",
+      "claim_type": "calculation",
+      "importance": "major",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_c001"
+      ]
+    },
+    {
+      "id": "c006",
+      "text": "每客户模型、基础设施和人工支持成本未知。",
+      "claim_type": "unknown",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "not_applicable",
+      "evidence_ids": []
+    },
+    {
+      "id": "c007",
+      "text": "6 周使用是正面早期信号，但不能证明长期留存。",
+      "claim_type": "inference",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "partially_verified",
+      "evidence_ids": [
+        "ev_u002"
+      ]
+    },
+    {
+      "id": "c008",
+      "text": "创始人可以通过历史合作和两个社群直接触达约 80 家工作室。",
+      "claim_type": "user_provided",
+      "importance": "major",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u003"
+      ]
+    },
+    {
+      "id": "c009",
+      "text": "当前 299 元定价是否能形成可持续单位经济性未知。",
+      "claim_type": "unknown",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "not_applicable",
+      "evidence_ids": []
+    },
+    {
+      "id": "c010",
+      "text": "该细分是否足以支持风险投资级市场尚未证明，但这不影响独立生意判断。",
+      "claim_type": "inference",
+      "importance": "major",
+      "confidence": "high",
+      "verification_status": "unverified",
+      "evidence_ids": [
+        "ev_u003"
+      ]
+    },
+    {
+      "id": "c011",
+      "text": "现有证据支持进入留存、成本和销售漏斗验证，而不是继续停留在问题访谈。",
+      "claim_type": "inference",
+      "importance": "critical",
+      "confidence": "medium",
+      "verification_status": "partially_verified",
+      "evidence_ids": [
+        "ev_u001",
+        "ev_u002",
+        "ev_u003"
+      ]
+    },
+    {
+      "id": "c012",
+      "text": "跨渠道客户反馈涉及隐私、权限、来源追溯和错误归并风险。",
+      "claim_type": "inference",
+      "importance": "major",
+      "confidence": "medium",
+      "verification_status": "unverified",
+      "evidence_ids": [
+        "ev_u001"
+      ]
+    },
+    {
+      "id": "c013",
+      "text": "why now、竞品和相邻市场资料不足。",
+      "claim_type": "unknown",
+      "importance": "major",
+      "confidence": "high",
+      "verification_status": "not_applicable",
+      "evidence_ids": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev_u001",
+      "evidence_type": "U",
+      "source_kind": "user_input",
+      "title": "合成问题与访谈输入",
+      "url": null,
+      "published_at": null,
+      "accessed_at": "2026-07-28",
+      "statement": "合成案例声明客户反馈分散，并已访谈 20 家目标工作室。",
+      "supports_claim_ids": [
+        "c001",
+        "c011",
+        "c012"
+      ],
+      "limitations": [
+        "完全虚构",
+        "没有访谈记录或外部验证"
+      ],
+      "verification_status": "verified",
+      "source_tier": null
+    },
+    {
+      "id": "ev_u002",
+      "evidence_type": "U",
+      "source_kind": "user_input",
+      "title": "合成付费试点输入",
+      "url": null,
+      "published_at": null,
+      "accessed_at": "2026-07-28",
+      "statement": "合成案例声明 5 家以每月 299 元付费并使用 6 周。",
+      "supports_claim_ids": [
+        "c002",
+        "c007",
+        "c011"
+      ],
+      "limitations": [
+        "完全虚构",
+        "没有账单、活跃或续费原始数据"
+      ],
+      "verification_status": "verified",
+      "source_tier": null
+    },
+    {
+      "id": "ev_u003",
+      "evidence_type": "U",
+      "source_kind": "user_input",
+      "title": "合成创始人资料与渠道",
+      "url": null,
+      "published_at": null,
+      "accessed_at": "2026-07-28",
+      "statement": "合成案例声明创始人有四年经验、可触达 80 家工作室，并以独立经营为目标。",
+      "supports_claim_ids": [
+        "c003",
+        "c004",
+        "c008",
+        "c010",
+        "c011"
+      ],
+      "limitations": [
+        "完全虚构",
+        "未验证联系人质量和创始人可投入时间"
+      ],
+      "verification_status": "verified",
+      "source_tier": null
+    },
+    {
+      "id": "ev_c001",
+      "evidence_type": "C",
+      "source_kind": "calculation",
+      "title": "合成试点月收入计算",
+      "url": null,
+      "published_at": null,
+      "accessed_at": "2026-07-28",
+      "statement": "5 × 299 CNY/月 = 1,495 CNY/月。",
+      "supports_claim_ids": [
+        "c005"
+      ],
+      "limitations": [
+        "只计算名义试点收入",
+        "不含退款、税费、成本或续费"
+      ],
+      "verification_status": "verified",
+      "source_tier": null
+    }
+  ],
+  "validation": {
+    "schema_status": "passed",
+    "cross_reference_status": "passed",
+    "citation_structure_status": "passed",
+    "citation_support_status": "not_applicable",
+    "numerical_status": "passed",
+    "human_review_status": "draft_reviewed",
+    "warnings": [
+      "案例与所有业务数据均为虚构，只用于方法测试。",
+      "快速模式没有外部竞品、市场或法规研究。",
+      "推进只代表进入下一验证阶段，不代表扩大团队或融资。"
+    ]
+  }
+}

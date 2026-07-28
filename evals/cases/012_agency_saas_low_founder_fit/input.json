@@ -1,0 +1,30 @@
+{
+  "case_schema_version": "evaluation_case.v1-draft",
+  "case_id": "case_012_agency_saas_low_founder_fit",
+  "title": "设计工作室反馈 SaaS，但提出者当前不愿承担经营动作",
+  "language": "zh-CN",
+  "data_origin": "synthetic_counterfactual",
+  "paired_with": "case_002_niche_agency_feedback_saas",
+  "changed_variables": [
+    "founder_time",
+    "willingness_to_sell",
+    "founder_goal"
+  ],
+  "original_idea": "业务情况与设计工作室反馈 SaaS 案例相同：20 次访谈、5 家每月 299 元付费试点、连续使用 6 周，也能触达约 80 家工作室。但我每周最多只愿意花 3 小时，希望它成为几乎不用销售和客户支持的被动收入。我不愿意主动联系工作室、做演示或处理客户工作流问题。",
+  "known_context": [
+    "业务证据与 case_002 相同。",
+    "创始人每周最多投入 3 小时。",
+    "创始人不愿主动销售、演示或处理客户工作流问题。",
+    "创始人目标是近乎被动收入。",
+    "尚无自动获客、自助开通、低支持负担或长期留存证据。",
+    "现有 5 家试点仍需要被妥善处理，不能因暂存而忽略承诺。"
+  ],
+  "requested_outputs": [
+    "这个业务是否仍有价值",
+    "当前是否适合本人继续",
+    "什么条件下可以重新启动",
+    "如何处理现有试点"
+  ],
+  "research_scope": "快速模式；所有业务和身份信息均为合成测试输入。",
+  "privacy_note": "完全虚构的身份反事实案例，用于检查系统能否把业务价值与当前提出者适配度分开。"
+}

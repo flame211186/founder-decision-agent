@@ -1,0 +1,1436 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:founder-decision-agent:schema:evaluation-report:v1",
+  "title": "Founder Decision Agent Evaluation Report v1",
+  "description": "A structured, evidence-calibrated assessment of an early-stage idea.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "report_id",
+    "idea_id",
+    "generated_at",
+    "as_of_date",
+    "report_language",
+    "evaluation_mode",
+    "disclaimer",
+    "input_snapshot",
+    "idea_normalization",
+    "information_quality",
+    "verdict",
+    "executive_summary",
+    "value_assessments",
+    "risk_assessments",
+    "dimension_assessments",
+    "theses",
+    "key_unknowns",
+    "risks",
+    "improvements",
+    "scenarios",
+    "disposition_plan",
+    "experiments",
+    "resource_plan",
+    "funding",
+    "claims",
+    "evidence",
+    "validation"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "evaluation_report.v1"
+    },
+    "report_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "idea_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "as_of_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "report_language": {
+      "type": "string",
+      "minLength": 2
+    },
+    "evaluation_mode": {
+      "enum": [
+        "quick",
+        "deep"
+      ]
+    },
+    "disclaimer": {
+      "$ref": "#/definitions/disclaimer"
+    },
+    "input_snapshot": {
+      "$ref": "#/definitions/inputSnapshot"
+    },
+    "idea_normalization": {
+      "$ref": "#/definitions/ideaNormalization"
+    },
+    "information_quality": {
+      "$ref": "#/definitions/informationQuality"
+    },
+    "verdict": {
+      "$ref": "#/definitions/verdict"
+    },
+    "executive_summary": {
+      "$ref": "#/definitions/executiveSummary"
+    },
+    "value_assessments": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "user_value",
+        "business_value",
+        "venture_scale_fit",
+        "founder_fit"
+      ],
+      "properties": {
+        "user_value": {
+          "$ref": "#/definitions/valueAssessment"
+        },
+        "business_value": {
+          "$ref": "#/definitions/valueAssessment"
+        },
+        "venture_scale_fit": {
+          "$ref": "#/definitions/valueAssessment"
+        },
+        "founder_fit": {
+          "$ref": "#/definitions/valueAssessment"
+        }
+      }
+    },
+    "risk_assessments": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "societal",
+        "ethical",
+        "legal_regulatory",
+        "privacy_security"
+      ],
+      "properties": {
+        "societal": {
+          "$ref": "#/definitions/riskAssessment"
+        },
+        "ethical": {
+          "$ref": "#/definitions/riskAssessment"
+        },
+        "legal_regulatory": {
+          "$ref": "#/definitions/riskAssessment"
+        },
+        "privacy_security": {
+          "$ref": "#/definitions/riskAssessment"
+        }
+      }
+    },
+    "dimension_assessments": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {
+        "$ref": "#/definitions/dimensionAssessment"
+      }
+    },
+    "theses": {
+      "$ref": "#/definitions/theses"
+    },
+    "key_unknowns": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/keyUnknown"
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/risk"
+      }
+    },
+    "improvements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/improvement"
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/scenario"
+      }
+    },
+    "disposition_plan": {
+      "$ref": "#/definitions/dispositionPlan"
+    },
+    "experiments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/experiment"
+      }
+    },
+    "resource_plan": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/resourceHorizon"
+      }
+    },
+    "funding": {
+      "$ref": "#/definitions/funding"
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/claim"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/evidenceItem"
+      }
+    },
+    "validation": {
+      "$ref": "#/definitions/validation"
+    }
+  },
+  "definitions": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stringList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/nonEmptyString"
+      }
+    },
+    "claimIdList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/nonEmptyString"
+      }
+    },
+    "disclaimer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_support_only",
+        "not_investment_advice",
+        "not_legal_or_tax_advice",
+        "limitations"
+      ],
+      "properties": {
+        "decision_support_only": {
+          "const": true
+        },
+        "not_investment_advice": {
+          "const": true
+        },
+        "not_legal_or_tax_advice": {
+          "const": true
+        },
+        "limitations": {
+          "$ref": "#/definitions/stringList"
+        }
+      }
+    },
+    "inputSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "original_text",
+        "user_objectives",
+        "profile_included",
+        "attachments_included"
+      ],
+      "properties": {
+        "original_text": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "user_objectives": {
+          "$ref": "#/definitions/stringList"
+        },
+        "profile_included": {
+          "type": "boolean"
+        },
+        "profile_summary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "attachments_included": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ideaNormalization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "one_sentence",
+        "problem",
+        "target_users",
+        "proposed_solution",
+        "stage",
+        "business_archetypes",
+        "geographies",
+        "assumptions"
+      ],
+      "properties": {
+        "one_sentence": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "problem": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "target_users": {
+          "$ref": "#/definitions/stringList"
+        },
+        "proposed_solution": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "stage": {
+          "enum": [
+            "S0_idea",
+            "S1_problem_discovery",
+            "S2_solution_validation",
+            "S3_early_traction",
+            "S4_repeatable_growth"
+          ]
+        },
+        "business_archetypes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "software",
+              "service",
+              "content",
+              "marketplace",
+              "hardware",
+              "deep_tech",
+              "regulated",
+              "community",
+              "open_source",
+              "other",
+              "unknown"
+            ]
+          }
+        },
+        "geographies": {
+          "$ref": "#/definitions/stringList"
+        },
+        "assumptions": {
+          "$ref": "#/definitions/stringList"
+        }
+      }
+    },
+    "informationQuality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "completeness",
+        "research_status",
+        "missing_critical_information",
+        "clarification_questions"
+      ],
+      "properties": {
+        "completeness": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "research_status": {
+          "enum": [
+            "not_performed",
+            "partial",
+            "complete_for_scope"
+          ]
+        },
+        "missing_critical_information": {
+          "$ref": "#/definitions/stringList"
+        },
+        "clarification_questions": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/definitions/clarificationQuestion"
+          }
+        }
+      }
+    },
+    "clarificationQuestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "question",
+        "rationale",
+        "could_change"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "question": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "rationale": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "could_change": {
+          "$ref": "#/definitions/stringList"
+        }
+      }
+    },
+    "verdict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "confidence",
+        "one_sentence",
+        "rationale_claim_ids",
+        "what_would_change",
+        "authorized_next_step",
+        "does_not_mean",
+        "next_review_condition"
+      ],
+      "properties": {
+        "label": {
+          "enum": [
+            "pursue",
+            "validate",
+            "reframe",
+            "park",
+            "stop"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "one_sentence": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "rationale_claim_ids": {
+          "$ref": "#/definitions/claimIdList"
+        },
+        "what_would_change": {
+          "$ref": "#/definitions/stringList"
+        },
+        "authorized_next_step": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "does_not_mean": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/stringList"
+            },
+            {
+              "minItems": 1
+            }
+          ]
+        },
+        "next_review_condition": {
+          "$ref": "#/definitions/nonEmptyString"
+        }
+      }
+    },
+    "executiveSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "opportunity",
+        "main_problem",
+        "recommended_next_move"
+      ],
+      "properties": {
+        "opportunity": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "main_problem": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "recommended_next_move": {
+          "$ref": "#/definitions/nonEmptyString"
+        }
+      }
+    },
+    "valueAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "score_status",
+        "score",
+        "label",
+        "summary",
+        "rationale_claim_ids"
+      ],
+      "properties": {
+        "score_status": {
+          "enum": [
+            "scored",
+            "insufficient_information",
+            "not_applicable"
+          ]
+        },
+        "score": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 5
+        },
+        "label": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "summary": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "rationale_claim_ids": {
+          "$ref": "#/definitions/claimIdList"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "score_status": {
+                "const": "scored"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "score": {
+                "type": "integer"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "score": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "riskAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "risk_level",
+        "summary",
+        "rationale_claim_ids"
+      ],
+      "properties": {
+        "risk_level": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical",
+            "unknown"
+          ]
+        },
+        "summary": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "rationale_claim_ids": {
+          "$ref": "#/definitions/claimIdList"
+        }
+      }
+    },
+    "dimensionAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dimension_id",
+        "name",
+        "score_status",
+        "score",
+        "summary",
+        "strengths",
+        "weaknesses",
+        "rationale_claim_ids"
+      ],
+      "properties": {
+        "dimension_id": {
+          "enum": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5",
+            "D6",
+            "D7",
+            "D8",
+            "D9",
+            "D10",
+            "D11",
+            "D12"
+          ]
+        },
+        "name": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "score_status": {
+          "enum": [
+            "scored",
+            "insufficient_information",
+            "not_applicable"
+          ]
+        },
+        "score": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 5
+        },
+        "summary": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "strengths": {
+          "$ref": "#/definitions/stringList"
+        },
+        "weaknesses": {
+          "$ref": "#/definitions/stringList"
+        },
+        "rationale_claim_ids": {
+          "$ref": "#/definitions/claimIdList"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "score_status": {
+                "const": "scored"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "score": {
+                "type": "integer"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "score": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "thesisPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "claim_ids"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "claim_ids": {
+          "$ref": "#/definitions/claimIdList"
+        }
+      }
+    },
+    "theses": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "supporting",
+        "opposing",
+        "synthesis"
+      ],
+      "properties": {
+        "supporting": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/thesisPoint"
+          }
+        },
+        "opposing": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/thesisPoint"
+          }
+        },
+        "synthesis": {
+          "$ref": "#/definitions/nonEmptyString"
+        }
+      }
+    },
+    "keyUnknown": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "question",
+        "importance",
+        "why_it_matters",
+        "cheapest_test",
+        "could_change_verdict"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "question": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "importance": {
+          "enum": [
+            "critical",
+            "major",
+            "minor"
+          ]
+        },
+        "why_it_matters": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "cheapest_test": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "could_change_verdict": {
+          "type": "boolean"
+        }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "category",
+        "severity",
+        "likelihood",
+        "description",
+        "mitigation",
+        "is_fatal",
+        "fatal_scope",
+        "claim_ids"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "category": {
+          "enum": [
+            "problem",
+            "market",
+            "competition",
+            "distribution",
+            "business_model",
+            "execution",
+            "technical",
+            "legal",
+            "regulatory",
+            "ethical",
+            "privacy",
+            "security",
+            "founder_fit",
+            "capital",
+            "other"
+          ]
+        },
+        "severity": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "likelihood": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "unknown"
+          ]
+        },
+        "description": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "mitigation": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "is_fatal": {
+          "type": "boolean"
+        },
+        "fatal_scope": {
+          "enum": [
+            "not_fatal",
+            "current_plan",
+            "current_solution",
+            "current_business_model",
+            "whole_idea"
+          ]
+        },
+        "claim_ids": {
+          "$ref": "#/definitions/claimIdList"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "is_fatal": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "fatal_scope": {
+                "enum": [
+                  "current_plan",
+                  "current_solution",
+                  "current_business_model",
+                  "whole_idea"
+                ]
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "fatal_scope": {
+                "const": "not_fatal"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "improvement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "description",
+        "expected_effect",
+        "validation_needed",
+        "claim_ids"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "description": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "expected_effect": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "validation_needed": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "claim_ids": {
+          "$ref": "#/definitions/claimIdList"
+        }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "assumptions",
+        "outcome",
+        "decision_implication"
+      ],
+      "properties": {
+        "name": {
+          "enum": [
+            "bear",
+            "base",
+            "bull"
+          ]
+        },
+        "assumptions": {
+          "$ref": "#/definitions/stringList"
+        },
+        "outcome": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "decision_implication": {
+          "$ref": "#/definitions/nonEmptyString"
+        }
+      }
+    },
+    "dispositionPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "rationale",
+        "allowed_actions",
+        "prohibited_actions",
+        "reactivation_triggers",
+        "closure_actions"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "active_validation",
+            "parked_watch",
+            "stop_and_close"
+          ]
+        },
+        "rationale": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "allowed_actions": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/stringList"
+            },
+            {
+              "minItems": 1
+            }
+          ]
+        },
+        "prohibited_actions": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/stringList"
+            },
+            {
+              "minItems": 1
+            }
+          ]
+        },
+        "reactivation_triggers": {
+          "$ref": "#/definitions/stringList"
+        },
+        "closure_actions": {
+          "$ref": "#/definitions/stringList"
+        }
+      }
+    },
+    "numberRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "min",
+        "max"
+      ],
+      "properties": {
+        "min": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "moneyRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "min",
+        "max",
+        "currency",
+        "basis"
+      ],
+      "properties": {
+        "min": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max": {
+          "type": "number",
+          "minimum": 0
+        },
+        "currency": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "basis": {
+          "enum": [
+            "user_provided",
+            "external_evidence",
+            "calculation",
+            "scenario_assumption"
+          ]
+        }
+      }
+    },
+    "resourceInputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "time_hours",
+        "cash",
+        "people",
+        "skills",
+        "channels",
+        "dependencies"
+      ],
+      "properties": {
+        "time_hours": {
+          "$ref": "#/definitions/numberRange"
+        },
+        "cash": {
+          "$ref": "#/definitions/moneyRange"
+        },
+        "people": {
+          "$ref": "#/definitions/stringList"
+        },
+        "skills": {
+          "$ref": "#/definitions/stringList"
+        },
+        "channels": {
+          "$ref": "#/definitions/stringList"
+        },
+        "dependencies": {
+          "$ref": "#/definitions/stringList"
+        }
+      }
+    },
+    "experiment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "horizon",
+        "hypothesis",
+        "method",
+        "inputs",
+        "expected_outputs",
+        "success_criteria",
+        "failure_criteria",
+        "decision_on_success",
+        "decision_on_failure"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "horizon": {
+          "enum": [
+            "7d",
+            "30d",
+            "90d",
+            "custom"
+          ]
+        },
+        "hypothesis": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "method": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "inputs": {
+          "$ref": "#/definitions/resourceInputs"
+        },
+        "expected_outputs": {
+          "$ref": "#/definitions/stringList"
+        },
+        "success_criteria": {
+          "$ref": "#/definitions/stringList"
+        },
+        "failure_criteria": {
+          "$ref": "#/definitions/stringList"
+        },
+        "decision_on_success": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "decision_on_failure": {
+          "$ref": "#/definitions/nonEmptyString"
+        }
+      }
+    },
+    "resourceHorizon": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "horizon",
+        "inputs",
+        "expected_outputs",
+        "decision_gate"
+      ],
+      "properties": {
+        "horizon": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "inputs": {
+          "$ref": "#/definitions/resourceInputs"
+        },
+        "expected_outputs": {
+          "$ref": "#/definitions/stringList"
+        },
+        "decision_gate": {
+          "$ref": "#/definitions/nonEmptyString"
+        }
+      }
+    },
+    "funding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "readiness",
+        "recommended_path",
+        "rationale",
+        "current_blockers",
+        "next_fundable_milestone",
+        "estimated_capital_need",
+        "likely_investor_questions",
+        "materials_needed",
+        "jurisdiction_notes"
+      ],
+      "properties": {
+        "readiness": {
+          "enum": [
+            "not_ready",
+            "early",
+            "ready_for_conversations",
+            "raise_ready",
+            "not_applicable"
+          ]
+        },
+        "recommended_path": {
+          "enum": [
+            "not_now",
+            "bootstrap",
+            "revenue_financing",
+            "grant",
+            "crowdfunding",
+            "angel",
+            "venture",
+            "debt",
+            "mixed",
+            "undetermined"
+          ]
+        },
+        "rationale": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "current_blockers": {
+          "$ref": "#/definitions/stringList"
+        },
+        "next_fundable_milestone": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "estimated_capital_need": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/moneyRange"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "likely_investor_questions": {
+          "$ref": "#/definitions/stringList"
+        },
+        "materials_needed": {
+          "$ref": "#/definitions/stringList"
+        },
+        "jurisdiction_notes": {
+          "$ref": "#/definitions/stringList"
+        }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "text",
+        "claim_type",
+        "importance",
+        "confidence",
+        "verification_status",
+        "evidence_ids"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "text": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "claim_type": {
+          "enum": [
+            "user_provided",
+            "external_fact",
+            "calculation",
+            "inference",
+            "assumption",
+            "unknown"
+          ]
+        },
+        "importance": {
+          "enum": [
+            "critical",
+            "major",
+            "minor"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "verification_status": {
+          "enum": [
+            "verified",
+            "partially_verified",
+            "unverified",
+            "not_applicable"
+          ]
+        },
+        "evidence_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/nonEmptyString"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "claim_type": {
+                "enum": [
+                  "external_fact",
+                  "calculation"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence_ids": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "evidenceItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "evidence_type",
+        "source_kind",
+        "title",
+        "url",
+        "published_at",
+        "accessed_at",
+        "statement",
+        "supports_claim_ids",
+        "limitations",
+        "verification_status",
+        "source_tier"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "evidence_type": {
+          "enum": [
+            "U",
+            "E",
+            "C",
+            "I",
+            "A",
+            "K"
+          ]
+        },
+        "source_kind": {
+          "enum": [
+            "user_input",
+            "regulator",
+            "official_company",
+            "official_project",
+            "research",
+            "industry_database",
+            "professional_media",
+            "investor_framework",
+            "community",
+            "calculation",
+            "model_inference",
+            "unknown"
+          ]
+        },
+        "title": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "published_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "accessed_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "statement": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "supports_claim_ids": {
+          "$ref": "#/definitions/claimIdList"
+        },
+        "limitations": {
+          "$ref": "#/definitions/stringList"
+        },
+        "verification_status": {
+          "enum": [
+            "verified",
+            "partially_verified",
+            "unverified",
+            "not_applicable"
+          ]
+        },
+        "source_tier": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 6
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "evidence_type": {
+                "const": "E"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "accessed_at": {
+                "type": "string",
+                "format": "date"
+              },
+              "source_tier": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_status",
+        "cross_reference_status",
+        "citation_structure_status",
+        "citation_support_status",
+        "numerical_status",
+        "human_review_status",
+        "warnings"
+      ],
+      "properties": {
+        "schema_status": {
+          "enum": [
+            "not_run",
+            "passed",
+            "failed"
+          ]
+        },
+        "cross_reference_status": {
+          "enum": [
+            "not_run",
+            "passed",
+            "failed"
+          ]
+        },
+        "citation_structure_status": {
+          "enum": [
+            "not_run",
+            "passed",
+            "failed"
+          ]
+        },
+        "citation_support_status": {
+          "enum": [
+            "not_run",
+            "draft_reviewed",
+            "expert_reviewed",
+            "failed",
+            "not_applicable"
+          ]
+        },
+        "numerical_status": {
+          "enum": [
+            "not_run",
+            "passed",
+            "failed",
+            "not_applicable"
+          ]
+        },
+        "human_review_status": {
+          "enum": [
+            "not_reviewed",
+            "draft_reviewed",
+            "expert_reviewed"
+          ]
+        },
+        "warnings": {
+          "$ref": "#/definitions/stringList"
+        }
+      }
+    }
+  }
+}

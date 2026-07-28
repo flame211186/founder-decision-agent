@@ -1,0 +1,115 @@
+schema_version: 1
+project:
+  name: Founder Decision Agent
+  repository: /Users/frame/Documents/lmao agent
+  github_target: flame211186/founder-decision-agent
+  npm_target: "@sangfei/founder-decision-agent"
+  version: 0.1.0-beta.0
+  status: active_unpublished_beta_candidate
+  current_phase: cross_phase_beta_candidate_with_stable_quality_gate_open
+  last_updated: 2026-07-28
+
+authoritative_documents:
+  - docs/PROJECT_CHARTER.md
+  - docs/REQUIREMENTS_TRACEABILITY.md
+  - docs/DECISIONS.md
+  - docs/ROADMAP.md
+  - docs/WORKLOG.md
+  - docs/PRODUCT_SPEC.md
+  - docs/EVALUATION_METHODOLOGY.md
+  - docs/FAILURE_TAXONOMY.md
+  - docs/EXPERT_REVIEW_PROTOCOL.md
+  - docs/ARCHITECTURE_PLAN.md
+  - docs/EVALS.md
+  - schemas/evaluation-report.v1.schema.json
+
+scope:
+  writable_project: /Users/frame/Documents/lmao agent
+  confirmed_future_integration_target: /Users/frame/Documents/lmao app
+  read_only_until_phase_7_authorization:
+    - /Users/frame/Documents/lmao app
+
+confirmed_constraints:
+  - quality_before_speed
+  - evidence_calibrated_founder_decision_support
+  - independent_open_source_agent_before_product_integration
+  - explicit_typescript_workflow
+  - provider_and_deployment_neutral_core
+  - openai_responses_default_adapter
+  - byok_user_pays_provider_cost
+  - api_keys_are_not_persisted
+  - quick_mode_no_web
+  - deep_mode_explicit_web
+  - configurable_budget_defaults
+  - local_first_sqlite_with_export_and_delete
+  - five_verdicts_with_strict_dispositions
+  - apache_2_0
+  - github_and_npm_public_beta_before_stable_v1
+  - no_claim_of_completion_without_direct_evidence
+
+current_deliverables:
+  product_and_method_documents: confirmed_and_maintained
+  explicit_typescript_core: implemented
+  public_json_schemas: implemented_and_offline_verified
+  openai_byok_adapter: implemented_and_mock_verified_not_live_verified
+  sqlite_storage: implemented_and_verified
+  cli_sdk_mcp_http: implemented_and_package_entrypoints_verified
+  portfolio_analysis: implemented_and_offline_verified
+  industry_packs: b2b_saas_and_ai_native_implemented_expert_review_pending
+  jurisdiction_guidance: us_and_mainland_china_primary_entrypoints_implemented
+  fixture_reports: five_covering_all_verdicts_structurally_verified_not_expert_validated
+  offline_tests: thirty_seven_passing
+  coverage_gate: passing
+  release_engineering: implemented_not_published
+  expert_review: designed_not_executed
+  real_anonymized_cases: not_collected
+
+default_budgets:
+  quick:
+    max_model_calls: 2
+    max_search_calls: 0
+    max_wall_time_minutes: 2
+  deep:
+    max_model_calls: 8
+    max_search_calls: 10
+    max_wall_time_minutes: 15
+  note: all_are_user_configurable_caps
+
+next_gate:
+  name: public_beta_release
+  required_before_beta:
+    - live_openai_smoke_with_user_provided_byok_key
+    - github_auth_and_public_repository_creation
+    - npm_account_auth_and_beta_publication
+  required_before_stable_v1:
+    - three_to_five_consented_anonymized_real_cases
+    - independent_expert_blind_review
+    - zero_unresolved_p0_or_p1_findings
+    - factuality_and_citation_support_sampling
+    - counterfactual_and_repeat_run_results
+    - published_artifact_clean_install
+
+external_blockers:
+  - OPENAI_API_KEY_not_present_for_live_smoke
+  - gh_cli_not_installed_or_authenticated
+  - npm_account_and_trusted_publisher_not_yet_confirmed
+
+completed_beta_checks:
+  - strict_typescript_build
+  - thirty_seven_offline_tests_and_coverage_gate
+  - five_fixture_schema_and_semantic_validation
+  - local_markdown_link_validation
+  - npm_tarball_generation
+  - clean_directory_tarball_install
+  - cli_version_and_sdk_sqlite_smoke
+  - mcp_and_http_bin_entrypoint_smoke
+  - npm_audit_zero_known_vulnerabilities
+  - local_secret_pattern_scan_no_matches
+
+prohibited_shortcuts:
+  - do_not_treat_offline_tests_as_live_model_quality
+  - do_not_treat_schema_validity_as_factual_or_expert_validation
+  - do_not_publish_stable_v1_before_human_and_real_case_gate
+  - do_not_invent_market_customer_financial_or_legal_facts
+  - do_not_store_or_log_secrets
+  - do_not_modify_lmao_app_before_phase_7_authorization

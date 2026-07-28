@@ -1,0 +1,1379 @@
+{
+  "schema_version": "evaluation_report.v1",
+  "report_id": "eval_case_001_v1",
+  "idea_id": "case_001_idea_evaluator_agent",
+  "generated_at": "2026-07-28T16:00:00+08:00",
+  "as_of_date": "2026-07-28",
+  "report_language": "zh-CN",
+  "evaluation_mode": "deep",
+  "disclaimer": {
+    "decision_support_only": true,
+    "not_investment_advice": true,
+    "not_legal_or_tax_advice": true,
+    "limitations": [
+      "本报告只验证了部分方法和工程来源，尚未完成目标市场、竞品、用户需求或付费意愿研究。",
+      "当前只有提出者本人的需求陈述，没有独立用户行为证据。",
+      "创始人身份资料不完整，因此个人适配度暂不评分。",
+      "融资部分是准备建议，不构成任何地区的法律、证券或税务意见。"
+    ]
+  },
+  "input_snapshot": {
+    "original_text": "做一个能从投资人视角评估自然语言想法、输出全面报告、指导现实验证与融资准备，并从多个想法发现用户专长和盲点的开源 Agent；之后接入想法收集产品。",
+    "user_objectives": [
+      "先服务独立工作者和早期创业者",
+      "提供简洁结论和全面报告",
+      "同时支持单想法判断与多想法个人洞察",
+      "先作为独立 Agent 开源，再接入其他产品",
+      "质量优先并通过持久化项目规则减少幻觉和目标漂移"
+    ],
+    "profile_included": false,
+    "profile_summary": null,
+    "attachments_included": false
+  },
+  "idea_normalization": {
+    "one_sentence": "为独立工作者和早期创业者提供一个证据校准的想法决策 Agent，把自然语言想法转化为阶段性判断、现实验证计划和长期个人洞察。",
+    "problem": "个人拥有大量产品或创业想法，但缺少有经验、可持续、能区分事实与假设的外部判断，也难以从长期想法记录中识别自己的优势、盲点和优先方向。",
+    "target_users": [
+      "独立开发者",
+      "自由职业者和创作者",
+      "idea 到 pre-seed 阶段的个人或小团队",
+      "同时积累多个想法、难以取舍的人"
+    ],
+    "proposed_solution": "通过结构化澄清、投资与创业框架、联网证据、反方审查、置信度和实验计划，生成可读及机器可读报告；后续结合身份模板和想法组合做个人适配与跨想法分析。",
+    "stage": "S0_idea",
+    "business_archetypes": [
+      "software",
+      "service",
+      "open_source"
+    ],
+    "geographies": [
+      "初始地区尚未限定",
+      "当前内容以中文用户为优先候选"
+    ],
+    "assumptions": [
+      "目标用户认为现有通用聊天模型的想法建议不够稳定、完整或可追溯。",
+      "用户愿意多次回来记录想法并更新验证结果。",
+      "长期个人洞察比一次性商业计划生成器更有差异化价值。",
+      "开源能够带来信任、反馈或分发，而不只是增加维护成本。",
+      "用户愿意为托管服务、深度研究、行业包或团队功能中的至少一种付费。"
+    ]
+  },
+  "information_quality": {
+    "completeness": "low",
+    "research_status": "partial",
+    "missing_critical_information": [
+      "至少 10 名目标用户当前如何判断和管理想法",
+      "用户对现有替代品最不满意的具体环节",
+      "是否存在重复使用和付费意愿",
+      "提出者的技能、时间、预算、分发渠道和地区",
+      "直接竞品与相邻替代的完整研究",
+      "独立开源与未来托管产品之间的商业关系"
+    ],
+    "clarification_questions": [
+      {
+        "id": "q1",
+        "question": "除你之外，哪三类人最近真实遇到过“有想法但无法判断是否值得做”的问题，他们现在具体怎么解决？",
+        "rationale": "这是判断问题是否广泛、频繁以及是否已有付费替代的最高信息量问题。",
+        "could_change": [
+          "问题强度",
+          "目标用户",
+          "商业价值",
+          "第一版切入点"
+        ]
+      },
+      {
+        "id": "q2",
+        "question": "未来要接入的想法收集产品是否就是当前的 lmao app，它的部署环境、用户身份和数据保存方式是什么？",
+        "rationale": "这会直接改变 TypeScript、Python、进程内 SDK 或独立服务的技术路线。",
+        "could_change": [
+          "技术架构",
+          "部署方式",
+          "存储策略",
+          "开源包形态"
+        ]
+      },
+      {
+        "id": "q3",
+        "question": "你希望它最终主要成为个人决策工具、可持续小生意，还是需要风险投资支持的高增长公司？",
+        "rationale": "三种目标对市场规模、开放策略、收费方式和融资里程碑的要求不同。",
+        "could_change": [
+          "商业模式",
+          "风险投资适配度",
+          "融资路径",
+          "产品范围"
+        ]
+      }
+    ]
+  },
+  "verdict": {
+    "label": "validate",
+    "confidence": "medium",
+    "one_sentence": "值得继续，但当前最有价值的不是立刻做成一个全行业 AI 投资人，而是先验证“独立工作者是否会反复使用并信任一个证据校准的想法决策记录”。",
+    "rationale_claim_ids": [
+      "c001",
+      "c002",
+      "c003",
+      "c007",
+      "c009",
+      "c010"
+    ],
+    "what_would_change": [
+      "如果 10–15 名目标用户中很少有人存在持续判断想法的需求，结论将转向重构或停止。",
+      "如果用户愿意提交真实想法、完成澄清并在 30 天内主动复评，结论可升级为推进。",
+      "如果一次性报告被喜欢但没有复用，产品应重构为更窄的研究、教练或工作流工具。",
+      "如果现有通用模型已经能以极低成本满足目标用户，必须依靠长期记忆、证据质量或产品集成建立新切入点。"
+    ],
+    "authorized_next_step": "完成问题访谈和人工 concierge 报告，用真实行动与复评验证核心价值。",
+    "does_not_mean": [
+      "不代表开始构建全功能 Agent 平台",
+      "不代表已经证明市场需求或付费",
+      "不代表现在应该融资"
+    ],
+    "next_review_condition": "完成至少 10 次问题访谈和 5 次人工 concierge 评估，并观察用户是否愿意带着新证据回来复评。"
+  },
+  "executive_summary": {
+    "opportunity": "该想法把一次性 AI 建议升级为可追踪的个人决策系统；长期想法组合、身份匹配、证据账本和复评机制可能形成区别于普通聊天机器人的产品价值。",
+    "main_problem": "目前只有提出者本人需求，尚未证明其他人会信任、重复使用或付费；“投资人视角全面报告”本身容易被通用模型和商业计划生成器商品化。",
+    "recommended_next_move": "暂停框架和 UI 扩张，先用手工高质量报告服务 5 名真实目标用户，验证他们最在意的是判断、研究、行动计划、长期记忆还是情绪上的确认。"
+  },
+  "value_assessments": {
+    "user_value": {
+      "score_status": "scored",
+      "score": 3,
+      "label": "有潜力但未验证",
+      "summary": "提出者痛点清晰，输出也可操作；但尚无独立用户证据证明它是高频或高代价问题。",
+      "rationale_claim_ids": [
+        "c001",
+        "c002",
+        "c010"
+      ]
+    },
+    "business_value": {
+      "score_status": "scored",
+      "score": 2,
+      "label": "商业模式未知",
+      "summary": "可能形成托管服务、深度报告或行业包收入，但当前没有价格、购买者或重复使用证据。",
+      "rationale_claim_ids": [
+        "c002",
+        "c007",
+        "c012"
+      ]
+    },
+    "venture_scale_fit": {
+      "score_status": "scored",
+      "score": 2,
+      "label": "暂不适合融资叙事",
+      "summary": "市场规模、增长路径、数据优势和防御性均未证明；现阶段更适合低成本自筹验证。",
+      "rationale_claim_ids": [
+        "c007",
+        "c012",
+        "c014"
+      ]
+    },
+    "founder_fit": {
+      "score_status": "insufficient_information",
+      "score": null,
+      "label": "资料不足",
+      "summary": "已知提出者有明确问题意识和质量要求，但缺少技能、时间、预算、渠道和长期目标资料。",
+      "rationale_claim_ids": [
+        "c013"
+      ]
+    }
+  },
+  "risk_assessments": {
+    "societal": {
+      "risk_level": "medium",
+      "summary": "过度自信的负面结论可能错误阻止用户行动，过度乐观则可能导致不合理投入；报告必须显示不确定性和可反驳条件。",
+      "rationale_claim_ids": [
+        "c008"
+      ]
+    },
+    "ethical": {
+      "risk_level": "medium",
+      "summary": "跨想法个人洞察可能被误读为人格诊断，应只基于具体行为证据并允许纠正。",
+      "rationale_claim_ids": [
+        "c008"
+      ]
+    },
+    "legal_regulatory": {
+      "risk_level": "medium",
+      "summary": "创业融资涉及地区性证券和法律要求；系统只能提供准备信息和权威链接，不能替代执业专业人士。",
+      "rationale_claim_ids": [
+        "c011"
+      ]
+    },
+    "privacy_security": {
+      "risk_level": "high",
+      "summary": "未公开的产品想法、个人资源和长期行为记录具有敏感性，远端存储、日志和模型传输必须最小化并支持删除。",
+      "rationale_claim_ids": [
+        "c008"
+      ]
+    }
+  },
+  "dimension_assessments": [
+    {
+      "dimension_id": "D1",
+      "name": "问题强度",
+      "score_status": "scored",
+      "score": 2,
+      "summary": "提出者存在真实痛点，但尚未证明是多人、高频或高代价问题。",
+      "strengths": [
+        "问题叙述具体",
+        "现有目标结果清晰"
+      ],
+      "weaknesses": [
+        "只有单一用户证据",
+        "缺少现有替代成本"
+      ],
+      "rationale_claim_ids": [
+        "c001",
+        "c002"
+      ]
+    },
+    {
+      "dimension_id": "D2",
+      "name": "用户与切入点",
+      "score_status": "scored",
+      "score": 3,
+      "summary": "独立工作者和早期创业者是可理解的起点，但仍需进一步缩窄到具体行为和渠道。",
+      "strengths": [
+        "首批用户与提出者自身相近",
+        "可以低成本访谈和手工服务"
+      ],
+      "weaknesses": [
+        "独立工作者内部差异很大",
+        "购买者和使用频率未知"
+      ],
+      "rationale_claim_ids": [
+        "c010"
+      ]
+    },
+    {
+      "dimension_id": "D3",
+      "name": "方案价值与行为变化",
+      "score_status": "scored",
+      "score": 3,
+      "summary": "全面报告、证据和复评可能帮助决策，但尚未证明用户会因此改变投入或验证行为。",
+      "strengths": [
+        "输出直接对应用户决策",
+        "可以明确下一实验"
+      ],
+      "weaknesses": [
+        "一次性报告容易变成阅读后即遗忘的内容",
+        "长期回访行为未验证"
+      ],
+      "rationale_claim_ids": [
+        "c003",
+        "c006"
+      ]
+    },
+    {
+      "dimension_id": "D4",
+      "name": "时机",
+      "score_status": "scored",
+      "score": 3,
+      "summary": "现有 Agent 框架降低了实现门槛，但同样降低了竞品门槛；时机利于快速实验，不自动构成优势。",
+      "strengths": [
+        "可利用成熟模型、工具和结构化输出能力",
+        "能以低成本做 concierge 与原型"
+      ],
+      "weaknesses": [
+        "基础模型能力快速变化",
+        "差异化容易被平台吸收"
+      ],
+      "rationale_claim_ids": [
+        "c009"
+      ]
+    },
+    {
+      "dimension_id": "D5",
+      "name": "市场与扩张",
+      "score_status": "scored",
+      "score": 2,
+      "summary": "潜在用户范围很大，但尚未定义初始可触达市场、频率或付费规模。",
+      "strengths": [
+        "可从个人扩展到团队、孵化器和行业包"
+      ],
+      "weaknesses": [
+        "没有市场规模或可触达用户数据",
+        "扩展路线目前主要是叙事"
+      ],
+      "rationale_claim_ids": [
+        "c002",
+        "c007"
+      ]
+    },
+    {
+      "dimension_id": "D6",
+      "name": "竞争、替代与差异化",
+      "score_status": "scored",
+      "score": 2,
+      "summary": "通用聊天模型、商业计划生成器、创业教练和投资分析模板都是替代；长期个人洞察是合理假设但未被验证。",
+      "strengths": [
+        "可以把证据、个人资料、历史想法和复评组合成连续产品"
+      ],
+      "weaknesses": [
+        "一次性报告缺乏防御性",
+        "竞品研究尚未完成"
+      ],
+      "rationale_claim_ids": [
+        "c003",
+        "c009"
+      ]
+    },
+    {
+      "dimension_id": "D7",
+      "name": "商业模式与经济性",
+      "score_status": "scored",
+      "score": 2,
+      "summary": "开源核心加托管、深度研究或行业包是一种可测试方向，但目前没有成本、价格或付费证据。",
+      "strengths": [
+        "软件和报告交付具备低边际成本潜力"
+      ],
+      "weaknesses": [
+        "高质量深度研究可能带来较高模型和搜索成本",
+        "开源与收费边界未知"
+      ],
+      "rationale_claim_ids": [
+        "c007",
+        "c012"
+      ]
+    },
+    {
+      "dimension_id": "D8",
+      "name": "分发与销售",
+      "score_status": "scored",
+      "score": 2,
+      "summary": "GitHub 可作为开发者分发渠道，但非技术用户的获客路径和转化机制尚未定义。",
+      "strengths": [
+        "开源可用于获取早期反馈和建立信任"
+      ],
+      "weaknesses": [
+        "没有现成受众或渠道证据",
+        "GitHub Star 不等同于活跃用户或收入"
+      ],
+      "rationale_claim_ids": [
+        "c007",
+        "c012"
+      ]
+    },
+    {
+      "dimension_id": "D9",
+      "name": "可行性",
+      "score_status": "scored",
+      "score": 4,
+      "summary": "单想法快速评估的技术原型可行；真正困难的是可靠证据、评测、隐私和长期产品行为。",
+      "strengths": [
+        "存在成熟的模型、工具、追踪和 Agent 基础设施",
+        "可以先用人工报告验证核心价值"
+      ],
+      "weaknesses": [
+        "高判断质量需要持续评测和专家复核",
+        "深度研究和长期记忆增加复杂度"
+      ],
+      "rationale_claim_ids": [
+        "c008",
+        "c009"
+      ]
+    },
+    {
+      "dimension_id": "D10",
+      "name": "提出者适配度",
+      "score_status": "insufficient_information",
+      "score": null,
+      "summary": "目标和质量态度清楚，但无法根据现有信息判断执行能力、渠道和资源匹配。",
+      "strengths": [
+        "提出者对问题有直接体验",
+        "愿意分阶段决策并开放所需工具"
+      ],
+      "weaknesses": [
+        "技能、预算、时间和渠道未知"
+      ],
+      "rationale_claim_ids": [
+        "c013"
+      ]
+    },
+    {
+      "dimension_id": "D11",
+      "name": "牵引与学习速度",
+      "score_status": "not_applicable",
+      "score": null,
+      "summary": "项目处于 S0，尚无可评估的外部牵引；当前应评价学习计划而不是惩罚没有收入。",
+      "strengths": [
+        "已开始先定义方法和质量门"
+      ],
+      "weaknesses": [
+        "尚无访谈、使用、复评或付费行为"
+      ],
+      "rationale_claim_ids": [
+        "c014"
+      ]
+    },
+    {
+      "dimension_id": "D12",
+      "name": "资本与回报形态",
+      "score_status": "scored",
+      "score": 3,
+      "summary": "验证阶段资本需求低，适合自筹；是否能成为 VC 级公司需要重复使用、市场和增长证据。",
+      "strengths": [
+        "早期可以通过人工服务和开源原型低成本验证"
+      ],
+      "weaknesses": [
+        "尚无足以支持融资的增长或防御性证据"
+      ],
+      "rationale_claim_ids": [
+        "c009",
+        "c012",
+        "c014"
+      ]
+    }
+  ],
+  "theses": {
+    "supporting": [
+      {
+        "statement": "用户真正需要的可能不是更多想法，而是一个持续、可反驳、能把想法变成实验的外部决策系统。",
+        "claim_ids": [
+          "c001",
+          "c003",
+          "c006"
+        ]
+      },
+      {
+        "statement": "从单次报告延伸到身份模板、想法历史和复评，可能形成独立于通用聊天的产品层。",
+        "claim_ids": [
+          "c003",
+          "c010"
+        ]
+      },
+      {
+        "statement": "原型实现门槛可控，团队可以先把资源投入到评估方法和用户学习，而不是基础模型研发。",
+        "claim_ids": [
+          "c009"
+        ]
+      }
+    ],
+    "opposing": [
+      {
+        "statement": "投资人风格报告很容易被通用模型复制，如果用户只使用一次，产品缺乏留存和防御性。",
+        "claim_ids": [
+          "c002",
+          "c003",
+          "c007"
+        ]
+      },
+      {
+        "statement": "过度完整的报告可能制造权威感，却不能真实提高判断正确性，甚至抑制用户实验。",
+        "claim_ids": [
+          "c008"
+        ]
+      },
+      {
+        "statement": "开源可以带来使用者，也可能让收费边界和维护成本变得困难。",
+        "claim_ids": [
+          "c012"
+        ]
+      }
+    ],
+    "synthesis": "底层问题值得验证，但产品论点必须从“AI 能写全面报告”升级为“用户是否会让一个有证据、有记忆、会复评的系统参与真实资源分配决策”。前者容易商品化，后者若能形成习惯和高质量数据，才可能产生持续价值。"
+  },
+  "key_unknowns": [
+    {
+      "id": "u1",
+      "question": "目标用户当前是否会为想法判断付出显著时间、金钱或机会成本？",
+      "importance": "critical",
+      "why_it_matters": "如果只是偶发好奇，产品可能只有低频内容价值。",
+      "cheapest_test": "访谈 10–15 名最近放弃、启动或纠结过项目的人，要求他们展示真实记录和决策过程。",
+      "could_change_verdict": true
+    },
+    {
+      "id": "u2",
+      "question": "什么输出会真正改变用户行为：结论、证据、行动计划、复评还是个人洞察？",
+      "importance": "critical",
+      "why_it_matters": "这决定第一版功能和差异化，不应假设所有报告章节同样重要。",
+      "cheapest_test": "向 5 名用户交付人工报告，分别追踪他们一周内实际执行的部分。",
+      "could_change_verdict": true
+    },
+    {
+      "id": "u3",
+      "question": "用户会不会在获得新证据后主动回来更新同一个想法？",
+      "importance": "critical",
+      "why_it_matters": "复评行为决定它是一次性生成器还是长期决策产品。",
+      "cheapest_test": "在首份报告中约定明确复评条件，30 天内观察自然回访而不是只发提醒。",
+      "could_change_verdict": true
+    },
+    {
+      "id": "u4",
+      "question": "提出者拥有哪些可以直接触达首批用户的渠道和领域优势？",
+      "importance": "major",
+      "why_it_matters": "没有渠道优势时，通用创业工具获客可能非常昂贵。",
+      "cheapest_test": "完成身份模板并列出 20 名可直接邀请的人。",
+      "could_change_verdict": true
+    },
+    {
+      "id": "u5",
+      "question": "最可行的收费单位是什么？",
+      "importance": "major",
+      "why_it_matters": "单次报告、订阅、团队席位、深度研究和行业包的使用频率与成本结构不同。",
+      "cheapest_test": "在人工交付后进行真实价格选择或预付测试，而不是只问愿不愿意付费。",
+      "could_change_verdict": true
+    }
+  ],
+  "risks": [
+    {
+      "id": "r1",
+      "category": "problem",
+      "severity": "high",
+      "likelihood": "medium",
+      "description": "提出者把自己的强需求误认为普遍需求。",
+      "mitigation": "在开发核心前完成问题访谈和真实 concierge 交付。",
+      "is_fatal": false,
+      "fatal_scope": "not_fatal",
+      "claim_ids": [
+        "c001",
+        "c002"
+      ]
+    },
+    {
+      "id": "r2",
+      "category": "competition",
+      "severity": "high",
+      "likelihood": "high",
+      "description": "一次性报告被通用模型、模板或现有创业工具快速替代。",
+      "mitigation": "验证连续复评、证据账本、身份适配和跨想法洞察是否产生显著行为价值。",
+      "is_fatal": false,
+      "fatal_scope": "not_fatal",
+      "claim_ids": [
+        "c003",
+        "c007"
+      ]
+    },
+    {
+      "id": "r3",
+      "category": "ethical",
+      "severity": "high",
+      "likelihood": "medium",
+      "description": "系统用流畅语言制造虚假确定性，错误影响用户资金和时间决策。",
+      "mitigation": "强制事实/推断/假设/未知标记，提供反证条件、证据验证和人工复核。",
+      "is_fatal": false,
+      "fatal_scope": "not_fatal",
+      "claim_ids": [
+        "c008"
+      ]
+    },
+    {
+      "id": "r4",
+      "category": "privacy",
+      "severity": "high",
+      "likelihood": "medium",
+      "description": "未公开想法、个人资源和行为记录在模型调用、日志或远端存储中泄露。",
+      "mitigation": "本地优先、最小传输、脱敏日志、可导出删除和明确研究授权。",
+      "is_fatal": false,
+      "fatal_scope": "not_fatal",
+      "claim_ids": [
+        "c008"
+      ]
+    },
+    {
+      "id": "r5",
+      "category": "business_model",
+      "severity": "high",
+      "likelihood": "unknown",
+      "description": "高质量研究成本和低使用频率使订阅经济性无法成立。",
+      "mitigation": "测量每份报告真实成本、复用率和付费单位，先手工收费验证。",
+      "is_fatal": false,
+      "fatal_scope": "not_fatal",
+      "claim_ids": [
+        "c007",
+        "c012"
+      ]
+    },
+    {
+      "id": "r6",
+      "category": "legal",
+      "severity": "critical",
+      "likelihood": "low",
+      "description": "融资模块越界为具体证券发行、招揽或法律意见。",
+      "mitigation": "限制为准备清单和权威资料，按地区提示律师复核，不自动外联或公开募资。",
+      "is_fatal": false,
+      "fatal_scope": "not_fatal",
+      "claim_ids": [
+        "c011"
+      ]
+    }
+  ],
+  "improvements": [
+    {
+      "title": "把第一版从“全行业 AI 投资人”收窄为“独立工作者想法复评系统”",
+      "description": "围绕一个想法从提出、澄清、实验到复评的连续过程设计，而不是先覆盖所有行业。",
+      "expected_effect": "降低范围并提高留存与差异化可验证性。",
+      "validation_needed": "观察用户是否会在获得新证据后主动复评。",
+      "claim_ids": [
+        "c003",
+        "c010"
+      ]
+    },
+    {
+      "title": "先做人工 concierge 报告",
+      "description": "在自动化前由人工结合固定方法完成 5 份高质量报告，记录用户真正使用的章节。",
+      "expected_effect": "避免把错误方法自动化，也能提前形成 golden cases。",
+      "validation_needed": "用户是否根据报告执行动作、提供纠正并愿意再次使用。",
+      "claim_ids": [
+        "c004",
+        "c006"
+      ]
+    },
+    {
+      "title": "把证据与未知作为产品界面的一等对象",
+      "description": "每个关键结论显示来自用户、外部来源、推断还是假设，并显示最能改变结论的问题。",
+      "expected_effect": "降低虚假权威，提高用户纠正和复评能力。",
+      "validation_needed": "用户能否准确解释结论依据，并发现报告中的错误。",
+      "claim_ids": [
+        "c008"
+      ]
+    },
+    {
+      "title": "将个人洞察延后到有足够想法证据时",
+      "description": "至少积累多个想法和行为结果后才产生模式，不根据一两个想法贴标签。",
+      "expected_effect": "减少伪心理分析并提高洞察可信度。",
+      "validation_needed": "洞察是否能引用至少两个具体想法或行为，并被用户认可或纠正。",
+      "claim_ids": [
+        "c008"
+      ]
+    },
+    {
+      "title": "把开源核心与未来商业层分开验证",
+      "description": "开源评估 Schema、基础流程和评测；托管研究、团队协作或行业包是否收费由真实使用决定。",
+      "expected_effect": "保留采用和信任优势，同时不提前假定商业模式。",
+      "validation_needed": "开源使用是否带来活跃反馈，托管能力是否产生真实付费。",
+      "claim_ids": [
+        "c012"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "bear",
+      "assumptions": [
+        "用户只想免费获得一次报告",
+        "通用模型的输出已足够",
+        "用户不回来更新想法",
+        "开源只带来维护请求"
+      ],
+      "outcome": "产品成为低频、低付费、易替代的报告生成器。",
+      "decision_implication": "停止做通用平台，转向更窄的行业研究工具、咨询增强工具或仅保留个人开源项目。"
+    },
+    {
+      "name": "base",
+      "assumptions": [
+        "一小群独立工作者愿意持续记录和复评",
+        "证据和行动计划比普通聊天更有价值",
+        "开源带来早期用户但付费有限"
+      ],
+      "outcome": "形成有忠实用户的开源工具和小型托管业务，适合自筹增长。",
+      "decision_implication": "专注留存、低成本深度研究和可持续小生意，不急于融资。"
+    },
+    {
+      "name": "bull",
+      "assumptions": [
+        "个人和团队把它用于真实资源配置",
+        "长期想法与实验数据形成高价值决策记录",
+        "行业包和团队工作流显著提高付费",
+        "分发可通过开源、社区和产品集成复用"
+      ],
+      "outcome": "演化为创始人和创新团队的决策基础设施，具备订阅、团队和生态扩张空间。",
+      "decision_implication": "在证明重复使用、团队采用和单位经济性后，再评估风险投资。"
+    }
+  ],
+  "disposition_plan": {
+    "mode": "active_validation",
+    "rationale": "当前证据支持验证方法是否改变真实决策，不支持扩大完整实现。",
+    "allowed_actions": [
+      "完成三至五个真实或匿名想法评估",
+      "收集用户纠正和专家分歧",
+      "根据实际失败修订方法与 Schema"
+    ],
+    "prohibited_actions": [
+      "在方法验证前开发完整多想法平台",
+      "用合成案例宣称高判断正确性",
+      "把报告长度或 Schema 通过等同于用户价值"
+    ],
+    "reactivation_triggers": [],
+    "closure_actions": []
+  },
+  "experiments": [
+    {
+      "id": "exp_7d_problem_interviews",
+      "horizon": "7d",
+      "hypothesis": "至少一类独立工作者存在重复且高代价的想法判断问题。",
+      "method": "招募 10 名最近六个月内实际启动、放弃或纠结过项目的人，要求展示真实记录，访谈其触发、替代方式、投入代价和最后决策。",
+      "inputs": {
+        "time_hours": {
+          "min": 8,
+          "max": 12
+        },
+        "cash": {
+          "min": 0,
+          "max": 500,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "10 名目标用户"
+        ],
+        "skills": [
+          "问题访谈",
+          "记录和归纳"
+        ],
+        "channels": [
+          "现有人脉",
+          "独立开发者或创作者社区"
+        ],
+        "dependencies": [
+          "统一访谈提纲",
+          "知情同意和匿名记录"
+        ]
+      },
+      "expected_outputs": [
+        "10 份真实决策过程记录",
+        "现有替代方式清单",
+        "问题频率与代价证据",
+        "3 个最强用户细分候选"
+      ],
+      "success_criteria": [
+        "至少 6 人过去六个月经历过两次以上类似决策",
+        "至少 5 人展示正在使用的记录、咨询、搜索或模型替代流程",
+        "至少 3 人愿意提供真实想法参加下一步评估"
+      ],
+      "failure_criteria": [
+        "大多数人只对概念感兴趣但没有真实决策行为",
+        "现有通用聊天工具已经稳定满足其需求",
+        "没有人愿意提交真实想法或回来复评"
+      ],
+      "decision_on_success": "选择问题最强且可触达的一个细分用户，进入人工报告测试。",
+      "decision_on_failure": "重构问题定义，评估是否转向产品研究、创业教练或想法管理中的更具体环节。"
+    },
+    {
+      "id": "exp_30d_concierge_reports",
+      "horizon": "30d",
+      "hypothesis": "高质量评估能改变用户的下一步行为，而且用户会用新证据修正报告。",
+      "method": "使用固定 Schema 人工完成 5 份报告；一周后检查实际动作，30 天后根据新证据复评。",
+      "inputs": {
+        "time_hours": {
+          "min": 25,
+          "max": 45
+        },
+        "cash": {
+          "min": 0,
+          "max": 2000,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "5 名来自同一细分用户的参与者",
+          "1–2 名有创业或投资经验的评审者"
+        ],
+        "skills": [
+          "商业研究",
+          "结构化写作",
+          "用户跟踪",
+          "证据核验"
+        ],
+        "channels": [
+          "访谈参与者",
+          "专家网络"
+        ],
+        "dependencies": [
+          "报告 Schema 草案",
+          "评审量表",
+          "来源和隐私规则"
+        ]
+      },
+      "expected_outputs": [
+        "5 份完整报告",
+        "用户纠正记录",
+        "最有用和最少使用章节排序",
+        "5 份复评或未复评原因",
+        "首批 golden cases"
+      ],
+      "success_criteria": [
+        "至少 4 人能准确复述报告的关键依据和未知项",
+        "至少 3 人执行一个建议实验",
+        "至少 3 人在获得新证据后完成复评",
+        "至少 2 人愿意为下一份或更深报告进行真实付费测试"
+      ],
+      "failure_criteria": [
+        "用户只评价报告写得好但没有行动",
+        "报告结论无法根据用户纠正稳定更新",
+        "专家发现明显致命遗漏或不支持主张"
+      ],
+      "decision_on_success": "冻结最小报告结构，开始构建 Phase 1 的窄评估内核。",
+      "decision_on_failure": "修改评估方法和产品切入点，不开始自动化。"
+    },
+    {
+      "id": "exp_90d_repeat_and_payment",
+      "horizon": "90d",
+      "hypothesis": "用户会持续提交想法或证据，并愿意为节省决策成本或提高研究质量付费。",
+      "method": "向通过 30 天测试的用户提供最小原型，追踪复评、多个想法使用、分享和真实付款。",
+      "inputs": {
+        "time_hours": {
+          "min": 60,
+          "max": 120
+        },
+        "cash": {
+          "min": 1000,
+          "max": 10000,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "10–20 名封闭测试用户"
+        ],
+        "skills": [
+          "最小产品开发",
+          "用户支持",
+          "指标分析"
+        ],
+        "channels": [
+          "访谈与 concierge 用户",
+          "开源早期社区"
+        ],
+        "dependencies": [
+          "通过 Phase 0 的报告方法",
+          "结构化输出",
+          "最小存储和隐私控制"
+        ]
+      },
+      "expected_outputs": [
+        "重复使用与复评数据",
+        "多想法使用样本",
+        "真实付费或拒付原因",
+        "单次运行成本",
+        "Phase 1 后续优先级"
+      ],
+      "success_criteria": [
+        "出现无需人工催促的自然复评",
+        "一部分用户提交两个以上想法",
+        "至少一个明确收费单位获得真实付款",
+        "每份报告成本和响应时间可被测量并控制"
+      ],
+      "failure_criteria": [
+        "使用高度依赖人工催促",
+        "没有任何真实付费",
+        "报告成本持续高于用户可接受价格",
+        "个人洞察没有产生额外价值或引发信任问题"
+      ],
+      "decision_on_success": "选择可持续商业形态并评估是否扩大开源发布。",
+      "decision_on_failure": "收缩为开源个人工具或转向最有价值的单一模块。"
+    }
+  ],
+  "resource_plan": [
+    {
+      "horizon": "未来 7 天",
+      "inputs": {
+        "time_hours": {
+          "min": 8,
+          "max": 12
+        },
+        "cash": {
+          "min": 0,
+          "max": 500,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "10 名访谈对象"
+        ],
+        "skills": [
+          "问题访谈",
+          "归纳"
+        ],
+        "channels": [
+          "可直接触达的独立工作者社区"
+        ],
+        "dependencies": [
+          "用户确认产品定位和访谈对象"
+        ]
+      },
+      "expected_outputs": [
+        "真实问题证据",
+        "用户细分",
+        "替代流程",
+        "首批报告参与者"
+      ],
+      "decision_gate": "是否存在一个问题强、可触达、愿意提交真实想法的细分用户。"
+    },
+    {
+      "horizon": "未来 30 天",
+      "inputs": {
+        "time_hours": {
+          "min": 25,
+          "max": 45
+        },
+        "cash": {
+          "min": 0,
+          "max": 2000,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "5 名目标用户",
+          "1–2 名经验评审者"
+        ],
+        "skills": [
+          "商业研究",
+          "报告写作",
+          "证据验证"
+        ],
+        "channels": [
+          "访谈参与者"
+        ],
+        "dependencies": [
+          "报告 Schema",
+          "评审量表"
+        ]
+      },
+      "expected_outputs": [
+        "5 份目标报告",
+        "用户行为变化",
+        "复评证据",
+        "方法修订"
+      ],
+      "decision_gate": "报告是否改变行为并支持基于新证据的复评。"
+    },
+    {
+      "horizon": "未来 90 天",
+      "inputs": {
+        "time_hours": {
+          "min": 60,
+          "max": 120
+        },
+        "cash": {
+          "min": 1000,
+          "max": 10000,
+          "currency": "CNY",
+          "basis": "scenario_assumption"
+        },
+        "people": [
+          "10–20 名封闭测试用户"
+        ],
+        "skills": [
+          "最小产品开发",
+          "用户支持",
+          "评测"
+        ],
+        "channels": [
+          "早期用户",
+          "开源社区"
+        ],
+        "dependencies": [
+          "Phase 0 方法通过",
+          "用户批准的技术路线"
+        ]
+      },
+      "expected_outputs": [
+        "重复使用",
+        "多想法组合样本",
+        "成本数据",
+        "真实付费信号"
+      ],
+      "decision_gate": "是否形成值得自动化和扩大开源发布的重复行为与经济信号。"
+    }
+  ],
+  "funding": {
+    "readiness": "not_ready",
+    "recommended_path": "bootstrap",
+    "rationale": "当前验证成本低，市场、复用、付费和防御性均未证明；融资会迫使项目过早扩大叙事和范围。",
+    "current_blockers": [
+      "没有独立用户问题证据",
+      "没有留存或复评行为",
+      "没有付费或单位经济性",
+      "没有清晰分发优势",
+      "没有证明长期个人洞察形成防御性"
+    ],
+    "next_fundable_milestone": "一个窄用户群中出现稳定复评、多个想法使用、真实付款和可控单次交付成本，并能解释为什么通用模型无法替代。",
+    "estimated_capital_need": {
+      "min": 1000,
+      "max": 10000,
+      "currency": "CNY",
+      "basis": "scenario_assumption"
+    },
+    "likely_investor_questions": [
+      "用户为什么不用通用模型？",
+      "这个问题多久发生一次？",
+      "用户会不会回来更新同一个想法？",
+      "谁付钱以及为什么持续付钱？",
+      "开源如何带来分发而不是只增加维护？",
+      "什么数据、工作流或网络效应会形成长期优势？",
+      "如何证明结论质量，而不是只证明报告读起来专业？"
+    ],
+    "materials_needed": [
+      "问题访谈证据",
+      "使用和复评漏斗",
+      "用户纠正与报告版本变化样例",
+      "真实付费和成本数据",
+      "评测方法与专家评审结果",
+      "开源采用和产品转化数据"
+    ],
+    "jurisdiction_notes": [
+      "融资工具和公开募资规则取决于公司成立地、投资人所在地和发行方式。",
+      "涉及证券发行、公开招揽或正式融资文件时，应由相关地区的律师和财务专业人士复核。"
+    ]
+  },
+  "claims": [
+    {
+      "id": "c001",
+      "text": "提出者明确存在持续判断、整理和迭代多个想法的需求。",
+      "claim_type": "user_provided",
+      "importance": "major",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u001"
+      ]
+    },
+    {
+      "id": "c002",
+      "text": "除提出者之外的目标用户需求、频率、替代成本和付费意愿尚未验证。",
+      "claim_type": "unknown",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "not_applicable",
+      "evidence_ids": []
+    },
+    {
+      "id": "c003",
+      "text": "长期复评、身份适配和跨想法洞察是比一次性投资人风格报告更有希望的差异化方向。",
+      "claim_type": "inference",
+      "importance": "critical",
+      "confidence": "medium",
+      "verification_status": "unverified",
+      "evidence_ids": [
+        "ev_u001"
+      ]
+    },
+    {
+      "id": "c004",
+      "text": "在早期开发中，尽快接触用户和用低成本方式学习，比等待构建完整产品更重要。",
+      "claim_type": "external_fact",
+      "importance": "major",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_e001"
+      ]
+    },
+    {
+      "id": "c005",
+      "text": "成熟的早期商业分析通常至少覆盖问题、方案、时机、市场、竞争、商业模式、团队和财务等维度。",
+      "claim_type": "external_fact",
+      "importance": "major",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_e002"
+      ]
+    },
+    {
+      "id": "c006",
+      "text": "产品市场匹配的验证需要超越叙事，检查存在权、行为变化、支付意愿和增长路径。",
+      "claim_type": "external_fact",
+      "importance": "major",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_e003"
+      ]
+    },
+    {
+      "id": "c007",
+      "text": "当前商业模式、分发、市场规模和长期防御性均未验证。",
+      "claim_type": "unknown",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "not_applicable",
+      "evidence_ids": []
+    },
+    {
+      "id": "c008",
+      "text": "高影响 Agent 需要分层 guardrails、风险管理、持续评测、人工介入和透明限制，不能只依赖模型自我批评。",
+      "claim_type": "external_fact",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_e004",
+        "ev_e005"
+      ]
+    },
+    {
+      "id": "c009",
+      "text": "现有开源 Agent 框架已经提供工具、状态、guardrail、session、tracing 或持久工作流等基础能力，因此单想法原型在工程上可行。",
+      "claim_type": "external_fact",
+      "importance": "major",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_e006",
+        "ev_e007"
+      ]
+    },
+    {
+      "id": "c010",
+      "text": "独立工作者和早期创业者是合理的第一切入人群，但仍需要按具体决策行为进一步细分。",
+      "claim_type": "inference",
+      "importance": "major",
+      "confidence": "medium",
+      "verification_status": "unverified",
+      "evidence_ids": [
+        "ev_u001"
+      ]
+    },
+    {
+      "id": "c011",
+      "text": "私营公司的融资与证券发行也可能受到地区性监管，融资模块需要明确法律边界。",
+      "claim_type": "external_fact",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_e008"
+      ]
+    },
+    {
+      "id": "c012",
+      "text": "开源核心加托管服务、深度研究、行业包或团队功能可能形成商业模式。",
+      "claim_type": "assumption",
+      "importance": "major",
+      "confidence": "low",
+      "verification_status": "unverified",
+      "evidence_ids": [
+        "ev_u002"
+      ]
+    },
+    {
+      "id": "c013",
+      "text": "提出者的技能、时间、资金、渠道、地区和风险目标资料不足。",
+      "claim_type": "unknown",
+      "importance": "major",
+      "confidence": "high",
+      "verification_status": "not_applicable",
+      "evidence_ids": []
+    },
+    {
+      "id": "c014",
+      "text": "项目目前没有独立用户访谈、使用、复评、付费或增长证据。",
+      "claim_type": "user_provided",
+      "importance": "critical",
+      "confidence": "high",
+      "verification_status": "verified",
+      "evidence_ids": [
+        "ev_u002"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev_u001",
+      "evidence_type": "U",
+      "source_kind": "user_input",
+      "title": "项目发起者的产品目标",
+      "url": null,
+      "published_at": null,
+      "accessed_at": "2026-07-28",
+      "statement": "用户希望输入一个或多个自然语言想法，获得投资人视角的完整判断、现实行动和长期个人洞察。",
+      "supports_claim_ids": [
+        "c001",
+        "c003",
+        "c010"
+      ],
+      "limitations": [
+        "只代表提出者本人",
+        "不证明其他用户需求"
+      ],
+      "verification_status": "verified",
+      "source_tier": null
+    },
+    {
+      "id": "ev_u002",
+      "evidence_type": "U",
+      "source_kind": "user_input",
+      "title": "项目阶段与开源目标",
+      "url": null,
+      "published_at": null,
+      "accessed_at": "2026-07-28",
+      "statement": "项目计划先独立开源、后续接入产品；当前尚处于规划阶段，未提供外部牵引数据。",
+      "supports_claim_ids": [
+        "c012",
+        "c014"
+      ],
+      "limitations": [
+        "开源能否带来有效分发尚未验证"
+      ],
+      "verification_status": "verified",
+      "source_tier": null
+    },
+    {
+      "id": "ev_e001",
+      "evidence_type": "E",
+      "source_kind": "investor_framework",
+      "title": "YC’s Essential Startup Advice",
+      "url": "https://www.ycombinator.com/blog/ycs-essential-startup-advice/",
+      "published_at": "2017-09-25",
+      "accessed_at": "2026-07-28",
+      "statement": "YC 建议尽早推出、与用户交流、做不扩张的事情并寻找 90/10 的低成本路径。",
+      "supports_claim_ids": [
+        "c004"
+      ],
+      "limitations": [
+        "通用创业建议，不是本产品的用户研究结果"
+      ],
+      "verification_status": "verified",
+      "source_tier": 4
+    },
+    {
+      "id": "ev_e002",
+      "evidence_type": "E",
+      "source_kind": "investor_framework",
+      "title": "Sequoia Capital: Writing a Business Plan",
+      "url": "https://sequoiacap.com/article/writing-a-business-plan/",
+      "published_at": null,
+      "accessed_at": "2026-07-28",
+      "statement": "Sequoia 的公开框架覆盖公司目的、问题、方案、why now、市场、竞争、商业模式、团队、财务和愿景。",
+      "supports_claim_ids": [
+        "c005"
+      ],
+      "limitations": [
+        "偏向风险投资型公司",
+        "不能单独评价适合独立工作者的小生意"
+      ],
+      "verification_status": "verified",
+      "source_tier": 4
+    },
+    {
+      "id": "ev_e003",
+      "evidence_type": "E",
+      "source_kind": "investor_framework",
+      "title": "Sequoia Capital: The Arc PMF Terrifying Questions Framework",
+      "url": "https://sequoiacap.com/article/pmf-framework-2/",
+      "published_at": null,
+      "accessed_at": "2026-07-28",
+      "statement": "该框架要求检查公司存在权、产品是否改变行为、客户是否愿意支付足够价值以及增长路径。",
+      "supports_claim_ids": [
+        "c006"
+      ],
+      "limitations": [
+        "属于单一投资机构的方法论"
+      ],
+      "verification_status": "verified",
+      "source_tier": 4
+    },
+    {
+      "id": "ev_e004",
+      "evidence_type": "E",
+      "source_kind": "official_company",
+      "title": "OpenAI: A practical guide to building AI agents",
+      "url": "https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/",
+      "published_at": null,
+      "accessed_at": "2026-07-28",
+      "statement": "指南建议采用分层 guardrails、失败阈值、人工介入和持续评测。",
+      "supports_claim_ids": [
+        "c008"
+      ],
+      "limitations": [
+        "来自模型与平台提供商",
+        "需结合独立风险框架和实际评测"
+      ],
+      "verification_status": "verified",
+      "source_tier": 2
+    },
+    {
+      "id": "ev_e005",
+      "evidence_type": "E",
+      "source_kind": "regulator",
+      "title": "NIST AI Risk Management Framework 1.0",
+      "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10",
+      "published_at": "2023-01-26",
+      "accessed_at": "2026-07-28",
+      "statement": "NIST 建议在 AI 生命周期中治理、映射、测量和管理有效性、可靠性、透明度、隐私与其他风险。",
+      "supports_claim_ids": [
+        "c008"
+      ],
+      "limitations": [
+        "通用风险管理框架，需要转换成本产品的具体控制和测试"
+      ],
+      "verification_status": "verified",
+      "source_tier": 1
+    },
+    {
+      "id": "ev_e006",
+      "evidence_type": "E",
+      "source_kind": "official_project",
+      "title": "OpenAI Agents SDK",
+      "url": "https://github.com/openai/openai-agents-python",
+      "published_at": null,
+      "accessed_at": "2026-07-28",
+      "statement": "该开源项目提供 agents、tools、guardrails、handoffs、sessions 和 tracing 等构建模块。",
+      "supports_claim_ids": [
+        "c009"
+      ],
+      "limitations": [
+        "存在工程模块不代表本产品的评估质量已经解决",
+        "是否采用该框架仍待架构决策"
+      ],
+      "verification_status": "verified",
+      "source_tier": 2
+    },
+    {
+      "id": "ev_e007",
+      "evidence_type": "E",
+      "source_kind": "official_project",
+      "title": "LangGraph",
+      "url": "https://github.com/langchain-ai/langgraph",
+      "published_at": null,
+      "accessed_at": "2026-07-28",
+      "statement": "该开源项目提供有状态、持久执行、记忆和人工介入等长期工作流能力。",
+      "supports_claim_ids": [
+        "c009"
+      ],
+      "limitations": [
+        "项目能力不等于本产品必须采用图式工作流",
+        "框架流行度不证明目标用户需求"
+      ],
+      "verification_status": "verified",
+      "source_tier": 2
+    },
+    {
+      "id": "ev_e008",
+      "evidence_type": "E",
+      "source_kind": "regulator",
+      "title": "SEC: Private Companies and the SEC",
+      "url": "https://www.sec.gov/resources-small-businesses/capital-raising-building-blocks/private-companies-sec",
+      "published_at": "2024-06-12",
+      "accessed_at": "2026-07-28",
+      "statement": "美国 SEC 说明私营公司向个人、天使或 VC 提供和出售证券通常也需要注册或符合豁免。",
+      "supports_claim_ids": [
+        "c011"
+      ],
+      "limitations": [
+        "只适用于相关美国法律范围",
+        "不能替代用户所在地律师意见"
+      ],
+      "verification_status": "verified",
+      "source_tier": 1
+    }
+  ],
+  "validation": {
+    "schema_status": "passed",
+    "cross_reference_status": "passed",
+    "citation_structure_status": "passed",
+    "citation_support_status": "draft_reviewed",
+    "numerical_status": "passed",
+    "human_review_status": "draft_reviewed",
+    "warnings": [
+      "这是首份内部方法样例，不是经过专家盲评的产品结果。",
+      "用户研究、市场研究和竞品研究尚未完成。",
+      "时间和现金区间均为验证计划的情景假设，不是报价或预测。",
+      "数值自动检查目前只证明区间结构和 min 不大于 max，不证明这些假设在现实中准确。"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+.git
+.github
+coverage
+dist
+node_modules
+*.tgz
+.env
+*.sqlite
+evals
+tests
+docs
