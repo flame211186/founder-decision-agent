@@ -58,12 +58,13 @@ current_deliverables:
   industry_packs: b2b_saas_and_ai_native_implemented_expert_review_pending
   jurisdiction_guidance: us_and_mainland_china_primary_entrypoints_implemented
   fixture_reports: five_covering_all_verdicts_structurally_verified_not_expert_validated
-  offline_tests: fifty_two_passing
+  offline_tests: sixty_five_passing
   coverage_gate: passing
   live_smoke_harness: implemented_and_offline_checked_live_key_pending
+  live_quality_harness: repeat_counterfactual_and_citation_sampling_implemented_live_key_pending
   release_engineering: public_github_source_published_integrity_aware_release_flow_verified_locally_release_and_npm_pending
   expert_review: protocol_and_record_validator_implemented_not_executed
-  real_anonymized_cases: not_collected
+  real_anonymized_cases: consent_and_deidentification_validator_implemented_not_collected
 
 default_budgets:
   quick:
@@ -95,7 +96,7 @@ external_blockers:
 
 completed_beta_checks:
   - strict_typescript_build
-  - fifty_two_offline_tests_and_coverage_gate
+  - sixty_five_offline_tests_and_coverage_gate
   - five_fixture_schema_and_semantic_validation
   - local_markdown_link_validation
   - npm_tarball_generation
@@ -109,6 +110,9 @@ completed_beta_checks:
   - github_dependency_graph_enabled_and_dependency_reviews_passed
   - npm_account_and_sangfei_scope_owner_permission_confirmed
   - live_smoke_harness_missing_key_failure_checked
+  - live_quality_plan_default_three_repeats_and_two_counterfactuals_checked
+  - real_case_consent_and_deidentification_contract_checked
+  - clean_install_quality_consent_and_schema_entrypoints_checked
   - npm_bootstrap_publish_command_dry_run_checked
   - node_22_14_and_node_24_runtime_checks_passed
   - published_candidate_has_no_runtime_native_install_scripts

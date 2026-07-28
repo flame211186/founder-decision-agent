@@ -50,3 +50,9 @@ choose quick mode for a zero-search evaluation. The OpenAI adapter records the n
 `web_search_call` items, while deduplicating query text only for display.
 
 Always review current provider pricing and organizational spend limits. This project intentionally does not estimate a fixed per-report price because models, token counts and web-search prices change.
+
+`npm run eval:quality` is a no-cost planning command unless `--execute` is added. Its default three
+repeat runs plus two counterfactuals create five evaluations, so the printed aggregate ceiling is
+five times the per-evaluation cap: quick defaults to at most 10 model calls and 0 searches; deep
+defaults to at most 40 model calls and 50 searches. These are hard ceilings, not expected usage or
+price estimates. Use `--repeats 2..5` and the budget flags to lower or raise them deliberately.

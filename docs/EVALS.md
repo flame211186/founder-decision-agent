@@ -51,6 +51,27 @@ overrun, zero quick-mode searches/external facts, no false human-review claim, a
 safety identifier in the outcome. The full artifact is written to a permission-restricted temporary
 path and remains human-review status `not_reviewed`.
 
+The reproducible live quality harness is no-cost by default:
+
+```bash
+# prints the cases and hard aggregate ceilings; makes no API request
+npm run eval:quality
+
+# explicit BYOK execution
+npm run eval:quality -- --mode quick --execute
+
+# configurable 2–5 baseline repeats and per-evaluation ceilings
+npm run eval:quality -- --mode deep --repeats 3 \
+  --max-model-calls 8 --max-search-calls 10 \
+  --max-wall-time-minutes 15 --execute
+```
+
+The default is three baseline repeats plus two single-variable counterfactuals. Output reports
+verdict/stage/score stability, the observed counterfactual changes and a deterministic deep-mode
+citation sample. All sampled claims remain `not_reviewed`, and `stable_gate_status` is always
+`not_assessed`; the harness does not invent a correctness threshold or replace expert judgment.
+Artifacts use permission-restricted temporary files. The API-key owner pays any provider charges.
+
 Private expert-review records can be checked without copying them into the repository:
 
 ```bash
@@ -64,6 +85,22 @@ This validates the review form and deterministic cross-field invariants and emit
 plus local issue locations, never review bodies. Its summary deliberately reports
 `stableGateStatus: not_assessed`; consent, reviewer independence, expertise and adjudication remain
 human evidence.
+
+Before a real case is evaluated or reviewed, validate its separate pseudonymous consent receipt:
+
+```bash
+npm run validate:consents -- /private/path/to/consent-records
+
+# after installing the npm package
+founder-consent-validate /private/path/to/consent-records
+```
+
+An `eligible` receipt requires explicit agent, external-model and deidentified-review scopes,
+withdrawal and retention disclosures, low-risk de-identification, an independent second-person
+check, artifact SHA-256 and an available deletion process. Public-release consent is separate and
+may remain false. Raw submissions, identities and contact details stay outside the repository.
+This validator checks declarations and consistency; it cannot authenticate the receipt, inspect the
+raw source, detect every identifier or establish legal compliance.
 
 ## What is not automatically proven
 

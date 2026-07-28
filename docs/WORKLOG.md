@@ -616,3 +616,56 @@ Phase 0：进行中。
 - tarball 在全新临时目录安装成功：96 个依赖、0 个已知漏洞；
 - 安装包内 `.bin/founder-review-validate --help`、评审 Schema 子路径导入与 SDK
   公开导入均通过。
+
+## 2026-07-28（实时质量诊断与真实案例同意门）
+
+### 审计发现
+
+- 原有 live smoke 只能运行一个固定合成案例，不能直接产生稳定性、反事实敏感性或
+  事实性抽样材料；
+- 稳定版要求 3–5 个知情同意并去标识化的真实案例，但此前只有原则，没有可机检的
+  处理记录契约；
+- 用户已经确定模型调用次数使用可调默认值，因此质量评测也必须先显示总费用上限，
+  不能在普通命令中暗中产生付费 API 调用。
+
+### 已完成
+
+- 新增 `founder-quality-eval` / `npm run eval:quality`：
+  - 默认只输出无费用计划，只有显式 `--execute` 才使用 BYOK；
+  - 默认三次相同基线加“更强付费留存证据”和“每周仅一小时”两个单变量反事实；
+  - 重复次数默认 3，可通过参数或 `FOUNDER_DECISION_QUALITY_REPEATS` 调为 2–5；
+  - quick/deep 每次评测继续使用 2/0/2 分钟与 8/10/15 分钟默认上限，也可单独调整；
+  - 输出分别保留 verdict/stage/各维度稳定性、反事实观察和最多 12 条外部事实人工
+    引用抽样，不合并为一个伪精确总分；
+  - 所有人工状态固定 `not_reviewed`，稳定版状态固定 `not_assessed`；
+  - 执行产物使用权限受限的临时目录和 `0600` 文件。
+- 新增公共 `live-quality-eval.v1` Schema、npm 子路径和 `.bin` 入口；
+- 新增 `real-case-consent.v1` 与 `founder-consent-validate`：
+  - 记录只允许随机化案例/参与者/操作者 ID，不保存姓名、联系信息、原始提交或密钥；
+  - 私有评测必须明确允许 Agent、外部模型和去标识化专家评审；
+  - 公开发布许可独立，私有评测不强迫用户公开案例；
+  - 检查撤回一致性、同意/去标识化/复核时间顺序、低重识别风险声明、第二人独立
+    复核、SHA-256、删除流程及重复记录；
+  - 输出只汇总数量和本地问题位置，固定不自称法律合规或稳定版通过。
+- README、评测、OpenAI 费用、Schema、路线图、追踪表、变更日志和真实案例隐私流程
+  已同步；`/Users/frame/Documents/lmao app` 未修改。
+
+### 验证
+
+- `npm run check` 通过，新增 `.mjs` 均有语法检查；
+- 13 个测试文件、65/65 测试通过；
+- coverage：statements 86.04%、branches 75.97%、functions 90.26%、lines 87.55%；
+- 5/5 fixture、34 个 Markdown 文件链接与 TypeScript build 通过；
+- 精确 tarball 为 115 个文件，约 147.8 kB，解包约 547.0 kB；
+- tarball 在全新临时项目安装成功，96 个依赖；
+- 安装包内质量计划输出确认默认 5 次评测、最多 10 次模型调用和 0 次搜索；
+- 安装包内 `founder-consent-validate`、`founder-review-validate` 及两个新增公共
+  Schema 子路径均可用。
+
+### 尚未证明
+
+- 工作区没有 `OPENAI_API_KEY`，因此尚未执行实时 smoke 或质量诊断，未产生真实模型
+  的重复、反事实和事实性结果；
+- 没有真实案例或真实同意记录，验证器存在不等于有效同意、绝对去标识化或法律合规；
+- 没有独立专家评审和裁决，稳定 `v1` 质量门继续开放；
+- npm beta 和 GitHub beta Release 仍未发布。

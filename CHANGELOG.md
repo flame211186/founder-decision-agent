@@ -25,6 +25,10 @@ All notable changes follow semantic versioning once stable.
 - Working `eval:offline` quality-gate command wired into CI and release checks.
 - Privacy-preserving `founder-review-validate` command with structural, blinding, rubric,
   adjudication and duplicate checks; it never self-declares the stable gate passed.
+- No-cost-by-default `founder-quality-eval` plan with explicit BYOK execution, configurable
+  repeat count, counterfactual diagnostics and human citation-review sampling.
+- Pseudonymous `real_case_consent.v1` contract and `founder-consent-validate` command enforcing
+  declared processing scopes, withdrawal consistency and independently verified de-identification.
 - Offline fixtures covering all five verdicts.
 - Permission-restricted live OpenAI smoke harness and integrity-aware npm release workflow.
 

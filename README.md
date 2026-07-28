@@ -145,10 +145,13 @@ Expert-review records can be validated without placing private records in the re
 
 ```bash
 founder-review-validate /private/path/to/review-records
+founder-consent-validate /private/path/to/consent-records
 ```
 
-The command checks record structure and deterministic consistency only. It intentionally does not
-claim that expert independence, consent or the stable-release quality gate has been proven.
+The commands check record structure and deterministic consistency only. Consent records are
+pseudonymous process receipts and must never contain names, contact details, raw submissions or
+secrets. Neither command claims legal compliance, expert independence or a passed stable-release
+gate.
 
 ## What a report guarantees—and does not
 
@@ -195,6 +198,12 @@ npm run test:coverage
 npm run validate:fixtures
 npm run build
 npm run pack:dry
+
+# No-cost plan: 3 repeated baseline runs + 2 counterfactuals by default
+npm run eval:quality
+
+# Explicit BYOK execution; the API-key owner pays provider charges
+npm run eval:quality -- --mode quick --execute
 
 # Maintainer-only live OpenAI smoke; reads the environment or ignored .env
 npm run eval:live -- --mode quick

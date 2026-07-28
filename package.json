@@ -30,7 +30,9 @@
     "founder-decision": "./dist/cli.js",
     "founder-decision-mcp": "./dist/mcp.js",
     "founder-decision-server": "./dist/server.js",
-    "founder-review-validate": "./scripts/validate-review-records.mjs"
+    "founder-review-validate": "./scripts/validate-review-records.mjs",
+    "founder-consent-validate": "./scripts/validate-real-case-consents.mjs",
+    "founder-quality-eval": "./scripts/live-quality-eval.mjs"
   },
   "exports": {
     ".": {
@@ -46,12 +48,17 @@
       "import": "./dist/adapters/sqlite.js"
     },
     "./schemas/expert-review.v1.schema.json": "./evals/review/review-form.v1.schema.json",
+    "./schemas/live-quality-eval.v1.schema.json": "./schemas/live-quality-eval.v1.schema.json",
+    "./schemas/real-case-consent.v1.schema.json": "./schemas/real-case-consent.v1.schema.json",
     "./schemas/*": "./schemas/*"
   },
   "files": [
     "dist",
     "schemas",
     "scripts/live-smoke.mjs",
+    "scripts/live-quality-eval.mjs",
+    "scripts/live-quality-eval.d.mts",
+    "scripts/validate-real-case-consents.mjs",
     "scripts/validate-review-records.mjs",
     "evals/review/review-form.v1.schema.json",
     "docs",
@@ -69,11 +76,13 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "check": "tsc -p tsconfig.json --noEmit && npm run check:scripts",
-    "check:scripts": "node --check scripts/live-smoke.mjs && node --check scripts/validate-all-reports.mjs && node --check scripts/validate-doc-links.mjs && node --check scripts/validate-report-semantics.mjs && node --check scripts/validate-review-records.mjs",
+    "check:scripts": "node --check scripts/live-smoke.mjs && node --check scripts/live-quality-eval.mjs && node --check scripts/validate-all-reports.mjs && node --check scripts/validate-doc-links.mjs && node --check scripts/validate-report-semantics.mjs && node --check scripts/validate-real-case-consents.mjs && node --check scripts/validate-review-records.mjs",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "eval:offline": "npm run test:coverage && npm run validate:fixtures",
     "eval:live": "node scripts/live-smoke.mjs",
+    "eval:quality": "node scripts/live-quality-eval.mjs",
+    "validate:consents": "node scripts/validate-real-case-consents.mjs",
     "validate:reviews": "node scripts/validate-review-records.mjs",
     "validate:fixtures": "node scripts/validate-all-reports.mjs",
     "validate:docs": "node scripts/validate-doc-links.mjs",

@@ -1,0 +1,574 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:founder-decision-agent:schema:live-quality-eval:v1",
+  "title": "Founder Decision Agent Live Quality Evaluation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "mode",
+    "repeat_runs",
+    "evaluation_count",
+    "budget_ceiling",
+    "providers",
+    "models",
+    "runs",
+    "repeat_stability",
+    "counterfactuals",
+    "citation_review_sample",
+    "stable_gate_status",
+    "notes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "live_quality_eval.v1"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "mode": {
+      "enum": ["quick", "deep"]
+    },
+    "repeat_runs": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 5
+    },
+    "evaluation_count": {
+      "type": "integer",
+      "minimum": 4,
+      "maximum": 7
+    },
+    "budget_ceiling": {
+      "$ref": "#/definitions/budgetCeiling"
+    },
+    "providers": {
+      "$ref": "#/definitions/nonEmptyUniqueStrings"
+    },
+    "models": {
+      "$ref": "#/definitions/nonEmptyUniqueStrings"
+    },
+    "runs": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 7,
+      "items": {
+        "$ref": "#/definitions/run"
+      }
+    },
+    "repeat_stability": {
+      "$ref": "#/definitions/repeatStability"
+    },
+    "counterfactuals": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/definitions/counterfactual"
+      }
+    },
+    "citation_review_sample": {
+      "$ref": "#/definitions/citationReviewSample"
+    },
+    "stable_gate_status": {
+      "const": "not_assessed"
+    },
+    "notes": {
+      "$ref": "#/definitions/nonEmptyStrings"
+    }
+  },
+  "definitions": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nonEmptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/nonEmptyString"
+      }
+    },
+    "nonEmptyUniqueStrings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/nonEmptyString"
+      }
+    },
+    "budgetCeiling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "per_evaluation",
+        "total_max_model_calls",
+        "total_max_search_calls",
+        "total_max_wall_time_ms"
+      ],
+      "properties": {
+        "per_evaluation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "max_model_calls",
+            "max_search_calls",
+            "max_wall_time_ms"
+          ],
+          "properties": {
+            "max_model_calls": {
+              "type": "integer",
+              "minimum": 2,
+              "maximum": 20
+            },
+            "max_search_calls": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "max_wall_time_ms": {
+              "type": "integer",
+              "minimum": 60000,
+              "maximum": 3600000
+            }
+          }
+        },
+        "total_max_model_calls": {
+          "type": "integer",
+          "minimum": 8
+        },
+        "total_max_search_calls": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_max_wall_time_ms": {
+          "type": "integer",
+          "minimum": 240000
+        }
+      }
+    },
+    "verdict": {
+      "enum": ["pursue", "validate", "reframe", "park", "stop"]
+    },
+    "stage": {
+      "enum": [
+        "S0_idea",
+        "S1_problem_discovery",
+        "S2_solution_validation",
+        "S3_early_traction",
+        "S4_repeatable_growth"
+      ]
+    },
+    "disposition": {
+      "enum": ["active_validation", "parked_watch", "stop_and_close"]
+    },
+    "dimensionScores": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 12,
+      "maxProperties": 12,
+      "patternProperties": {
+        "^D(?:[1-9]|1[0-2])$": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 5
+        }
+      }
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "run_kind",
+        "repeat_index",
+        "report_id",
+        "idea_id",
+        "verdict",
+        "stage",
+        "disposition",
+        "dimension_scores",
+        "model_calls",
+        "search_calls",
+        "total_tokens",
+        "models",
+        "artifact_file"
+      ],
+      "properties": {
+        "case_id": {
+          "enum": [
+            "baseline_repeat",
+            "stronger_traction",
+            "limited_founder_time"
+          ]
+        },
+        "run_kind": {
+          "enum": ["repeat", "counterfactual"]
+        },
+        "repeat_index": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "report_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "idea_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "verdict": {
+          "$ref": "#/definitions/verdict"
+        },
+        "stage": {
+          "$ref": "#/definitions/stage"
+        },
+        "disposition": {
+          "$ref": "#/definitions/disposition"
+        },
+        "dimension_scores": {
+          "$ref": "#/definitions/dimensionScores"
+        },
+        "model_calls": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "search_calls": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "models": {
+          "$ref": "#/definitions/nonEmptyUniqueStrings"
+        },
+        "artifact_file": {
+          "$ref": "#/definitions/nonEmptyString"
+        }
+      }
+    },
+    "countMap": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "scoreRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["min", "max", "span"],
+      "properties": {
+        "min": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "max": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "span": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5
+        }
+      }
+    },
+    "dimensionRanges": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "patternProperties": {
+        "^D(?:[1-9]|1[0-2])$": {
+          "$ref": "#/definitions/scoreRange"
+        }
+      }
+    },
+    "repeatStability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "verdict_counts",
+        "stage_counts",
+        "disposition_counts",
+        "verdict_agreement_rate",
+        "unanimous_verdict",
+        "unanimous_stage",
+        "unanimous_disposition",
+        "max_verdict_distance",
+        "dimension_score_ranges"
+      ],
+      "properties": {
+        "verdict_counts": {
+          "$ref": "#/definitions/countMap"
+        },
+        "stage_counts": {
+          "$ref": "#/definitions/countMap"
+        },
+        "disposition_counts": {
+          "$ref": "#/definitions/countMap"
+        },
+        "verdict_agreement_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "unanimous_verdict": {
+          "type": "boolean"
+        },
+        "unanimous_stage": {
+          "type": "boolean"
+        },
+        "unanimous_disposition": {
+          "type": "boolean"
+        },
+        "max_verdict_distance": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        },
+        "dimension_score_ranges": {
+          "$ref": "#/definitions/dimensionRanges"
+        }
+      }
+    },
+    "numericDeltaRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["min", "max"],
+      "properties": {
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        }
+      }
+    },
+    "baselineReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verdicts", "stages", "target_dimension_scores"],
+      "properties": {
+        "verdicts": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "$ref": "#/definitions/verdict"
+          }
+        },
+        "stages": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "$ref": "#/definitions/stage"
+          }
+        },
+        "target_dimension_scores": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 5
+          }
+        }
+      }
+    },
+    "counterfactual": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "changed_variable",
+        "expectation",
+        "target_dimension_id",
+        "baseline_reference",
+        "variant",
+        "observations",
+        "human_review_status"
+      ],
+      "properties": {
+        "case_id": {
+          "enum": ["stronger_traction", "limited_founder_time"]
+        },
+        "changed_variable": {
+          "enum": ["traction_evidence", "founder_weekly_hours"]
+        },
+        "expectation": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "target_dimension_id": {
+          "enum": ["D10", "D11"]
+        },
+        "baseline_reference": {
+          "$ref": "#/definitions/baselineReference"
+        },
+        "variant": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["verdict", "stage", "target_dimension_score"],
+          "properties": {
+            "verdict": {
+              "$ref": "#/definitions/verdict"
+            },
+            "stage": {
+              "$ref": "#/definitions/stage"
+            },
+            "target_dimension_score": {
+              "type": ["number", "null"],
+              "minimum": 0,
+              "maximum": 5
+            }
+          }
+        },
+        "observations": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "verdict_distance_from_baseline",
+            "stage_delta_from_baseline",
+            "target_score_delta_from_baseline"
+          ],
+          "properties": {
+            "verdict_distance_from_baseline": {
+              "$ref": "#/definitions/numericDeltaRange"
+            },
+            "stage_delta_from_baseline": {
+              "$ref": "#/definitions/numericDeltaRange"
+            },
+            "target_score_delta_from_baseline": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/numericDeltaRange"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        "human_review_status": {
+          "const": "not_reviewed"
+        }
+      }
+    },
+    "citationEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "url",
+        "title",
+        "source_tier",
+        "published_at",
+        "accessed_at",
+        "verification_status"
+      ],
+      "properties": {
+        "evidence_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "title": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "source_tier": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "maximum": 6
+        },
+        "published_at": {
+          "type": ["string", "null"]
+        },
+        "accessed_at": {
+          "type": ["string", "null"]
+        },
+        "verification_status": {
+          "$ref": "#/definitions/nonEmptyString"
+        }
+      }
+    },
+    "sampledClaim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "claim_text",
+        "importance",
+        "observed_in_cases",
+        "observed_in_reports",
+        "evidence",
+        "human_support_status"
+      ],
+      "properties": {
+        "claim_id": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "claim_text": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "importance": {
+          "enum": ["critical", "major", "minor"]
+        },
+        "observed_in_cases": {
+          "$ref": "#/definitions/nonEmptyUniqueStrings"
+        },
+        "observed_in_reports": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/citationEvidence"
+          }
+        },
+        "human_support_status": {
+          "const": "not_reviewed"
+        }
+      }
+    },
+    "citationReviewSample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "applicable",
+        "selection_method",
+        "total_unique_external_claims",
+        "sampled_claims",
+        "human_review_status"
+      ],
+      "properties": {
+        "applicable": {
+          "type": "boolean"
+        },
+        "selection_method": {
+          "$ref": "#/definitions/nonEmptyString"
+        },
+        "total_unique_external_claims": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sampled_claims": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "$ref": "#/definitions/sampledClaim"
+          }
+        },
+        "human_review_status": {
+          "const": "not_reviewed"
+        }
+      }
+    }
+  }
+}
