@@ -35,8 +35,7 @@ jobs:
         run: |
           set -euo pipefail
           npm run check
-          npm run test:coverage
-          npm run validate:fixtures
+          npm run eval:offline
           npm run validate:docs
           npm run build
       - name: Pack the exact release artifact

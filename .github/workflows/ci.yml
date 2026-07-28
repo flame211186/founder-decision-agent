@@ -24,8 +24,7 @@ jobs:
       - run: npm install --global npm@11.16.0
       - run: npm ci --strict-allow-scripts
       - run: npm run check
-      - run: npm run test:coverage
-      - run: npm run validate:fixtures
+      - run: npm run eval:offline
       - run: npm run validate:docs
       - run: npm run build
       - run: npm run pack:dry

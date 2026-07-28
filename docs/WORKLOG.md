@@ -541,6 +541,7 @@ Phase 0：进行中。
 - `FounderProfile` 在 CLI、HTTP、MCP 和 SQLite 的运行时校验强度不一致；
 - `PortfolioRequest` 只有 TypeScript 版本字段，没有公开 JSON Schema；
 - SDK 的畸形输入会在规范化阶段先触发普通 TypeError，而不是稳定的 `INVALID_INPUT`。
+- 公开 `npm run eval:offline` 指向不存在的 `tests/evals`，会以“无测试文件”失败。
 
 ### 已完成
 
@@ -549,6 +550,8 @@ Phase 0：进行中。
 - SDK 在规范化和模型调用前拒绝畸形请求与无效嵌套画像；
 - CLI、HTTP、MCP 与公开 SQLite 适配器在持久化前拒绝无效画像；
 - `createFounderDecisionMcpServer` 接受通用 `StorageAdapter`，默认仍使用 SQLite；
+- `eval:offline` 改为真正执行 coverage-enforced 测试与五份 fixture 校验，并由 CI/发布
+  workflow 直接调用；
 - 新增内存 MCP client/server 协议测试，覆盖：
   - 七个工具发现；
   - quick 评估与持久化；
@@ -571,5 +574,7 @@ Phase 0：进行中。
 - 实际 tarball 包含 106 个文件和新增组合请求 Schema，约 127 kB；
 - tarball 在全新消费者目录严格安装成功，包内 CLI、SDK Schema getter、公开 Schema
   子路径和 SQLite 无效画像拒绝路径均通过；
+- 修正后的 `npm run eval:offline` 实际执行 45 项 coverage 测试和 5/5 fixture 校验并通过；
+- 修改后的 CI 与 publish workflow 通过 actionlint；
 - 提交 `b8a0b49` 已推送，远端 CI run `30355428433` 与 CodeQL run
   `30355428396` 均成功。

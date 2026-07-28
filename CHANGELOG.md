@@ -22,6 +22,7 @@ All notable changes follow semantic versioning once stable.
   portfolio inputs.
 - In-memory MCP protocol integration tests covering evaluation, persistence, consent and portfolio
   tools.
+- Working `eval:offline` quality-gate command wired into CI and release checks.
 - Offline fixtures covering all five verdicts.
 - Permission-restricted live OpenAI smoke harness and integrity-aware npm release workflow.
 

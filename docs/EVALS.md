@@ -29,10 +29,15 @@ Run:
 npm run check
 npm test
 npm run test:coverage
+npm run eval:offline
 npm run validate:fixtures
 npm run validate:docs
 npm run build
 ```
+
+`eval:offline` is the single offline evaluation gate: it runs the coverage-enforced test suite and
+then validates all five canonical fixture reports. The individual commands remain available for
+diagnosis.
 
 The maintainer-only live smoke is:
 

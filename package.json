@@ -68,7 +68,7 @@
     "check:scripts": "node --check scripts/live-smoke.mjs && node --check scripts/validate-all-reports.mjs && node --check scripts/validate-doc-links.mjs && node --check scripts/validate-report-semantics.mjs",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "eval:offline": "vitest run tests/evals",
+    "eval:offline": "npm run test:coverage && npm run validate:fixtures",
     "eval:live": "node scripts/live-smoke.mjs",
     "validate:fixtures": "node scripts/validate-all-reports.mjs",
     "validate:docs": "node scripts/validate-doc-links.mjs",
