@@ -7,18 +7,21 @@ import {
   symlink,
   writeFile
 } from "node:fs/promises";
+import { createRequire } from "node:module";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
-import Ajv from "ajv";
-import addFormats from "ajv-formats";
 import {
   buildQualityEvalPlan,
   summarizeQualityEval
 } from "../scripts/live-quality-eval.mjs";
 import type { EvaluationOutcome, RunManifest } from "../src/types.js";
 import { fixtureReport } from "./helpers.js";
+
+const require = createRequire(import.meta.url);
+const Ajv = require("ajv") as typeof import("ajv")["default"];
+const addFormats = require("ajv-formats") as typeof import("ajv-formats")["default"];
 
 const script = fileURLToPath(
   new URL("../scripts/audit-stable-release.mjs", import.meta.url)

@@ -816,3 +816,34 @@ Phase 0：进行中。
 - `stable-release` environment 尚未配置独立 required reviewer 或实际批准变量；
 - 工作区仍无 `OPENAI_API_KEY`，npm 包与 GitHub beta Release 仍未发布；
 - 发布门只能核对声明、哈希与 GitHub 保护状态，不能替代对私有证据真实性的人工核验。
+
+## 2026-07-28（稳定版门远端 TypeScript 兼容修复）
+
+### 远端发现
+
+- 稳定版门实现提交 `be4ecb1749fd9aef2752c5db3ecc6af688961a28` 已以非强制快进
+  方式同步到公开仓库 `main`；远端提交、父提交和树哈希均与本地一致；
+- GitHub CI run `30368275556` 的 Node 22.14 与 Node 24 quality job 都在
+  `npm run check` 失败；
+- 失败限定在 `tests/stable-release-audit.test.ts`：TypeScript 在 NodeNext/CJS
+  interop 下将 `Ajv` 与 `ajv-formats` 默认导入解析为不可构造/不可调用的模块命名空间；
+- 同一 run 的 Docker job `90305102788` 已成功构建镜像，并通过 CLI 与非 root SQLite
+  smoke；这不能抵消 quality job 的失败。
+
+### 修复与本地验证
+
+- 测试改用与现有 `src/validation.ts` 和 `tests/schema-contracts.test.ts` 相同的
+  `createRequire` 兼容模式；产品运行时代码、公开 Schema 和质量门槛均未改变；
+- `npm run check` 通过；
+- `npm run eval:offline` 通过：17 个测试文件、89/89 测试和 5/5 fixture；
+- coverage：statements 85.25%、branches 76.25%、functions 88.98%、lines 86.46%；
+- 34 个 Markdown 链接、TypeScript build 和 npm dry-run tarball 通过；
+- 本机默认 npm cache 含历史 root 所有权文件，首次 dry-run 在完成 prepack 后因
+  `EPERM` 失败；未修改用户全局目录，改用 `/private/tmp` 独立缓存后成功，生成 122 个
+  文件、167.5 kB 的候选 tarball。
+
+### 尚未证明
+
+- 本修复尚未取得新的远端 Node 22.14/24 CI 与 CodeQL 成功证据；
+- BYOK 实时 smoke、npm beta、GitHub beta Release、3–5 个真实案例和最终人工稳定版
+  决定仍未完成。
