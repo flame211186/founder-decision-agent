@@ -79,7 +79,7 @@ next_gate:
   name: public_beta_release
   required_before_beta:
     - live_openai_smoke_with_user_provided_byok_key
-    - npm_account_auth_and_beta_publication
+    - npm_bootstrap_publication_and_trusted_publisher_configuration
   required_before_stable_v1:
     - three_to_five_consented_anonymized_real_cases
     - independent_expert_blind_review
@@ -90,7 +90,7 @@ next_gate:
 
 external_blockers:
   - OPENAI_API_KEY_not_present_for_live_smoke
-  - npm_account_and_trusted_publisher_not_yet_confirmed
+  - npm_bootstrap_publication_and_trusted_publisher_not_yet_completed
 
 completed_beta_checks:
   - strict_typescript_build
@@ -104,6 +104,9 @@ completed_beta_checks:
   - npm_audit_zero_known_vulnerabilities
   - local_secret_pattern_scan_no_matches
   - public_github_repository_created_and_main_pushed
+  - github_main_ci_and_codeql_passed
+  - github_dependency_graph_enabled_and_dependency_reviews_passed
+  - npm_account_and_sangfei_scope_owner_permission_confirmed
 
 prohibited_shortcuts:
   - do_not_treat_offline_tests_as_live_model_quality

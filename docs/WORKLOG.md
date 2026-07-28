@@ -404,14 +404,14 @@ Phase 0：进行中。
 - 专家盲评尚未执行；
 - Docker build 未执行，因为当前环境没有 `docker` 命令；
 - GitHub 公开源码仓库已经发布，但 GitHub Release 与 npm beta 尚未实际发布；
-- npm 账户和 trusted publisher 尚未确认；
+- npm 登录账号 `flame211186` 及其 `sangfei` 组织 owner 权限已确认；首次 bootstrap 发布和 trusted publisher 尚未完成；
 - 因此只能称为“公开源码 beta 候选”，不能称为已发布 beta 或稳定完成。
 
 ### 下一步
 
 1. 使用用户 BYOK Key 运行非敏感实时 smoke；
 2. 实时 smoke 通过后创建 GitHub beta Release；
-3. 确认 npm scope 权限，bootstrap/trusted publisher 后发布 `beta` dist-tag；
+3. 完成 npm bootstrap 发布并配置 trusted publisher，发布 `beta` dist-tag；
 4. 招募独立专家并完成 3–5 个真实匿名案例，满足后再发布稳定 `v1`。
 
 ### 发布候选后续验证
@@ -438,3 +438,6 @@ Phase 0：进行中。
 - GitHub 官方设备授权成功，CLI 核对登录账号为 `flame211186`；
 - 已创建公开仓库 `https://github.com/flame211186/founder-decision-agent`，并将本地 `main` 根提交推送到远端；
 - GitHub 仓库公开不等于 beta Release：实时 OpenAI smoke 和 npm 发布门仍保持开放。
+- 远端 `main` 的 CI 与 CodeQL 首次运行通过；
+- 新仓库的 Dependency Review 最初因未启用 Dependency Graph 失败；启用依赖图与漏洞提醒后，7 个自动依赖更新 PR 的依赖审查重跑全部通过；
+- npm 官方网页登录成功，`npm whoami` 为 `flame211186`，`npm org ls sangfei` 确认为 `sangfei` 组织 owner；未因 GitHub 用户名不同而擅自更换既定 npm scope。
