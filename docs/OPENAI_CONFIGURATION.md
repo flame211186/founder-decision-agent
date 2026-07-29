@@ -31,6 +31,18 @@ history.
 
 The default adapter fails fast with `MISSING_API_KEY` when the variable is absent. The SDK also accepts an `apiKey` constructor option, but applications should inject it from a secret manager and never serialize the adapter options.
 
+## Structured output compatibility
+
+OpenAI Structured Outputs accepts only a JSON Schema subset. The adapter derives a generation
+schema that removes unsupported composition and uniqueness keywords, converts constants to typed
+single-value enums, makes optional object fields required-but-nullable, and retains only supported
+string formats. The public canonical Schema is not weakened: every generated report is parsed and
+then checked again with the full canonical and semantic validators.
+
+The subset regression test checks unsupported keywords, typed enums, required object properties
+and `additionalProperties: false`. Provider-side live smoke is still required because OpenAI may
+change validation behavior.
+
 ## Stable safety identifier
 
 Applications may set `FOUNDER_DECISION_SAFETY_IDENTIFIER` or pass `safetyIdentifier` in the SDK request. The adapter hashes it before sending `safety_identifier` to OpenAI. It is not copied into reports or manifests.
@@ -50,6 +62,11 @@ choose quick mode for a zero-search evaluation. The OpenAI adapter records the n
 `web_search_call` items, while deduplicating query text only for display.
 
 Always review current provider pricing and organizational spend limits. This project intentionally does not estimate a fixed per-report price because models, token counts and web-search prices change.
+
+If the API returns `429 You exceeded your current quota`, OpenAI documents two possible causes:
+the project has no remaining credits or the organization reached its maximum monthly spend. The
+Key owner must add credits under API Billing or raise the organization limit. A ChatGPT
+subscription does not supply this project's API budget.
 
 `npm run eval:quality` is a no-cost planning command unless `--execute` is added. Its default three
 repeat runs plus two counterfactuals create five evaluations, so the printed aggregate ceiling is

@@ -3,6 +3,31 @@ import { fileURLToPath } from "node:url";
 
 type JsonSchema = Record<string, unknown>;
 
+const UNSUPPORTED_OPENAI_SCHEMA_KEYWORDS = new Set([
+  "$schema",
+  "$id",
+  "allOf",
+  "not",
+  "dependentRequired",
+  "dependentSchemas",
+  "if",
+  "then",
+  "else",
+  "uniqueItems"
+]);
+
+const SUPPORTED_OPENAI_STRING_FORMATS = new Set([
+  "date-time",
+  "time",
+  "date",
+  "duration",
+  "email",
+  "hostname",
+  "ipv4",
+  "ipv6",
+  "uuid"
+]);
+
 let canonicalCache: JsonSchema | undefined;
 let openAiCache: JsonSchema | undefined;
 let evaluationRequestCache: JsonSchema | undefined;
@@ -56,6 +81,24 @@ function nullable(schema: JsonSchema): JsonSchema {
   return { anyOf: [schema, { type: "null" }] };
 }
 
+function inferEnumType(values: unknown[]): string | string[] | undefined {
+  const types = new Set<string>();
+  for (const value of values) {
+    if (value === null) {
+      types.add("null");
+    } else if (typeof value === "string" || typeof value === "boolean") {
+      types.add(typeof value);
+    } else if (typeof value === "number") {
+      types.add(Number.isInteger(value) ? "integer" : "number");
+    } else {
+      return undefined;
+    }
+  }
+  if (types.size === 0) return undefined;
+  const inferred = [...types];
+  return inferred.length === 1 ? inferred[0] : inferred;
+}
+
 function transformNode(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(transformNode);
   if (value === null || typeof value !== "object") return value;
@@ -64,7 +107,7 @@ function transformNode(value: unknown): unknown {
   const output: JsonSchema = {};
 
   for (const [key, child] of Object.entries(input)) {
-    if (["$schema", "$id", "allOf", "if", "then", "else"].includes(key)) continue;
+    if (UNSUPPORTED_OPENAI_SCHEMA_KEYWORDS.has(key)) continue;
     if (key === "definitions") {
       output.$defs = transformNode(child);
       continue;
@@ -73,7 +116,22 @@ function transformNode(value: unknown): unknown {
       output.$ref = child.replace("#/definitions/", "#/$defs/");
       continue;
     }
+    if (key === "const") {
+      output.enum = [transformNode(child)];
+      continue;
+    }
+    if (
+      key === "format" &&
+      typeof child === "string" &&
+      !SUPPORTED_OPENAI_STRING_FORMATS.has(child)
+    ) {
+      continue;
+    }
     output[key] = transformNode(child);
+  }
+
+  if (output.type === undefined && Array.isArray(output.enum)) {
+    output.type = inferEnumType(output.enum);
   }
 
   if (output.type === "object" && output.properties && typeof output.properties === "object") {
@@ -95,9 +153,10 @@ function transformNode(value: unknown): unknown {
 
 /**
  * OpenAI Structured Outputs supports a strict JSON-Schema subset. The canonical
- * schema keeps conditional Draft-7 rules; this derived schema removes those
- * rules and makes optional fields nullable. Canonical and semantic validation
- * still run after generation.
+ * schema keeps conditional and uniqueness Draft-7 rules; this derived schema
+ * removes unsupported generation constraints and formats, represents constants
+ * as typed single-value enums and makes optional fields nullable. Canonical and
+ * semantic validation still run after generation.
  */
 export function getOpenAiReportSchema(): JsonSchema {
   openAiCache ??= transformNode(getCanonicalReportSchema()) as JsonSchema;

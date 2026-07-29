@@ -439,14 +439,11 @@
           "$ref": "#/definitions/nonEmptyString"
         },
         "does_not_mean": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/stringList"
-            },
-            {
-              "minItems": 1
-            }
-          ]
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/nonEmptyString"
+          }
         },
         "next_review_condition": {
           "$ref": "#/definitions/nonEmptyString"
@@ -911,24 +908,18 @@
           "$ref": "#/definitions/nonEmptyString"
         },
         "allowed_actions": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/stringList"
-            },
-            {
-              "minItems": 1
-            }
-          ]
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/nonEmptyString"
+          }
         },
         "prohibited_actions": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/stringList"
-            },
-            {
-              "minItems": 1
-            }
-          ]
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/nonEmptyString"
+          }
         },
         "reactivation_triggers": {
           "$ref": "#/definitions/stringList"
