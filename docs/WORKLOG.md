@@ -993,3 +993,13 @@ Phase 0：进行中。
 2. 额度生效后重新执行 quick，再执行 deep；
 3. 两档通过后继续 npm 登录、首次 bootstrap、Trusted Publisher、GitHub prerelease
    和 registry 干净安装。
+
+### 远端复验
+
+- 兼容修复提交 `6b76d1c987cd6ec476ef0af7de8b26c0af741025` 已推送到
+  `codex/openai-structured-schema`，草稿 PR
+  `https://github.com/flame211186/founder-decision-agent/pull/11` 已创建；
+- PR CI run `30452708499` 的 Node 22.14、Node 24 与 Docker 全部通过；
+- Dependency Review run `30452708782` 与 CodeQL run `30452708421` 通过；
+- 远端检查证明该提交在受保护分支要求的平台/供应链门中通过，不替代仍受额度阻塞的
+  quick/deep 真实生成。
