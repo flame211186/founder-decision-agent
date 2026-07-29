@@ -22,7 +22,9 @@
 - Docker 构建、容器 CLI 和非 root SQLite smoke 已在远端 CI 实际通过；
 - `main` 已启用 PR、必需检查、线性历史、对话解决、禁止强推和删除的保护；
 - `beta-release` GitHub Environment 已创建且不冒充稳定版独立审批；
-- 已完成干净 npm tarball 安装并公开 GitHub 源码；尚未完成实时 OpenAI smoke、GitHub Release、npm beta、真实案例和专家盲评；
+- 已完成干净 npm tarball 安装并公开 GitHub 源码；BYOK 已安全写入本地，但终端无法连接
+  `api.openai.com:443`，因此实时 OpenAI smoke 尚未完成；GitHub Release、npm beta、
+  真实案例和专家盲评也仍待完成；
 - `/Users/frame/Documents/lmao app` 仍未修改。
 
 ## Phase 0：定义问题与判断方法
