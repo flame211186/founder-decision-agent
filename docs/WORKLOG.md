@@ -881,6 +881,18 @@ Phase 0：进行中。
   - force push 与分支删除均禁止。
 - 没有修改 `/Users/frame/Documents/lmao app`。
 
+### Beta 发布环境准备
+
+- 创建并回读 `beta-release` GitHub Environment：
+  - `wait_timer` 为 0；
+  - 没有 required reviewer；
+  - 不配置稳定版批准变量；
+  - 只作为 GitHub prerelease 发布 workflow 的环境边界；
+- 保留 `stable-release` 未创建，直到用户指定独立真人审批人；
+- 重新执行 `npm whoami` 与组织权限查询时均返回 401；此前确认过的 npm 登录会话已
+  过期，首次 bootstrap 发布前必须由用户重新运行 `npm login`，不能把旧认证记录当作
+  当前有效凭据。
+
 ### 需要用户本人完成
 
 - 在 OpenAI Platform 创建 API Key、确认 API 账户具备可用余额/限额，并只把 Key
@@ -893,5 +905,6 @@ Phase 0：进行中。
 ### 尚未证明
 
 - 工作区仍未配置 `OPENAI_API_KEY`，尚未执行付费实时 quick/deep smoke；
+- npm 当前未认证，首次发布前需要用户重新登录并处理 2FA；
 - npm registry 与 GitHub Release 仍无 beta；
 - `stable-release` environment、真实案例、专家盲评和最终人工决定仍未完成。
