@@ -908,3 +908,36 @@ Phase 0：进行中。
 - npm 当前未认证，首次发布前需要用户重新登录并处理 2FA；
 - npm registry 与 GitHub Release 仍无 beta；
 - `stable-release` environment、真实案例、专家盲评和最终人工决定仍未完成。
+
+## 2026-07-29（BYOK 配置与实时 API 网络诊断）
+
+### 用户完成
+
+- 用户在 OpenAI Platform 创建了本人所有的项目密钥，并只写入本地忽略的 `.env`；
+- 未把密钥粘贴到聊天、GitHub、报告或测试固件。
+
+### 已验证
+
+- `.env` 存在且 `OPENAI_API_KEY` 非空；
+- 文件权限为 `0600`；
+- `.gitignore` 明确忽略 `.env`，`git ls-files` 确认它未被跟踪；
+- TypeScript build 通过；
+- 真实 quick smoke 已启动，但 OpenAI SDK 在收到响应前报告连接超时；
+- 随后的只读模型元数据请求同样在收到响应前超时；
+- 不带任何密钥的 `curl` HTTPS 探针也无法连接 `api.openai.com:443`，15 秒连接超时且
+  HTTP 状态为 `000`；
+- 当前进程没有 `HTTP_PROXY`、`HTTPS_PROXY` 或 `ALL_PROXY`，macOS 系统代理配置为空。
+
+### 结论
+
+- 当前证据只能证明本地密钥文件安全配置完成；
+- 因为无密钥探针也无法建立 TCP/TLS 连接，不能把本次失败归因于密钥、模型权限、
+  API 余额、报告 Schema 或 Agent 业务代码；
+- quick/deep 实时质量门继续保持未通过，不能创建 GitHub beta Release 或发布 npm beta。
+
+### 下一步
+
+1. 用户启用能覆盖终端进程的网络连接，例如系统代理、全局模式或 TUN；
+2. 先复测不带密钥的 HTTPS 探针，获得任意非 `000` HTTP 状态；
+3. 再按 quick、deep 顺序运行真实 smoke；
+4. smoke 通过后进入 npm 登录、首次 bootstrap 和 Trusted Publisher。
