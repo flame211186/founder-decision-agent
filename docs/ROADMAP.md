@@ -2,7 +2,7 @@
 
 版本：0.2  
 状态：路线已确认；跨阶段 beta 实现已形成，质量门仍分别执行  
-最后更新：2026-07-28
+最后更新：2026-07-29
 
 ## 总体原则
 
@@ -20,6 +20,7 @@
 - 已建立最终人工决定记录和 stable 发布失败关闭门，防止仅修改版本号绕过真人质量门；
 - 已建立 Apache-2.0、双语 README、安全/隐私/限制文档、Docker 与 GitHub/npm 发布工作流；
 - Docker 构建、容器 CLI 和非 root SQLite smoke 已在远端 CI 实际通过；
+- `main` 已启用 PR、必需检查、线性历史、对话解决、禁止强推和删除的保护；
 - 已完成干净 npm tarball 安装并公开 GitHub 源码；尚未完成实时 OpenAI smoke、GitHub Release、npm beta、真实案例和专家盲评；
 - `/Users/frame/Documents/lmao app` 仍未修改。
 
@@ -231,7 +232,8 @@
 公共评估、画像和组合输入均有版本化运行时 Schema 校验，MCP 已通过内存协议集成
 测试；Ubuntu Node 22.14/24 已纳入 CI，macOS arm64 Node 22.14/24 已本地验证，
 Docker 构建与非 root SQLite smoke 已在 CI 实际通过；稳定版失败关闭发布门也已在
-Node 22.14/24 矩阵和 CodeQL 复验；Windows 明确为 beta 未经 CI 验证且
+Node 22.14/24 矩阵和 CodeQL 复验；`main` 已要求 PR 和上述必需检查，并禁止强推与
+删除；Windows 明确为 beta 未经 CI 验证且
 文件权限加固仅为 best-effort；实时 OpenAI
 smoke、GitHub beta Release、npm beta 和新用户反馈尚未完成。
 

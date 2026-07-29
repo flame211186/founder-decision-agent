@@ -857,3 +857,41 @@ Phase 0：进行中。
 
 - BYOK 实时 smoke、npm beta、GitHub beta Release、3–5 个真实案例和最终人工稳定版
   决定仍未完成。
+
+## 2026-07-29（main 分支保护与人工参与边界）
+
+### 用户确认
+
+- 用户要求按推荐顺序继续，并要求所有必须由本人完成的步骤明确交还本人操作。
+
+### 已完成
+
+- 核对保护前状态：经典 branch protection 与 repository ruleset 均为 0；
+- 从最近成功的 push 与 PR 读取实际检查名称和 GitHub App ID，避免配置不存在或可被
+  其他应用冒充的 status context；
+- 第一次 GitHub API 请求因个人仓库不接受组织级用户/团队绕过字段返回 422，保护设置
+  未改变；
+- 移除无效绕过字段后，为 `main` 成功启用并复核：
+  - 管理员也必须遵守；
+  - 必须使用 PR，当前批准人数为 0；
+  - 分支必须最新；
+  - 必须通过 `quality (22.14.0)`、`quality (24)`、`docker`、`analyze` 和
+    `dependency-review`；
+  - 必须解决 PR 对话并保持线性历史；
+  - force push 与分支删除均禁止。
+- 没有修改 `/Users/frame/Documents/lmao app`。
+
+### 需要用户本人完成
+
+- 在 OpenAI Platform 创建 API Key、确认 API 账户具备可用余额/限额，并只把 Key
+  写入本地忽略的 `.env`；不得把 Key 粘贴到聊天、GitHub、issue 或报告；
+- npm 首次 bootstrap 发布时完成本人账户的 2FA/网页登录确认；随后在 npm 网页配置
+  GitHub Actions Trusted Publisher；
+- 稳定版阶段提供或协调 3–5 个经知情同意、去标识化的真实案例；
+- 邀请独立专家执行盲评和必要裁决，并由独立审批人批准 `stable-release` environment。
+
+### 尚未证明
+
+- 工作区仍未配置 `OPENAI_API_KEY`，尚未执行付费实时 quick/deep smoke；
+- npm registry 与 GitHub Release 仍无 beta；
+- `stable-release` environment、真实案例、专家盲评和最终人工决定仍未完成。

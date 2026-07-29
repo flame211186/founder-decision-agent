@@ -1,7 +1,7 @@
 # 需求追踪
 
 版本：0.2  
-最后更新：2026-07-28
+最后更新：2026-07-29
 
 状态含义：
 
@@ -26,7 +26,7 @@
 | REQ-011 | 从多个想法发现个人漏洞、专长和思维模式 | implemented | `EVALUATION_METHODOLOGY.md §9`、`src/portfolio.ts` | 两想法证据阈值测试通过；用户纠正测试待完成 |
 | REQ-012 | 引导用户思考和产品迭代 | implemented | `PRODUCT_SPEC.md §2.3, §3.2`、`src/prompts.ts` | 澄清最多三项和实验结构验证；真实迭代案例待完成 |
 | REQ-013 | Agent 先独立开源，再接入另一个开源项目 | implemented | `ARCHITECTURE_PLAN.md §5, §9`、公共 SDK/HTTP | 独立构建与 HTTP 契约测试通过；`lmao app` 集成明确延期 |
-| REQ-014 | 发布到 GitHub，供别人使用 | verified | `ROADMAP.md Phase 6`、`.github/`、Apache-2.0 | 公开源码仓库 `https://github.com/flame211186/founder-decision-agent` 已创建并推送 `main`；GitHub Release 仍受 beta 质量门约束 |
+| REQ-014 | 发布到 GitHub，供别人使用 | verified | `ROADMAP.md Phase 6`、`.github/`、Apache-2.0 | 公开源码仓库 `https://github.com/flame211186/founder-decision-agent` 已创建并推送 `main`；默认分支已要求 PR、CI/CodeQL/Docker/Dependency Review，且禁止强推和删除；GitHub Release 仍受 beta 质量门约束 |
 | REQ-015 | 中途关键事项由用户决策 | verified | `DECISIONS.md`、`ROADMAP.md` | DEC-001 至 DEC-014 用户确认历史；DEC-015 为记录清楚的可逆发布实现决定 |
 | REQ-016 | 不急于求成，不以堆代码代替质量 | implemented | `PROJECT_CHARTER.md §5`、`AGENTS.md §2`、`docs/EVALS.md` | 覆盖率门和稳定版硬门已执行/记录；人工门仍开放 |
 | REQ-017 | 降低幻觉、上下文压缩和目标丢失 | implemented | `AGENTS.md`、`EVALUATION_METHODOLOGY.md §6–11`、`src/validation.ts` | 状态恢复、外部事实/引用/提示词边界测试；深研真实搜索调用计数与超限失败关闭测试；语义引用人工评测待完成 |
