@@ -42,6 +42,15 @@
   https://developers.openai.com/api/reference/resources/responses/methods/create  
   采用点：结构化输出、`store: false`、`safety_identifier`、工具和调用上限。
 
+- OpenAI: Structured model outputs — Supported schemas
+  https://developers.openai.com/api/docs/guides/structured-outputs#supported-schemas
+  采用点：生成 Schema 只使用支持的类型、格式和约束；对象字段全部 required，
+  `additionalProperties: false`；完整 canonical 约束在生成后复核。
+
+- OpenAI: API error codes
+  https://developers.openai.com/api/docs/guides/error-codes#api-errors
+  采用点：区分速率 429 与额度 429；额度 429 需要 Key 所属组织购买额度或提高消费上限。
+
 - OpenAI: Web search guide  
   https://developers.openai.com/api/docs/guides/tools-web-search  
   采用点：外部事实必须保留 URL citation 和来源列表；引用可见不等于语义支持已验证。

@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { getOpenAiReportSchema } from "../src/openai-schema.js";
+import {
+  getCanonicalReportSchema,
+  getOpenAiReportSchema
+} from "../src/openai-schema.js";
 import {
   validateEvaluationRequest,
   validateFounderProfile,
@@ -78,24 +81,46 @@ describe("public input validation", () => {
 });
 
 describe("OpenAI generation schema", () => {
-  it("removes unsupported conditional keywords and requires every object property", () => {
+  it("derives the supported strict subset without weakening canonical validation", () => {
     const schema = getOpenAiReportSchema();
     const encoded = JSON.stringify(schema);
-    expect(encoded).not.toContain('"allOf"');
-    expect(encoded).not.toContain('"if"');
-    expect(encoded).not.toContain('"then"');
-    expect(encoded).not.toContain('"else"');
+    const unsupported = new Set([
+      "$schema",
+      "$id",
+      "allOf",
+      "not",
+      "dependentRequired",
+      "dependentSchemas",
+      "if",
+      "then",
+      "else",
+      "uniqueItems",
+      "const"
+    ]);
     expect(encoded).toContain('"$defs"');
+    expect(encoded).toContain('"enum":[true],"type":"boolean"');
+    expect(encoded).not.toContain('"format":"uri"');
+
+    const canonicalEncoded = JSON.stringify(getCanonicalReportSchema());
+    expect(canonicalEncoded).toContain('"uniqueItems":true');
+    expect(canonicalEncoded).toContain('"const":true');
+    expect(canonicalEncoded).toContain('"format":"uri"');
 
     const visit = (value: unknown): void => {
       if (Array.isArray(value)) return value.forEach(visit);
       if (!value || typeof value !== "object") return;
       const object = value as Record<string, unknown>;
+      for (const key of Object.keys(object)) {
+        expect(unsupported.has(key), `unsupported generation keyword: ${key}`).toBe(false);
+      }
       if (object.type === "object" && object.properties) {
         expect(new Set(object.required as string[])).toEqual(
           new Set(Object.keys(object.properties as Record<string, unknown>))
         );
         expect(object.additionalProperties).toBe(false);
+      }
+      if (Array.isArray(object.enum)) {
+        expect(object.type, "generation enums must declare their JSON type").toBeDefined();
       }
       Object.values(object).forEach(visit);
     };

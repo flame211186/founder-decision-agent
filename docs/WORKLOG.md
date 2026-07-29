@@ -941,3 +941,65 @@ Phase 0：进行中。
 2. 先复测不带密钥的 HTTPS 探针，获得任意非 `000` HTTP 状态；
 3. 再按 quick、deep 顺序运行真实 smoke；
 4. smoke 通过后进入 npm 登录、首次 bootstrap 和 Trusted Publisher。
+
+## 2026-07-29（TUN 恢复、Structured Outputs 兼容与额度阻塞）
+
+### 用户完成
+
+- 用户启用 Clash Verge 虚拟网卡/TUN，使终端进程能够经代理访问 OpenAI API。
+
+### 已验证与发现
+
+- 不携带 Key 的 `GET /v1/models` 在约 0.54 秒内返回预期 `401`，不再是连接超时，
+  证明 TCP/TLS/API 路径已恢复；
+- 使用本地 BYOK 运行 quick 后，真实 API 先后在生成前返回两个 `400`：
+  - `uniqueItems` 不属于 Structured Outputs 支持子集；
+  - canonical Schema 中用于数组复合约束的 `allOf` 被简单移除后留下无 `type` 空
+    Schema；
+- 依据 OpenAI 官方 Structured Outputs 文档修复生成 Schema：
+  - 移除不支持的组合、唯一性和 `uri` 格式；
+  - 将 `const` 转为带明确 JSON 类型的单值 `enum`；
+  - 把三个等价的 `allOf` 数组约束改写为直接 `type/items/minItems`，不改变 canonical
+    语义；
+  - optional 属性仍转换为 required-but-nullable，所有对象仍强制
+    `additionalProperties: false`；
+  - 生成后继续执行完整 canonical 与语义验证，未用兼容修复降低公开报告质量门。
+- 随后真实 quick 请求返回 OpenAI `429 You exceeded your current quota`；官方定义为
+  项目额度耗尽或达到组织月度消费上限。此次仍未进入报告生成，因此没有实时报告成功
+  证据，也不能继续 deep。
+
+### 回归与文档
+
+- `tests/validation.test.ts` 增加 Structured Outputs 支持子集、typed enum、支持格式和
+  canonical 保留完整约束的回归检查；
+- 失败分类新增 O04“提供商 Schema 子集不兼容”；
+- OpenAI 配置、研究来源、需求追踪、路线图和项目状态同步更新；
+- `/Users/frame/Documents/lmao app` 未修改。
+
+### 本轮已通过
+
+- `npm run check`；
+- 定向 `tests/validation.test.ts` 10/10；
+- `npm run eval:offline`：17 个测试文件、89/89 测试、5/5 fixture；
+- coverage：statements 85.09%、branches 76.03%、functions 89.02%、lines 86.34%；
+- 34 个 Markdown 文件链接、TypeScript build 和 `git diff --check`；
+- npm dry-run 候选包为 122 个文件、173.7 kB，解包 658.7 kB；
+- `.env` 继续未跟踪且被 Git 忽略，变更集密钥模式扫描无匹配。
+
+### 当前人工阻塞
+
+1. Key 所属用户需在 OpenAI API Billing 开通/充值额度，并确认组织 Limits 的月度上限
+   不为 0；
+2. 额度生效后重新执行 quick，再执行 deep；
+3. 两档通过后继续 npm 登录、首次 bootstrap、Trusted Publisher、GitHub prerelease
+   和 registry 干净安装。
+
+### 远端复验
+
+- 兼容修复提交 `6b76d1c987cd6ec476ef0af7de8b26c0af741025` 已推送到
+  `codex/openai-structured-schema`，草稿 PR
+  `https://github.com/flame211186/founder-decision-agent/pull/11` 已创建；
+- PR CI run `30452708499` 的 Node 22.14、Node 24 与 Docker 全部通过；
+- Dependency Review run `30452708782` 与 CodeQL run `30452708421` 通过；
+- 远端检查证明该提交在受保护分支要求的平台/供应链门中通过，不替代仍受额度阻塞的
+  quick/deep 真实生成。

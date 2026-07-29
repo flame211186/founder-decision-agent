@@ -22,9 +22,10 @@
 - Docker 构建、容器 CLI 和非 root SQLite smoke 已在远端 CI 实际通过；
 - `main` 已启用 PR、必需检查、线性历史、对话解决、禁止强推和删除的保护；
 - `beta-release` GitHub Environment 已创建且不冒充稳定版独立审批；
-- 已完成干净 npm tarball 安装并公开 GitHub 源码；BYOK 已安全写入本地，但终端无法连接
-  `api.openai.com:443`，因此实时 OpenAI smoke 尚未完成；GitHub Release、npm beta、
-  真实案例和专家盲评也仍待完成；
+- 已完成干净 npm tarball 安装并公开 GitHub 源码；BYOK 已安全写入本地，TUN 已恢复
+  终端到 `api.openai.com` 的连接；真实请求暴露并修复了 Structured Outputs 子集兼容
+  问题，随后被 Key 所属项目的额度/消费上限 429 阻止，尚未产生实时报告；GitHub
+  Release、npm beta、真实案例和专家盲评也仍待完成；
 - `/Users/frame/Documents/lmao app` 仍未修改。
 
 ## Phase 0：定义问题与判断方法
@@ -237,8 +238,8 @@
 Docker 构建与非 root SQLite smoke 已在 CI 实际通过；稳定版失败关闭发布门也已在
 Node 22.14/24 矩阵和 CodeQL 复验；`main` 已要求 PR 和上述必需检查，并禁止强推与
 删除；Windows 明确为 beta 未经 CI 验证且
-文件权限加固仅为 best-effort；实时 OpenAI
-smoke、GitHub beta Release、npm beta 和新用户反馈尚未完成。
+文件权限加固仅为 best-effort；实时 OpenAI API 已可达，但生成被项目额度/消费上限
+阻止；quick/deep smoke、GitHub beta Release、npm beta 和新用户反馈尚未完成。
 
 ## Phase 7：接入想法收集产品
 
